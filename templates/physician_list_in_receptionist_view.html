@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ehr.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href=#>HMS LAMJINGBA</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item admin-name" data-toggle="tooltip" data-placement="right" title="Admin Name">
+
+                <img src="" alt="" class="img-ic">
+                <span class="nav-link-text"><b style="font-size:16px">Receptionist</b></span>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/receptionistdashboard/'>
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    <span class="nav-link-text">Dashboard</span></a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/patient_list/'>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span class="nav-link-text">Patient</span></a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a style="background-color:#64c1b1;" class="nav-link" href='/physician_list_view/'>
+                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                    <span class="nav-link-text">Doctor</span></a>
+            </li>
+              <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/Hms/inventory/dashboard'>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="nav-link-text">Inventory</span></a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li><a onclick="window.location.pathname='/logout/'" data-toggle="modal" data-target="#exampleModal"
+                   style="color:white;">
+                Logout</a>
+
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="content-details">
+                <h3>Doctor</h3>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <!--<div class="btn add-btn right"><i  class="fa fa-plus fa-lg adding doctor-adduser" aria-hidden="true"-->
+                        <!--title="Create New Doctor"></i>-->
+                        <!--</div>-->
+                        <div class="Search" style="width: 500px; border:10px">
+                            <input id="myInput" type="search" class="docinput form-control" data-table="order-table"
+                                   placeholder="Search Doctor">
+                        </div>
+                    </div>
+                </div>
+
+                <!--create doctor-->
+                {% csrf_token %}
+                <div class="manage-table">
+
+                    <div class="manage-table">
+                        <table class="table table-bordered table-striped order-table table"
+                               style="    font-size: 13px;">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Speciality</th>
+                                <th>Qualification</th>
+                                <th>Experience</th>
+                                <th>Availability</th>
+
+                                <!--<th style="width: 382px !important;">Action</th>-->
+                            </tr>
+                            </thead>
+                            <tbody id="Doctorreceptionisttable">
+                            <tr id="selectdoctor">
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="manage-table">
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div id="doctoravailability-form" title="Doctor Availability">
+                            <form autocomplete="off">
+                                <fieldset>
+                                    <div class="fields">
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="stime">Start Time</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="time" name="stime" id="stime" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="etime">End Time</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="time" name="etime" id="etime" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                               <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="bstime">Break Start</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="time" name="bstime" id="bstime" value=""
+                                                                class="form-control" />
+                                                        </div>
+                                                        <div class="col-md-2 required">
+                                                            <label for="betime">Break End</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="time" name="betime" id="betime" value=""
+                                                                class="form-control" />
+                                                        </div>
+                                            <p id="successMessage"></p>
+                                        </div>
+                                                </div>
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="duration">Appointment Duration(Min)</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="number" name="duration" id="duration" value="" placeholder="Minutes"
+                                                           class="form-control"/>
+                                                    <!--<select class="form-control" id="duration">-->
+                                                    <!--<option selected disabled>Select</option>-->
+                                                    <!--<option value="15">15</option>-->
+                                                    <!--<option value="30">30</option>-->
+                                                    <!--</select>-->
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="cfee">Consultation Fee(INR)</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="number" name="fee" id="cfee" value="" placeholder="INR"
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        <!-- <div class="col-md-2">
+                                            <label for="content" class="create-name">Work</label></div>
+                                        <div class="col-md-4">
+
+                                            <select type="text" class="form-control" id="User-type">
+                                                <option value="">Select</option>
+                                                <option value="">Doctor</option>
+                                                <option value="">Nurses</option>
+                                                <option value="">Laboratorist</option>
+                                                <option value="">Pharmacist</option>
+                                                <option value="">Receptionist</option>
+                                            </select>
+                                        </div> -->
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="footer">-->
+    <!--<p>Address: Level 1, MB tower,am@10 Road Number 10, Avenue 4, Banjara Hills, Hyderabad, Telangana 500034</p>-->
+    <!--</div>-->
+
+
+    <!--<div class="watermark">&copy; Copyright 2019, Cygen Group</div>-->
+    <script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+
+
+
+    </script>
+    <script>
+   (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('docinput');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+
+    </script>
+    <script>
+  $('#toggleNavPosition').click(function() {
+    $('body').toggleClass('fixed-nav');
+    $('nav').toggleClass('fixed-top static-top');
+  });
+
+
+    </script>
+
+    <script src="{% static 'js/sb-admin.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/adminscript.js' %}"></script>
+    <script src="{% static 'js/adminajax.js' %}"></script>
+
+</body>
+</html>

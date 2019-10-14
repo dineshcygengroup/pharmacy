@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Billing</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
+    <
+   <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'css/materialize_datatable.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+             <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+
+    <style>
+        #logo-container {
+            height: 100%
+        }
+
+        main {
+            padding: 1%;
+
+        }
+
+        .fixed-action-btn {
+            right: 5px;
+            top: 53px !important;
+        }
+
+        .heading {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .risk_scores {
+            display: flex;
+            
+        }
+
+        .cards {
+            min-height: 100%;
+
+            /* max-height:430px */
+        }
+        @media screen and (max-width: 600px) {
+                .risk_scores {
+                    flex-direction: column;
+                }
+         }
+
+
+        .disclaimer {
+            padding: 15px;
+            font-size: 11px;
+            text-align: justify;
+            border: 2px solid #585353;
+        }
+
+        .paragraph {
+            font-size: 15px
+        }
+        .ul{
+            list-style: disc !important;
+        }
+
+        .paginate-button{
+            background-color:blue !important;
+        }
+         th,td{
+             text-align:center
+         }
+         .select-dropdown{
+             max-height:200px !important;
+             overflow-y:auto !important
+         }
+         tr{
+             cursor: pointer !important;
+         }
+         
+    </style>
+</head>
+
+<body>
+     <div id="content">
+
+    <div class="navbar1">
+        <div class="dropdown1">
+            <button class="dropbtn1"><img src="{% static 'img/user.png'%}">
+            </button>
+            <div class="dropdown-content1">
+                <a href="#">My Account</a>
+                <a href="#">Sign out</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Main-->
+    <main>
+        <!--Account Settings-->
+        <ul id="accountsum" class="dropdown-content">
+            <li><a href="#!"><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="home.html"><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+
+        <div class="container-fluid">
+                        <!-- Billing -->
+                          <div class="card">
+                                  <div class="card-content">
+                                        <a href='{% url "billing:onebilling" %}' class="btn btn-large btn-floating purple right"><i class="material-icons large">add</i>></a>
+                                      <span class="card-title"><i class="material-icons red-text lighten-2">credit_card</i>&nbsp; Billing</span>
+                                      <div class="row">
+                                          <div class="input-field col m2 s12">
+                                              <select id="patient_filter">
+                                                  <option disabled selected>Select Patient</option>
+                                                  <option>Patient 1</option>
+                                                  <option>Patient 2</option>
+                                                  <option>Patient 3</option>
+                                                  <option>Patient 4</option>
+                                                  <option>Patient 5</option>
+                                                  <option>Patient 6</option>
+                                                  <option>Patient 7</option>
+                                                  <option>Patient 8</option>
+                                                  <option>Patient 9</option>
+                                                  <option>Patient 10</option>
+                                              </select>
+                                          </div>
+                                          <div class="input-field col m2 s12">
+                                              <select id="user_filter">
+                                                  <option disabled selected>Select User</option>
+                                                  <option>Manohar</option>
+                                                  <option>Suhaas</option>
+                                                  <option>Srinithi</option>
+                                              </select>
+                                          </div>
+                                          <div class="input-field col m2 s12">
+                                              <input type="text" id="invoice_filter">
+                                              <label for="invoice_filter">Invoice number</label>
+                                          </div>
+                                          <div class="input-field col m2 s12">
+                                              <select id="date_filter">
+                                                  <option disabled selected>Select Date range</option>
+                                                  <option>All</option>
+                                                  <option>This Week</option>
+                                                  <option>This Month</option>
+                                              </select>
+                                          </div>
+                                          <div class="input-field col m2 s12">
+                                              <select id="payment_filter">
+                                                  <option disabled selected>Select Payment Status</option>
+                                                  <option>All</option>
+                                                  <option>Paid</option>
+                                                  <option>Unpaid</option>
+                                              </select>
+                                          </div>
+                                          <div class="col s12 m2">
+                                              <br>
+                                              <button  class="btn">Search</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                          </div>
+                              <!-- Table -->
+                          <div class="card">
+                                  <div class="card-content">
+                                          <table id="tbl" class="responsive-table">
+                                                  <thead>
+                                                      <tr>
+                                                          <th>User</th>
+                                                          <th>Patient</th>
+                                                          <th>Date</th>
+                                                          <th>Amount</th>
+                                                          <th>Paid</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                  
+                                                  </tbody>
+                                          </table>
+                                  </div>
+                          
+        </div>
+            </div>
+    </main>
+    <footer class="">
+
+    </footer>
+
+   
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/init.js' %}" ></script>
+    <script src="{% static 'js/materialize.js' %}" ></script>
+
+  <script src="{% static 'js/apicals.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $(".modal").modal();
+            $('.collapsible').collapsible();
+            $('.dropdown-trigger').dropdown({ hover: true });
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+            });
+
+             $("#new_billing").hide();
+            $("#billing_tbl").show();
+            $('select').formSelect();
+            // datatable..
+
+var details=[];
+    var load_hospitalbillreports = function(){
+         get_hospitalbillreports_data(function(data, status) {
+           if (status == "success") {
+
+           console.log("get_hospitalbillreports_data");
+
+             var rowId=0;
+                    $("#tbl").DataTable({
+                        "lengthChange": false,
+                        "pageLength":10,
+                        "searching": false,
+                         "data":data,
+                         "columns":[
+                             {"data":"user"},
+                             {"data":"patient"},
+                             {"data":"date"},
+                             {"data":"amount"},
+                             {"data":"paid"}
+                        ],
+                        "rowCallback": function( row, details ) {
+                               $(row).click(function(){
+
+                                   //function goes here
+                                   window.location.pathname="/billsreport"+"/"+details.id;
+                               })
+
+                            }
+                    });
+
+        }
+         });
+    }
+load_hospitalbillreports();
+ console.log("details_hospitalbillreports_data");
+console.log(details);
+                    
+
+
+        });
+    </script>
+
+</body>
+
+</html>

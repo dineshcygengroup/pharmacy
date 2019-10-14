@@ -1,0 +1,31 @@
+.container {
+    .logout-button {
+        float: right;
+    }
+    .body {
+        height: 92vh;
+    }
+    mat-toolbar-row {
+        width: 100%;
+        #app-name {
+            margin-top: 0.3%;
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.side-bar-container {
+    .side-bar {
+        width: 20%;
+    }
+    .side-bar-content {
+        width: 78%;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .active-list-item {
+        color: #3F51B5 !important;
+    }
+}

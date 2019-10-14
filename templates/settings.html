@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>HealthTech</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js" type="text/javascript"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/setting.css' %}" rel="stylesheet">
+    <link href="{% static 'css2/finalehr.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+</head>
+<style>
+    tr td {
+    display: block;
+    border: none;
+    font-size: 13px !important;
+    padding: 5px 0px 0px 20px !important;
+    word-break: break-all;
+}
+</style>
+<body>
+
+<div id="content">
+    <div class="navbar1">
+
+        <div class="dropdown1">
+            <button class="dropbtn1"><img src="{% static 'img/user.png'%}">
+            </button>
+            <div class="dropdown-content1">
+                <a href="#">My Account</a>
+                <a href="#">Sign out</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="settings-div">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">
+                    <div class="setting-subbox">
+                        <div class="settings-head">PROFILE</div>
+                        <div class="settings-content">Change Name, Email.</div>
+                        <div class="settings-button"><a href="/userprofile/{{request.user.id}}"><input type="button"
+                                                                                                       value="Edit-Profile"
+                                                                                                       name="Edit-Profile"class="edit"></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">
+                    <div class="setting-subbox">
+                        <div class="settings-head">CHANGE PASSWORD</div>
+                        <div class="settings-content">Change your password.</div>
+                        <!--<div class="settings-button"><a href="/changepasswordtemplete/"><input type="button" value="Change-Password"-->
+                                                                        <!--name="Change-Password" class="edit"></a></div>-->
+                        <div id="ehr-createpassword" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                        <div class="col-xs-12" style="padding: 0 0 8px 0;">
+                            <div id="createpassword-contain" class="ui-widget">
+                                <div class="imodule-body">
+                                    <button class="settings-button" style="padding:none!important;" id="create-changepassword">
+                                                        Change password</button>
+
+                                    <div id="dialog-form-changepassword" class="form-popup">
+                                        <form method="POST" enctype="multipart/form-data" id="ehr_createpassword_report">
+                                            <fieldset class="form-body" style="border:none;">
+                                                <div class="fields">
+                                                    <div class="user-info">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label style="font-size:13px;font-weight:0;"
+                                                                       for="currentpassword"> Current password </label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="currentpassword"
+                                                                       class="form-control"
+                                                                       id="currentpassword">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     <div class="user-info">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label style="font-size:13px;font-weight:0;"
+                                                                       for="newpassword"> New password </label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="newpassword"
+                                                                       class="form-control"
+                                                                       id="newpassword">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">
+                <div class="setting-subbox">
+                    <div class="settings-head"> MANAGE USER</div>
+                    <div class="settings-content">Manage users, you can create new user or view existing user and edit
+                        them
+                    </div>
+                    <div class="settings-button"><a href='{% url "ehr:usermanage" %}'><input type="button"
+                                                                                             value="Manage-user"
+                                                                                             name="Manage-user"
+                                                                                             class="edit"></a></div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="row">-->
+            <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">-->
+                <!--<div class="setting-subbox">-->
+                    <!--<div class="settings-head">HOSPITAL CODES</div>-->
+                    <!--<div class="settings-content">Set your hospital codes like procedure code, item/service code etc-->
+                        <!--here and use them easily.-->
+                    <!--</div>-->
+                    <!--<div class="settings-button">-->
+                        <!--<div class="button dropdown">-->
+                            <!--<select id="hospitalselector" class="edit">-->
+                                <!--<option selected="true" disabled="disabled">Hospital Codes</option>-->
+                                <!--<option value="Procedure">Procedure Code</option>-->
+                                <!--<option value="Drug">Drug-Code</option>-->
+                                <!--<option value="test">Test-Code</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="output">-->
+                    <!--<div id="Procedure" class="hospital two">-->
+                        <!--<div class="user-profile">-->
+                            <!--<div id="Procedure-form" title="Procedure Code">-->
+                                <!--<form>-->
+                                    <!--<fieldset>-->
+                                        <!--<div class="fields">-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Procedure-code">Procedure Code</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Procedure-code" id="Procedure-code"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off"></div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="procedurename">Procedure Name/Description*</label>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" id="procedurename" class="form-control"-->
+                                                               <!--required autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="procedureamount">Amount</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="number" name="Amount" id="procedureamount"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                    <!--</fieldset>-->
+                                <!--</form>-->
+                            <!--</div>-->
+
+                            <!--<div id="itemcode1" class="ui-widget">-->
+                                <!--<div class="itemservice">-->
+                                    <!--<div class="itemcode-name"> Procedure Code</div>-->
+                                    <!--<div class="item-btn">-->
+                                        <!--<button id="Procedureitampopup">-->
+                                            <!--+-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="table-content">-->
+                                    <!--<table id="Proceduretable" class="table table-bordered">-->
+
+                                        <!--<tbody>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="Drug" class="hospital two">-->
+                        <!--<div class="user-profile">-->
+                            <!--<div id="Drug-form" title="Drug Code">-->
+                                <!--<form>-->
+                                    <!--<fieldset>-->
+                                        <!--<div class="fields">-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Drug-Code">Drug Code</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Drug-Code" id="Drug-Code"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off"></div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Drug-Medication">Medication*</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Drug-Medication" id="Drug-Medication"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Strength">Strength</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Strength" id="Strength"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Company">Company</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Company" id="Company"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Drug-Amount">Amount</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="number" name="Drug-Amount" id="Drug-Amount"-->
+                                                               <!--class="form-control" value="" required-->
+                                                               <!--autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</fieldset>-->
+                                <!--</form>-->
+                            <!--</div>-->
+
+                            <!--<div id="itemcode" class="ui-widget">-->
+                                <!--<div class="itemservice">-->
+                                    <!--<div class="itemcode-name"> Drug Code</div>-->
+                                    <!--<div class="item-btn">-->
+                                        <!--<button id="Drugcodepopup">-->
+                                            <!--+-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="table-content">-->
+                                    <!--<table id="Drugtable" class="table table-bordered">-->
+
+                                        <!--<tbody>-->
+                                        <!--<tr>-->
+
+                                        <!--</tr>-->
+
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="test" class="hospital two">-->
+                        <!--<div class="user-profile">-->
+                            <!--<div id="test-form" title="Test Code">-->
+                                <!--<form>-->
+                                    <!--<fieldset>-->
+                                        <!--<div class="fields">-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Test-Code">Test Code</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Test-Code" id="Test-Code"-->
+                                                               <!--class="form-control" value="" autocomplete="off"></div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Test-Name">Test Name*</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Test-Name" id="Test-Name"-->
+                                                               <!--class="form-control" value="" autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Curated-Range">Curated Range</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="number" name="Curated-Range" id="Curated-Range"-->
+                                                               <!--class="form-control" value="" autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="Unit">Unit</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="text" name="Unit" id="Unit" class="form-control"-->
+                                                               <!--value="" autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="user-info">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<label for="test-Amount">Amount</label></div>-->
+                                                    <!--<div class="col-md-8">-->
+                                                        <!--<input type="number" name="test-Amount" id="test-Amount"-->
+                                                               <!--class="form-control" value="" autocomplete="off">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</fieldset>-->
+                                <!--</form>-->
+                            <!--</div>-->
+
+                            <!--<div id="itemcode" class="ui-widget">-->
+                                <!--<div class="itemservice">-->
+                                    <!--<div class="itemcode-name"> Test Code</div>-->
+                                    <!--<div class="item-btn">-->
+                                        <!--<button id="testcodepopup">-->
+                                            <!--+-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="table-content">-->
+                                    <!--<table id="testtable" class="table table-bordered">-->
+
+                                        <!--<tbody>-->
+                                        <!--<tr>-->
+
+                                        <!--</tr>-->
+
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">
+                <div class="setting-subbox">
+                    <div class="settings-head">LOGO PRINTING</div>
+                    <div class="settings-content">Select image with logo that will used in the reports like health
+                        records, prescription, receipts etc.The file format should be in .jpeg or .jpg or .png or .gif.
+                    </div>
+                    <div id="ehr-hospitallogofile" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                        <div class="col-xs-12" style="padding: 0 0 8px 0;">
+                            <div id="hospitallogofile-contain" class="ui-widget">
+                                <div class="imodule-body">
+                                    <button style="padding:none!important;" id="create-hospitallogofile">
+                                                        Upload Hospital Logo</button>
+                                    <table id="hospitallogouploadfile" class="ui-widget ui-widget-content"
+                                           style="border:none;">
+                                        <tbody style="border:5px">
+                                        <tr>
+
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="dialog-form-hospitallogofile" class="form-popup">
+                                        <form method="POST" enctype="multipart/form-data" id="ehr_hospitallogo_report">
+                                            <fieldset class="form-body" style="border:none;">
+                                                <div class="fields">
+                                                    <div class="user-info">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label style="font-size:13px;font-weight:0;"
+                                                                       for="hospitallogosource"> Upload file </label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="file" name="hospitallogoimage"
+                                                                       class="form-control"
+                                                                       id="hospitallogosource">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 setting-box">
+                <div class="setting-subbox">
+                    <div class="settings-head">DOCTOR'S SIGNATURE</div>
+                    <div class="settings-content"> Select doctor's signature image that will used in the reports like
+                        health records, prescription etc. The file format should be in .jpeg or .jpg or .png or .gif.
+                    </div>
+                    <div id="ehr-doctorsignfile" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                        <div class="col-xs-12" style="padding: 0 0 8px 0;">
+                            <div id="doctorsignfile-contain" class="ui-widget">
+                                <div class="imodule-body">
+                                    <button style="padding:none!important;" id="create-doctorsignfile">
+                                                        Upload Doctor signature</button>
+                                    <table id="doctorsignuploadfile" class="ui-widget ui-widget-content"
+                                           style="border:none;">
+                                        <tbody style="border:5px">
+                                        <tr>
+
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="dialog-form-doctorsignfile" class="form-popup">
+                                        <form method="POST" enctype="multipart/form-data" id="ehr_doctorsign_report">
+                                            <fieldset class="form-body" style="border:none;">
+                                                <div class="fields">
+                                                    <div class="user-info">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label style="font-size:13px;font-weight:0;"
+                                                                       for="doctorsignsource"> Upload file </label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="file" name="doctorsignimage"
+                                                                       class="form-control"
+                                                                       id="doctorsignsource">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+var patient_id='{{patient_id}}';
+    var orgnastion_id='{{request.user.orgnastion_id}}';
+    var user_id='{{request.user.id}}';
+    var doctor='{{request.user.first_name}}';
+
+$(document).ready(function(){
+
+
+            $("#myprocedurebuttonid").on("click",function() {
+	    var v = $(this).val();
+	});
+
+
+
+                  })
+
+ window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+
+
+</script>
+<script src="{% static 'js2/csrf.js' %}"></script>
+<script src="{% static 'js2/settings.js' %}"></script>
+<script src="{% static 'js2/settings-ajax.js' %}"></script>
+
+
+<script>
+
+
+            $(function() {
+  $('#hospitalselector').change(function(){
+$('.hospital').hide();
+    $('#' + $(this).val()).show();
+  });
+});
+
+
+</script>
+<script>
+                    $(function() {
+          $('#serviceselector').change(function(){
+            $('.service').hide();
+            $('#' + $(this).val()).show();
+          });
+        });
+
+
+</script>
+
+
+</body>
+</html>
+

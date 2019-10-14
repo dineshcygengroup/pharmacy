@@ -1,0 +1,31 @@
+.container {
+    padding: 1%;
+    // height: 78vh;
+    .form-container {
+        display: flex;
+        
+        .input-field {
+            width: 85%;
+            padding-right: 2%;
+            padding-left: 1%;
+        }
+
+        .small-input-field {
+            width: 42%;
+            padding-right: 0.5%;
+            padding-left: 1%;
+        }
+          
+        .form-column {
+            flex: 33%;
+        }
+    }
+    #submit-button {
+        width: 62%;
+        padding-top:5%;
+        button {
+            margin-left: 2%;
+            float: right;
+        }
+    }
+}

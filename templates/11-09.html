@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+     <title>Page Title</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script id="__scripts__" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+         crossorigin="anonymous">
+
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css2/bootstrap.min2.css' %}">
+    <script type=text/javascript" src="{% static 'js2/bootstrap.min2.js' %}"></script>
+    <script type=text/javascript" src="{% static 'js2/autogrow2.js' %}"></script>
+    <link href="{% static 'css2/finalehr.css' %}" rel="stylesheet">
+    <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet">
+ <link rel="stylesheet" href="{% static 'css2/navbar2.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ehr.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+.navbar {
+    border-radius: 0px;
+}
+.ui-dialog-titlebar-close{
+color: transparent;
+}
+.ui-button-icon-space{
+display:none;
+}
+button
+{
+    color: #017b8b;
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href=# style="font-size: 20px; padding: 13px;">HMS LAMJINGBA</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item admin-name" data-toggle="tooltip" data-placement="right" >
+
+                <img src="" alt="" class="img-ic">
+                <span class="nav-link-text">Receptionist</span>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" >
+                <a class="nav-link" href='/dashboard/'>
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    <span class="nav-link-text">Dashboard</span></a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" >
+                <a class="nav-link" href='/Patient_list/'>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span class="nav-link-text">Patients</span></a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/Physician_list_view/'>
+                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                    <span class="nav-link-text">Doctors</span></a>
+            </li>
+
+
+
+        </ul>
+
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li><button id="logoutbut" data-toggle="modal" data-target="#exampleModal" style="color:white; font-size: 16px;">
+                Logout</button>
+
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="content-wrapper">
+
+    <div id="summary">
+        <div class="col-sm-12 container_body">
+            <div style="width:100%;" class='container'>
+                <div id="top-header" class="row row-equal-hgt">
+                    <div class="col-md-11">
+                     <span style="font-size:20px ;font-weight: 400;color:#017b8b;text-align: center;float:centre;">HEALTH RECORD</span></div>
+                    <!--<div class="col-md-1">-->
+                        <!--<div class="printMe "><i class="fa fa-print" aria-hidden="true"></i></div>-->
+                    <!--</div>-->
+
+                    <div class="col-xs-12" style="padding:0 0 5px 0;">
+                        <div class="col-xs-12 white-box content-box  max-hgt" style="padding: 0;">
+                            <div id="top-c-1" class="col-lg-4 max-hgt" style="padding: 0;">
+                                <div class="col-xs-12 " style="padding: 0;">
+                                    <div class="col-xs-12 " style="padding: 15px 0;">
+                                        <table id="table" class="ui-widget " style="border:none;margin-left:5px;">
+                                            <tbody>
+                                            <tr>
+                                              {% for i in patient %}
+                                                <td style="color: #64c1b1; font-size: 20px !important;">{{i.pat.first_name}} {{i.pat.last_name}}-{{i.pat.gender}} ({{i.age}})</td>
+                                                <td>{{i.pat.email}}</td>
+                                                <td>{{i.pat.phone}}</td>
+                                                 <td>{{i.blood_group}}</td>
+                                              {% endfor %}
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--column1 ended-->
+                            <div id="top-c-2" class=" col-lg-4 max-hgt" style="padding: 0;">
+                                <div class="col-xs-12" style="padding: 0;">
+                                    <div class="col-xs-12 " style="padding: 15px 0;">
+                                        <table id="patientehrcontactdetails" class="ui-widget "
+                                               style="border:none;margin-left:5px;">
+                                            <tbody>
+                                            <tr>
+                                                {% for i in patient %}
+                                                <td>{{i.address}}</td>
+                                                <td> {{i.city}}</td>
+                                                <td> {{i.state}}</td>
+                                                <td> {{i.country}},{{i.zip_code}}</td>
+                                                <td> {{i.ethnicity}}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--column2 ended-->
+                            <div id="top-c-3" class=" col-lg-4 max-hgt" style="padding: 0;">
+                                <div class="col-xs-12 max-hgt" style="padding: 0;">
+                                    <div class="col-xs-12 " style="padding: 10px 0;">
+                                        <div class="border-left max-hgt"
+                                             style="border-width: 5px; max-width: 1.5%;"></div>
+                                        <div class="" style="width: 97%;">
+                                            <table class="ui-widget "
+                                                   style="border:none;margin-left:5px;font-size:15px;">
+
+                                                <tbody>
+                                                <tr>
+                                                    {% for i in patient %}
+                                                    <td>EHR Number:CYG-{{i.pat_id}}</td>
+                                                    {% endfor %}
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 100%;" class="container">
+                <div id="cols" class="row">
+                    <div id="col-1" class="col-sm-12 col-md-6 col-lg-4 "
+                         style="padding: 0 0 0 0;">
+                        <!--allergies part start from here-->
+                        <div id="ehr-allergies" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="allergies-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fas fa-allergies"
+                                                   aria-hidden="true"></i>
+                                                Allergy
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-Allergy"
+                                                          title="Add Allergy">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="Allergy" class="ui-widget ui-widget-content" style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-allergy" class="form-popup" title="Allergy">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="AllergyType">Allergy type</label></div>
+                                                                <div class="col-md-8">
+                                                                    <select class="form-control" name="AllergyType"
+                                                                            id="AllergyType">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Drug Allergy">Drug Allergy
+                                                                        </option>
+                                                                        <option value="Food Allergy">Food Allergy
+                                                                        </option>
+                                                                        <option value="Other Allergy">Other Allergy
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="Allergen">Allergen</label></div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Allergen" id="Allergen"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="AllergyDescription"> Description</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <textarea name="AllergyDescription"
+                                                                              id="AllergyDescription"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--socialhistory starts here-->
+                        <div id="ehr-socialhistory" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fas fa-glass-martini"
+                                                   aria-hidden="true"></i>
+                                                Social History
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-socialhistory">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="socialhistory" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-socialhistory" class="form-popup" title="Social History">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="socialhistoryType">Social
+                                                                        History</label></div>
+                                                                <div class="col-md-8">
+                                                                    <select class="form-control"
+                                                                            name="socialhistoryType"
+                                                                            id="socialhistoryType">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Smoking Status">Smoking Status
+                                                                        </option>
+                                                                        <option value="Tobacco">Tobacco</option>
+                                                                        <option value="Alcohol">Alcohol</option>
+                                                                        <option value="Drug ">Drug</option>
+                                                                        <option value="Caffeine">Caffeine</option>
+                                                                        <option value="Other">Other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="socialhistoryDescription">
+                                                                        Description</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <textarea name="socialhistoryDescription"
+                                                                              id="socialhistoryDescription"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="fromdate">
+                                                                        From Date</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input name="fromdate" type="date"
+                                                                           dateformat="yyyy-mm-dd"
+                                                                           id="fromdate"
+                                                                           class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FamilyHealthHistory part start from here-->
+                        <div id="ehr-FamilyHealthHistory" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="familyhealth-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fa fa-users"
+                                                   aria-hidden="true"></i>
+                                                Family Health
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;"
+                                                          id="create-familyhealthhistory">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="familyhealthhistory" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-familyhealthhistory" class="form-popup"
+                                             title="Family Health History">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="relationType">Relationship</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control" name="relationType"
+                                                                            id="relationType">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Father">Father</option>
+                                                                        <option value="Mother">Mother</option>
+                                                                        <option value="Spouse">Spouse</option>
+                                                                        <option value="Brother">Brother</option>
+                                                                        <option value="Sister">Sister</option>
+                                                                        <option value="Son">Son</option>
+                                                                        <option value="Daughter">Daughter</option>
+                                                                        <option value="Grandfather">Grandfather</option>
+                                                                        <option value="Grandmother">Grandmother</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="FamilyDescription"> Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="FamilyDescription"
+                                                                              id="FamilyDescription" rows="3"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="Familynote"> Note</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="Familynote"
+                                                                              id="Familynote" rows="3"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--vitals part start-->
+                        <div id="ehr-Vitals" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="vitals-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fa fa-heartbeat"
+                                                   aria-hidden="true"></i>
+                                                Vitals
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-vitals">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="vitals" class="ui-widget ui-widget-content" style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-vitals" class="form-popup" title="Vitals">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="heightfeet">Height</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="heightfeet" id="heightfeet"
+                                                                           class="form-control" value=""
+                                                                           placeholder="Feet">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="heightinch">Height</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="heightinch" id="heightinch"
+                                                                           class="form-control" value=""
+                                                                           placeholder="Inch">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="weight">Weight</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="weight" id="weight"
+                                                                           class="form-control" value=""
+                                                                           placeholder="Kg">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="temparature">Temperature</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="temparature"
+                                                                           id="temparature"
+                                                                           class="form-control" value=""
+                                                                           placeholder="°C">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="systolicbp">Systolic BP</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="vitalsType" id="systolicbp"
+                                                                           class="form-control" value=""
+                                                                           placeholder="(mm Hg)">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="diastolicbp">Diastolic BP</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="diastolicbp"
+                                                                           id="diastolicbp"
+                                                                           class="form-control" value=""
+                                                                           placeholder="(mm Hg)">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="oxygensaturation">Oxygen
+                                                                        Saturation</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="oxygensaturation"
+                                                                           id="oxygensaturation"
+                                                                           class="form-control" value=""
+                                                                           placeholder="%">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="pulse">Heart rate/Pulse</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="pulse" id="pulse"
+                                                                           class="form-control" value=""
+                                                                           placeholder="Beats/Minute">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="respiratoryrate">Respiratory
+                                                                        rate</label></div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="respiratoryrate"
+                                                                           id="respiratoryrate"
+                                                                           class="form-control" value=""
+                                                                           placeholder="Breaths/minute">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="glucose">Glucose Level(Glucometer)
+                                                                    </label></div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="glucose"
+                                                                           id="glucose"
+                                                                           class="form-control" value=""
+                                                                           placeholder="mg/dL">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--problems part starts from here-->
+                        <div id="ehr-problems" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="problrms-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fa fa-stethoscope"
+                                                   aria-hidden="true"></i>
+                                                Problems
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-problems">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="problems" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-problems" class="form-popup" title="Problems">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:100%;"
+                                                                           for="Problem">Problem</label></div>
+                                                                <div class="col-md-9">
+                                                                    <textarea id="Problem" class="form-control" placeholder="search and select the data"></textarea>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="ProblemDescription">
+                                                                        Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="ProblemDescription"
+                                                                              id="ProblemDescription"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="Problemfromdate">
+                                                                        From Date</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input name="problemdate"
+                                                                           id="Problemfromdate"
+                                                                           type="date"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <!--symptoms start here-->
+                        <div id="ehr-symptoms" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="symptoms-contain1" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-wheelchair"
+                                                   aria-hidden="true"></i> Symptoms
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color"
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-symptoms">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="symptoms" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-symptoms" class="form-popup"
+                                             title="Symptoms">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="symdescription">Symptoms</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea id="symdescription" class="form-control" placeholder="search and select the data"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="sympstartdate">Start Date</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="discription"
+                                                                           id="sympstartdate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--visitreason part starts from here-->
+                        <div id="ehr-visitreason" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="visitreason-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fas fa-hospital"
+                                                   aria-hidden="true"></i>
+                                                Visit Reason
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-visitreason">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="visitreason" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-visitreason" class="form-popup" title="Visit Reason">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="visitreasonDescription">
+                                                                        Visit Reason</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="ProblemDescription"
+                                                                              id="visitreasonDescription" rows="3"
+                                                                              class="form-control" value=""></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--procedure part starts from here-->
+                        <div id="ehr-procedure" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="procedure-contain11" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move; position:relative; font-size:15px;  ">
+                                        <div>
+                                            <div class="info-name kpull-left" style="color:#017b8b;">
+                                                <i style=" position:relative;left:-6px;" class="fas fa-file-medical"
+                                                   aria-hidden="true"></i>
+                                                Procedure
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class="icon-md icon-color   "
+                                                     style="display: inline-block; visibility:visible; ">
+                                                    <span style="padding:none!important;" id="create-procedure">
+                                                        &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient hover icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body ">
+                                        <table id="procedure" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-procedure" class="form-popup" title="Procedure">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="procedurecodetype">
+                                                                        Procedure Code Type</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control selectOption" name="procedurecode"
+                                                                            id="procedurecodetype">
+                                                                        <!--<option value="" disabled selected>Select</option>-->
+                                                                        <option value="ICD-10-PCS">ICD-10-PCS</option>
+                                                                        <option value="CPT">CPT</option>
+                                                                        <option value="HCPCS">HCPCS</option>
+                                                                        <!--<option value="SNOMED_CT">SNOMED CT</option>-->
+                                                                        <option value="PROCEDURE-CODE">PROCEDURE-CODE
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;">
+                                                                        Procedure Code</label>
+                                                                </div>
+                                                                <div class="col-md-9 " id="changingArea">
+                                                                    <textarea name="procedurecode"
+                                                                           id="ICD-10-PCS"
+                                                                              class="form-control procedurecode desc" ></textarea>
+                                                                    <textarea name="procedurecode"
+                                                                           id="CPT"
+                                                                              class="form-control procedurecode desc" ></textarea>
+                                                                    <textarea name="procedurecode"
+                                                                           id="HCPCS"
+                                                                              class="form-control procedurecode desc" ></textarea>
+                                                                    <textarea name="procedurecode"
+                                                                           id="PROCEDURE-CODE"
+                                                                              class="form-control procedurecode desc" ></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="proceduredescription">
+                                                                        Procedure</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="proceduredescription"
+                                                                              id="proceduredescription" rows="3"
+                                                                              class="form-control" value=""></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="proceduredestatus">
+                                                                        Status</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select id="proceduredestatus" class="form-control"
+                                                                            style="width: 100%;">
+                                                                        <option value="active">Active</option>
+                                                                        <option value="inactive">Inactive</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="col-2" class="col-sm-12 col-md-6 col-lg-4 connectedSortable ui-sortable"
+                         style="padding: 0 0 0 0;">
+                        <!--diagnostic lab tests part start from here-->
+                        <div id="ehr-diagnostic" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="diagnosticlab-contain1" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-microscope"
+                                                   aria-hidden="true"></i> Test Details
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-diagnosticlab">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div data-toggle="tooltip"-->
+                                                <!--class=" icon-md icon-color"-->
+                                                <!--style="display: inline-block;color: #017b8b;">-->
+                                                <!--<span style="padding:none!important;" class="fa fa-share-square"-->
+                                                <!--id="share-diagnosticlab">-->
+
+                                                <!--</span>-->
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="diagnosticlab" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-diagnosticlab" class="form-popup"
+                                             title="Diagnostic Test details">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="testname">Test Name/Test Code</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <textarea id="testname" class="form-control" placeholder="search and select the data"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="testresult">Test Result</label></div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="testresult" id="testresult"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="testunits">Units</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input name="testunits"
+                                                                           id="testunits"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="testnote">Note</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <textarea name="testnote"
+                                                                              id="testnote"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--diagnostic lab tests ends here-->
+                        <!--medications part start from here-->
+                        <div id="ehr-medications" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="medications-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-capsules"
+                                                   aria-hidden="true"></i> Medications
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-medications">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="medications" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-medications" class="form-popup"
+                                             title="Medications">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="medicationname">Medication Name</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea id="medicationname" class="form-control" placeholder="search and select the data"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="dossage">Dosage</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="dossage" id="dossage"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="quantity">Quantity</label></div>
+                                                                <div class="col-md-3">
+                                                                    <input type="text" name="quantity" id="quantity"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="medstartdate">Start date</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="startdate"
+                                                                           id="medstartdate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="medenddate">End date</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="startdate" id="medenddate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="directionstoussage">Directions To
+                                                                        Use</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="testunits"
+                                                                              id="directionstoussage"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="refills">Refills</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input name="refills" type="text"
+                                                                           id="refills"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="company">Company/Label</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input name="company" type="text"
+                                                                           id="company"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="mednote">Notes</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="testunits"
+                                                                              id="mednote"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--medications ends here-->
+                        <!--vaccine  part start from here-->
+                        <div id="ehr-vaccine" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="status-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-syringe"
+                                                   aria-hidden="true"></i> Vaccine
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-vaccine">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="-->
+                                                <!--allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="vaccine" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-vaccine" class="form-popup"
+                                             title="Vaccine">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="vaccinename">vaccine Name/Code</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea id="vaccinename" class="form-control" placeholder="search and select the data"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="vaccinestatus">Status</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" name="vaccinestatus"
+                                                                           id="vaccinestatus"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="vaccinetakendate">Taken Date</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="vaccinetakendate"
+                                                                           id="vaccinetakendate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="vaccinenote">Vaccine Note</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="vaccinenote"
+                                                                              id="vaccinenote"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--vaccine ends here-->
+                        <!--status part start from here-->
+                        <div id="ehr-status" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="status-contain1" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-procedures"
+                                                   aria-hidden="true"></i> Status
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-status">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="status" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-status" class="form-popup"
+                                             title="Status">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="statusselect">Select Status</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control" id="statusselect">
+                                                                        <option value="" disabled="" selected="">
+                                                                            Select
+                                                                        </option>
+                                                                        <option value="Cognitive Status">Cognitive
+                                                                            Status
+                                                                        </option>
+                                                                        <option value="Functional Status">Functional
+                                                                            Status
+                                                                        </option>
+                                                                        <option value="Other Status">Other Status
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="effectivedate">Effective Date</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="dossage" id="effectivedate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="statusdiscription">Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="statusdiscription"
+                                                                              id="statusdiscription"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--status ends here-->
+                        <!--amendments part start from here-->
+                        <div id="ehr-amendments" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="amendments-contain1" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-diagnoses"
+                                                   aria-hidden="true"></i> Amendments
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-amendments">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="amendments" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-amendments" class="form-popup"
+                                             title="Amendments">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="amendementssource">Source</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input name="amendementssource"
+                                                                           id="amendementssource"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="amendementssourcediscription">Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea type="text"
+                                                                              name="amendementssourcediscription"
+                                                                              id="amendementssourcediscription"
+                                                                              class="form-control" value=""></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="amendementsstatus">Status</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" name="amendementsstatus"
+                                                                           id="amendementsstatus"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="amendementsstatusdiscription">Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="amendementsstatusdiscription"
+                                                                              id="amendementsstatusdiscription"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--amendments ends here-->
+                        <!--advanceddirectives part start from here-->
+                        <div id="ehr-Advancedirectives" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="advanceddirectives-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-prescription-bottle-alt"
+                                                   aria-hidden="true"></i> Advance Directives
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color"
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;"
+                                                           id="create-advancedirectives">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="advancedirectives" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-advancedirectives" class="form-popup"
+                                             title="Advance Directives">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="directive">Directive</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control" id="directive">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Assessment">Assessment</option>
+                                                                        <option value="Plan of treatment">Plan of
+                                                                            treatment
+                                                                        </option>
+                                                                        <option value="Other Directives">Other
+                                                                            Directives
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="ADdiscription">Description</label></div>
+                                                                <div class="col-md-9">
+                                                                    <textarea type="text" name="discription"
+                                                                              id="ADdiscription"
+                                                                              class="form-control" value=""></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--advanceddirectives ends here-->
+                        <!--allert part start from here-->
+                        <div id="ehr-allert" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="allert-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-bell"
+                                                   aria-hidden="true"></i> Alert
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color"
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-allert">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="allert" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-allert" class="form-popup"
+                                             title="Alert">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="alertdiscription">Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="discription"
+                                                                              id="alertdiscription"
+                                                                              class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="alertvisibility">Visibility</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select id="alertvisibility" class="form-control">
+                                                                        <option selected="" value="Everyone">Everyone
+                                                                        </option>
+                                                                        <option value="Doctors">Doctors</option>
+                                                                        <option id="only-to-me" value="only-me">Only to
+                                                                            me
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--allert ends here-->
+
+                    </div>
+                    <div id="col-3" class="col-sm-12 col-md-6 col-lg-4 connectedSortable ui-sortable"
+                         style="padding: 0 0 0 0;">
+                        <!--Note start here-->
+                        <div id="ehr-notes" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="notes-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move;position:relative; font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;" class="fas fa-notes-medical"
+                                                   aria-hidden="true"></i>Note
+                                            </div>
+                                            <div class="kpull-right  ">
+                                                <div data-toggle="tooltip"
+                                                     title="Add note"
+                                                     class="icon-md icon-color "
+                                                     style="display: inline-block;">
+                                                <span style="padding:none!important;" id="create-note">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="note" class="ui-widget ui-widget-content" style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-note" class="form-popup" title="Note">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="AllergyDescription"> Note/visit
+                                                                        summary</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <textarea name="notesummary"
+                                                                              id="notesummary"
+                                                                              class="form-control" value=""
+                                                                              rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--note ends here-->
+                        </div>
+                        <!--goal start here-->
+                        <div id="ehr-goals" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="goals-contain2" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor: move;position:relative; font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;" class="fas fa-bullseye"
+                                                   aria-hidden="true"></i>Goal
+                                            </div>
+                                            <div class="kpull-right  ">
+                                                <div data-toggle="tooltip"
+                                                     title="Add note"
+                                                     class="icon-md icon-color "
+                                                     style="display: inline-block;">
+                                                <span style="padding:none!important;" id="create-goal">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="goal" class="ui-widget ui-widget-content" style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-goal" class="form-popup" title="Goal">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="goalsummary"> Goal
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="goalsummary"
+                                                                              id="goalsummary"
+                                                                              class="form-control" value=""
+                                                                              rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="goalsdate"> Start Date</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="goalsdate"
+                                                                           id="goalsdate"
+                                                                           class="form-control" value=""
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--note ends here-->
+                        </div>
+
+                        <!--inpatient start here-->
+                        <div id="ehr-inpatient" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="inpatient-contain1" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-ambulance"
+                                                   aria-hidden="true"></i> Inpatient
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-inpatient">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="inpatient" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-inpatient" class="form-popup"
+                                             title="Inpatient">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="adddate">Admission Date</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="adddate" id="adddate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="disdate">Discharge date</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="date" name="disdate"
+                                                                           id="disdate"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="distype">Discharge type</label></div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control" id="distype">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Emergency">Emergency</option>
+                                                                        <option value="Elective">Elective</option>
+                                                                        <option value="New Born">New Born</option>
+                                                                        <option value="Trauma Centre">Trauma Centre
+                                                                        </option>
+                                                                        <option value="Medico Legal case">Medico Legal
+                                                                            case
+                                                                        </option>
+                                                                        <option value="LAMA">LAMA</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="dissum">Discharge summary</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="dissum"
+                                                                              id="dissum"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--refferel start here-->
+                        <div id="ehr-refferel" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="refferel-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fa fa-user-md"
+                                                   aria-hidden="true"></i> Referral
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-refferel">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="refferel" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-refferel" class="form-popup"
+                                             title="Referral">
+                                            <form>
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="doctorname">Doctor name </label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" name="doctorname" id="doctorname"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="doctorcontact">Doctor Contact</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="text" name="doctorcontact"
+                                                                           id="doctorcontact"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="doctoremail">Doctor Email</label></div>
+                                                                <div class="col-md-9">
+                                                                    <input type="email" name="doctoremail"
+                                                                           id="doctoremail"
+                                                                           class="form-control" value="">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="doctornote">Doctor Note</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="doctornote"
+                                                                              id="doctornote"
+                                                                              class="form-control" value=""
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--attachfile start here-->
+                        <div id="ehr-attachfile" class="col-xs-12 " style="padding: 5px 0px 5px 5px;">
+                            <div class="col-xs-12 white-box" style="padding: 0 0 8px 0;">
+                                <div id="attachfile-contain" class="ui-widget">
+                                    <div class="col-xs-12 imodule-head"
+                                         style="cursor:move;position:relative;font-size:15px;">
+                                        <div>
+                                            <div class=" info-name kpull-left" style="color:#017b8b;">
+                                                <i style="position:relative;left:-6px;font-size:15px;"
+                                                   class="fas fa-file-upload"
+                                                   aria-hidden="true"></i> Attachfile
+                                            </div>
+                                            <div class="kpull-right hidden-print hover-content ">
+                                                <div data-toggle="tooltip"
+                                                     class=" icon-md icon-color  "
+                                                     style="display: inline-block;">
+                                                     <span style="padding:none!important;" id="create-attachfile">
+                                                       &#43;
+                                                    </span>
+                                                </div>
+                                                <!--<div class="hidden-patient  icon-md icon-color fa fa-ellipsis-v dropdown-toggle dropdown-toggle1"-->
+                                                <!--data-toggle="dropdown" aria-expanded="false"-->
+                                                <!--title="Show more options">-->
+                                                <!--</div>-->
+                                                <!--<ul class="dropdown-menu dropdown-menu-right  hidden-print" role="menu"-->
+                                                <!--aria-labelledby="menu1">-->
+                                                <!--<li id="allergies-help-btn" class="allergiesclickhelp"-->
+                                                <!--role="presentation">-->
+                                                <!--<a class="icon-color" role="menuitem" tabindex="5">-->
+                                                <!--<span class="icon-color fa fa-question-circle-o"></span>-->
+                                                <!--<span>&nbsp;&nbsp;Help</span>-->
+                                                <!--</a>-->
+                                                <!--</li>-->
+                                                <!--</ul>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imodule-body">
+                                        <table id="attachfile" class="ui-widget ui-widget-content"
+                                               style="border:none;">
+                                            <tbody style="border:5px">
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="dialog-form-attachfile" class="form-popup"
+                                             title="Attach file">
+                                            <form enctype="multipart/form-data" id="ehr_attach_report">
+                                                <fieldset class="form-body" style="border:none;">
+                                                    <div class="fields">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="fieldtype">Attachment file type </label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control" name="filetype" id="fieldtype">
+                                                                        <option value="" disabled selected>Select
+                                                                        </option>
+                                                                        <option value="Report">Report</option>
+                                                                        <option value="Xray">Xray</option>
+                                                                        <option value="Scan">Scan</option>
+                                                                        <option value="Sonogram">Sonogram</option>
+                                                                        <option value="MRI">MRI</option>
+                                                                        <option value="Blood Report">Blood Report
+                                                                        </option>
+                                                                        <option value="ECG">ECG</option>
+                                                                        <option value="Old Patient File">Old Patient
+                                                                            File
+                                                                        </option>
+                                                                        <option value="Other">Other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--<div class="user-info">-->
+                                                        <!--<div class="row">-->
+                                                        <!--<div class="col-md-3">-->
+                                                        <!--<label style="font-size:13px;font-weight:0;"-->
+                                                        <!--for="attachfileinput">Upload file </label>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="col-md-9">-->
+                                                        <!--<input type="file" name="file" id="attachfileinput">-->
+                                                        <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--</div>-->
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:none !important;"
+                                                                           for="fielddescription">Description</label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <textarea name="description"
+                                                                              id="fielddescription"
+                                                                              class="form-control"
+                                                                              rows="2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label style="font-size:13px;font-weight:0;"
+                                                                           for="fieldsource"> Source </label>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <input type="file"  name="source" class="form-control"
+                                                                           id="fieldsource">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                            <!--<form method="POST" enctype="multipart/form-data" id="ehr_attach_report">-->
+                                                <!--<input type="text" name="filetype"/><br/><br/>-->
+                                                <!--<input type="text" name="description"/><br/><br/>-->
+                                                <!--<input type="file" name="source"/><br/><br/>-->
+                                                <!--&lt;!&ndash;<input type="submit" value="Submit" id="btnSubmit"/>&ndash;&gt;-->
+                                            <!--</form>-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% csrf_token %}
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h1 style="color:#017b8b;"><span >Send Mail</span><span class="close">&times;</span></h1>
+        <input name="address" type="text" required placeholder="Address" class="form-control" autocomplete="off" id="adress"><br>
+         <input name="name" type="text" required placeholder="Name" class="form-control" autocomplete="off" id="name"><br>
+                    <input name="email" required placeholder="Email" type="text" autocomplete="off" class="form-control" id="emailid"><br>
+<div class="sendmail">
+  <input id="sendmailbutton" type="submit">
+
+</div>
+
+  </div>
+    </div>
+
+
+<script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+      </script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js2/finalehrscript.js' %}"></script>
+<script src="{% static 'js2/services.js' %}"></script>
+
+
+   <script>
+
+var patient_id='{{pat_id}}';
+    var orgnastion_id='{{request.user.orgnastion_id}}';
+    var user_id='{{request.user.id}}';
+    var doctor='{{request.user.first_name}}'
+
+function send_patienttest(data, call_back){
+    $.ajax({
+ type: "POST",
+ url: "/sendtestinmail/",
+ data: JSON.stringify(data),
+ contentType: "application/json",
+ dataType: "json",
+ success: function (data, status) {
+//
+        call_back(data,status);
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //Process error actions
+
+                console.log( XMLHttpRequest.responseText);
+                console.log(XMLHttpRequest.status + ' ' +
+                    XMLHttpRequest.statusText);
+                return false;
+              }
+});
+}
+
+function send_patientpharmacy(data, call_back){
+    $.ajax({
+ type: "POST",
+ url: "/sendpharmacyinmail/",
+ data: JSON.stringify(data),
+ contentType: "application/json",
+ dataType: "json",
+ success: function (data, status) {
+//
+
+        call_back(data,status);
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //Process error actions
+
+                console.log( XMLHttpRequest.responseText);
+                console.log(XMLHttpRequest.status + ' ' +
+                    XMLHttpRequest.statusText);
+                return false;
+              }
+});
+}
+    var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+    modal.style.display = "none";
+}
+$("#diagnosticlab").on('click','.sendmalil',function() {
+var par=$(this).closest("tr").find("td.testcode").text();
+var par1=$(this).closest("tr").find("td.resultumber").text();
+var par2=$(this).closest("tr").find("td.notes").text();
+modal.style.display = "block";
+$("#sendmailbutton").on('click',function() {
+var test_data = {
+                "testcode": par,
+                "resultumber": par1,
+                "notes": par2,
+                "email":$("#emailid").val(),
+                "name":$("#name").val(),
+                "address":$("#adress").val(),
+                "patient_id":patient_id
+            }
+    send_patienttest(test_data, function(data, status) {
+        modal.style.display = "none";
+                if (status == "success") {
+                    console.log("email sent sucessfully");
+                }
+            });
+             $("#emailid").val("");
+    });
+    return ;
+        });
+   </script>
+<script>
+$(function(){
+      $('.selectOption').change(function(){
+        var selected = $(this).find(':selected').text();
+        //alert(selected);
+        $(".desc").hide();
+         $('#' + selected).show();
+      }).change()
+});
+ $("#logoutbut").on("click",function() {
+                window.location.pathname='/userlogin/'
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

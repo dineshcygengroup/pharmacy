@@ -1,0 +1,227 @@
+.appointment-head ul, li {
+    color: black !important;
+    display: inline-flex;
+}
+.appointment-head{
+    margin-top: 70px;
+}
+.appointment-items {
+    padding: 10px 35px !important;
+}
+/*** PANEL DEFAULT ***/
+/* Tabs*/
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+.nav-tabs {
+    border-bottom: none !important;
+}
+#tabs h6.section-title{
+    color: #eee;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #017b8b;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 0px 3px #454545;
+}
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    color: #017b8b;
+    font-size: 16px;
+    border-radius: 18px;
+}
+.tab-content {
+    box-shadow: 0px 0px 3px #454545;
+    margin-top: 25px;
+    padding: 20px !important;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+}
+.tab-content>.active {
+    display: block;
+    padding: 5px;
+    text-align: justify;
+    /* overflow: auto; */
+}
+
+.appoint-doctor{
+   
+    padding: 10px;
+}
+.appoint-info{
+    padding:10px;
+}
+
+.appoint-docinfo, li {
+    padding: 0px;
+    display: block;
+}
+.appoint-reserved{
+    border: 2px solid #efefef;
+    padding: 2px 20px;
+    overflow: hidden;
+}
+.time{
+    word-break: break-all;
+}
+.appoint-doclist{
+    border-top: 1px solid #efefef;
+    padding: 5px;
+    font-size: 14px;
+}
+.appoint-doclist:first-child{
+    border-top: none;
+}
+.time span{
+    float:right;
+}
+.doctor-img{
+    padding: 5px;
+}
+.book-appointment{
+    float:right;
+    margin-bottom: 15px;
+}
+.book-appoint,.next-btn,.pay-btn,.medication-btn,.submit-btn,.vitals-btn{
+    border: none;
+    background: #017b8b;
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+}
+.appoint-schedul{
+    display: none;
+}
+.next{
+    margin-top: 10px;
+}
+.patient-name{
+    padding: 10px;
+}
+.appoint-confirm{
+    font-size: 16px;
+    color: white;
+    border-radius: 18px;
+    text-align: center;
+    padding:8px 10px;
+    margin-bottom: 20px;
+    background: rgba(17, 45, 65, 0.6);
+}
+.select{
+    font-size: 16px;
+    /* font-weight: bold; */
+    width: 42%;
+    color: white;
+    border-radius: 18px;
+    text-align: center;
+    padding:8px 10px;
+    margin-bottom: 20px;
+    background: rgba(17, 45, 65, 0.6);
+}
+.glyphicon-arrow-left:after{
+    content: ' \00AB';
+    font-size: 25px;
+}
+.dropdown-menu {
+    left: 555.484px;
+padding: 20px !important;
+box-shadow: 1px 1px 10px 1px #454545;
+}
+.prev,.next{
+    padding: 1px 10px;
+    border-radius: 5px !important;
+}
+.glyphicon-arrow-right:after{
+    content: ' \00BB';
+    font-size: 25px;
+}
+.datetimepicker td, .datetimepicker th {
+    padding: 8px 20px;
+}
+.datetimepicker table tr td.active, .datetimepicker table tr td.active:hover, .datetimepicker table tr td.active.disabled, .datetimepicker table tr td.active.disabled:hover {
+    background-color: #017b8b !important;
+    background-image: none !important;
+}
+.datetimepicker table tr td.active:active, .datetimepicker table tr td.active:hover:active, .datetimepicker table tr td.active.disabled:active, .datetimepicker table tr td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .datetimepicker table tr td.active:hover.active, .datetimepicker table tr td.active.disabled.active, .datetimepicker table tr td.active.disabled:hover.active {
+    background-color: #017b8b !important;
+}
+.datetimepicker table tr td span.active:active, .datetimepicker table tr td span.active:hover:active, .datetimepicker table tr td span.active.disabled:active, .datetimepicker table tr td span.active.disabled:hover:active, .datetimepicker table tr td span.active.active, .datetimepicker table tr td span.active:hover.active, .datetimepicker table tr td span.active.disabled.active, .datetimepicker table tr td span.active.disabled:hover.active {
+    background-color:  #017b8b !important;
+}
+.datetimepicker table tr td span.active, .datetimepicker table tr td span.active:hover, .datetimepicker table tr td span.active.disabled, .datetimepicker table tr td span.active.disabled:hover {
+    background-color: #017b8b !important;
+    background-image: none !important;
+}
+.control-label{
+    font-size: 16px;
+    color: white;
+    background: rgba(17, 45, 65, 0.6);
+    border-radius: 20px;
+    text-align: justify;
+    padding: 8px;
+    padding-left: 31px !important;
+}
+.table-condensed{
+    border-radius: 5px;
+}
+.datetimepicker-inline {
+    width: 100% !important;
+}
+.datetimepicker th.switch {
+    width: 100% !important;
+}
+.datetime,.add-medication,.add-vitals{
+    display: none;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+    text-align: center;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+.medication-name{
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    padding: 10px 31px;
+    color: white;
+    width: fit-content;
+    /* border-radius: 22px; */
+    background: rgba(17, 45, 65, 0.6);
+}
+.medication-add,.vitals-add{
+    float: right;
+}
+.datetimepicker table tr td.day{
+    cursor: pointer;
+    background-color: #f8f8f8;
+    border: 2px solid #fff;
+}
+#start-time-before{
+    font-size: 15px;
+    color: #6d6c6c;
+}
+.well {
+    margin-top: 5%;
+}
+.medication{
+    border: 2px solid #efefef;
+    padding: 10px;
+    margin: 10px;
+}

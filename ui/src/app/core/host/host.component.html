@@ -1,0 +1,81 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch">
+    <div>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout>
+          <!-- <div > -->
+            <div fxFlex="3%">
+              <button type="button" aria-label="Toggle sidenav" mat-icon-button 
+                (click)="drawer.toggle()" color="warn">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+              </button>
+            </div>
+            <div fxFlex="95%" id="app-name">
+              <span>Inventory Management</span>
+            </div>
+            <div fxFlex class="logout-button">
+              <button mat-icon-button color="warn" matTooltip="logout" onclick="window.location.pathname='/logout/'">
+                <mat-icon>power_settings_new</mat-icon>
+              </button>
+            </div>
+          <!-- </div> -->
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    <div fxLayout class="body">
+      <mat-sidenav-container fxFlexFill class="side-bar-container">
+       <mat-sidenav #drawer fxLayout="column" mode="side" opened role="navigation" class="side-bar">
+        <div fxLayout="column">
+          <mat-nav-list>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.dashboard'>
+              <mat-icon>dashboard</mat-icon> &nbsp;
+              <span>Dashboard</span> 
+            </a>
+          </mat-nav-list>
+          <mat-nav-list>
+            <h2 matSubheader> Vendor </h2>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.addVendor'>
+              <mat-icon>person_add</mat-icon> &nbsp;
+              <span> Add Vendor </span> 
+            </a>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.vendorList'>
+              <mat-icon>group</mat-icon> &nbsp;
+              <span> Vendor List </span> 
+            </a>
+          </mat-nav-list>
+          <mat-nav-list>
+            <h2 matSubheader> Purchase Order </h2>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.addPurchaseOrder'>
+              <mat-icon>shopping_cart</mat-icon> &nbsp;
+              <span> Add Purchase Order </span> 
+            </a>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.purchaseOrderList'>
+              <mat-icon>view_list</mat-icon> &nbsp;
+              <span> Purchase Order List </span> 
+            </a>
+          </mat-nav-list>
+          <mat-nav-list>
+            <h2 matSubheader> Product </h2>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.addProduct'>
+              <mat-icon>add_box</mat-icon> &nbsp;
+              <span> Add Product </span> 
+            </a>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.productList'>
+              <mat-icon>view_list</mat-icon> &nbsp;
+              <span> Product List </span> 
+            </a>
+          </mat-nav-list>
+          <mat-nav-list>
+            <h2 matSubheader> Reports </h2>
+            <a mat-list-item routerLinkActive="active-list-item" [routerLink]='appWebUrls.purchaseOrderSummary'>
+              <mat-icon>assignment</mat-icon> &nbsp;
+              <span> Purchase Order Summary </span> 
+            </a>
+          </mat-nav-list>
+        </div>
+       </mat-sidenav>
+       <mat-sidenav-content class="side-bar-content">
+         <router-outlet></router-outlet>
+       </mat-sidenav-content>
+     </mat-sidenav-container>
+    </div>     
+</div>

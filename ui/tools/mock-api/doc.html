@@ -1,0 +1,52 @@
+<div>
+    <h3>How to create sample mock data?</h3>
+    <p>create a sample javascript file and create a const with array and provide it module export, refer below example:
+    </p>
+    <strong>mock-data.js</strong>
+    <pre>
+            const courses = [
+                {
+                id: 1,
+                title: "Securing React Apps with Auth0",
+                slug: "react-auth0-authentication-security",
+                authorId: 1,
+                category: "JavaScript"
+                }
+            ];
+
+         const authors = [
+            { id: 1, name: "Cory House" },
+            { id: 2, name: "Scott Allen" },
+            { id: 3, name: "Dan Wahlin" }
+        ];
+
+         const newCourse = {
+            id: null,
+            title: "",
+            authorId: null,
+            category: ""
+        };
+
+         // Using CommonJS style export so we can consume via Node (without using Babel-node)
+        module.exports = {
+            newCourse,
+            courses,
+            authors
+        };
+
+     </pre>
+    <p>Run this command to initialize the mock data base / mock data json (i.e db.json)</p>
+    <pre>
+        npm run init:mock-api-data
+    </pre>
+    <p>Run this command to start the mock-api</p>
+    <pre>
+        npm run start:mock-api
+    </pre>
+    <p>
+        run the below command to start the app in dev mode along with mock api after initializing the mock data base
+    </p>
+    <pre>
+        npm run start:dev
+    </pre>
+</div> 

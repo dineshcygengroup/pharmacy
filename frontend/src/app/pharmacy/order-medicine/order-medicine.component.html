@@ -1,0 +1,58 @@
+<div>
+	<mat-toolbar>
+		<mat-toolbar-row>
+			<mat-icon matSuffix>shopping_cart</mat-icon>
+			<span>&nbsp;&nbsp;Order Medicine</span>
+		</mat-toolbar-row>
+	</mat-toolbar>
+	<div class="container">
+		<form class="form-container" [formGroup]="orderMedicineForm">
+			<mat-form-field class="input-field">
+				<mat-label>Medicine</mat-label>
+				<mat-select formControlName="medicine" required>
+					<mat-option>None</mat-option>
+					<mat-option *ngFor="let medicine of medicineList" [value]="medicine.name">{{medicine.name}}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="input-field">
+				<mat-label>Category</mat-label>
+				<mat-select formControlName="medicineCategory" required>
+					<mat-option>None</mat-option>
+					<mat-option *ngFor="let category of categoryList" [value]="category.medicineType">{{category.medicineType}}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="input-field">
+				<mat-label>Supplier</mat-label>
+				<mat-select formControlName="supplier" required>
+					<mat-option>None</mat-option>
+					<mat-option *ngFor="let supplier of supplierList" [value]="supplier.name">{{supplier.name}}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="input-field">
+				<input matInput placeholder="Quantity" required formControlName="quantity">
+			</mat-form-field>
+
+			<mat-form-field class="input-field">
+				<input matInput [matDatepicker]="picker" formControlName="fulfillmentDate" [min]="todayDate"
+					required placeholder="Fullfillment by">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+
+			<mat-form-field class="input-field">
+				<textarea matInput placeholder="Details" cdkTextareaAutosize cdkAutosizeMinRows="3"
+					cdkAutosizeMaxRows="5" formControlName="details"></textarea>
+			</mat-form-field>
+
+			<div class="input-field" id="submit-button">
+				<button type="submit" mat-raised-button color="primary" [disabled]="!orderMedicineForm.valid"
+					(click)="onSubmit()">Order</button>
+			</div>
+		</form>
+	<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+	</div>
+</div>

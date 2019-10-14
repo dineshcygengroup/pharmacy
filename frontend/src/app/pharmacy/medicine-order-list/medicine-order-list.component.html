@@ -1,0 +1,78 @@
+<div class="container">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <mat-icon>list_alt</mat-icon> &nbsp;
+            <span><b>Orders</b></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- order number Column -->
+            <ng-container matColumnDef="orderId">
+                <th mat-header-cell *matHeaderCellDef> Order No </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="medicineName">
+                <th mat-header-cell *matHeaderCellDef> Medicine Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.medicine}} </td>
+            </ng-container>
+
+            <!-- category Column -->
+            <ng-container matColumnDef="medicineCategory">
+                <th mat-header-cell *matHeaderCellDef> Category </th>
+                <td mat-cell *matCellDef="let element"> {{element.medicineCategory}} </td>
+            </ng-container>
+
+            <!-- suplier name Column -->
+            <ng-container matColumnDef="supplierName">
+                <th mat-header-cell *matHeaderCellDef> Supplier Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.supplier}} </td>
+            </ng-container>
+
+            <!-- quantity Column -->
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            </ng-container>
+
+            <!-- fullfillment date Column -->
+            <ng-container matColumnDef="fulfillmentDate">
+                <th mat-header-cell *matHeaderCellDef> Fullfillment by </th>
+                <td mat-cell *matCellDef="let element"> {{element.fulfillmentDate | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <!-- details column -->
+            <ng-container matColumnDef="details">
+                <th mat-header-cell *matHeaderCellDef> Details </th>
+                <td mat-cell *matCellDef="let element"> {{element.details?element.details: '--' }} </td>
+            </ng-container>
+
+            <!-- status column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+            </ng-container>
+
+            <!-- actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button mat-icon-button color="primary" class="button-icons" aria-label="Edit order details" (click)="editOrder(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" class="button-icons" aria-label="Delete order" (click)="deleteOrder(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+    </div>
+</div>

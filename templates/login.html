@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login-signup.css'%}">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+<style>
+ #head-nav {
+    box-shadow: 0px 0px 2px 2px #efefef;
+    margin: 15px;
+}
+.head-logo{
+    color: #017b8b;
+    font-weight: 500;
+    font-size: 30px;
+}
+.nav-link{
+    color: rgba(117, 115, 115, 0.85);
+    font-size: 17px;
+}
+
+</style>
+<body>
+<div class="container">
+<br><br><br>
+    <div class="login-form">
+        <div class="main-div">
+            <div class="panel">
+                <h2 style="color:#017b8b;font-weight:bold;font-size:25px;">Login</h2>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="inputEmail" placeholder="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+
+            <div class="status" id="dialogboxLogin" style="display: none;">
+                 <span id= "errorMsgLogin"style="font-size:12px; color:red" class="alert "   role="alert">
+                 </span></div>
+            <div class="status" id="dialogboxLoginuser" style="display: none;">
+                 <span id= "errorMsgLoginuser"style="font-size:12px; color:red" class="alert "   role="alert">
+                 </span></div>
+
+            <div class="forgot">
+                <a href="/forgot/">Forgot password?</a>
+                <div id="myDIV" style="display:none">
+                    <p style="color:red">Your login Password is expired <br> Please click below resend link to generate new password</p>
+                    <a onclick="myFunction()" id="resend" style="cursor:pointer;"><u>resend password?</u></a>
+                </div>
+            </div>
+            <button type="submit" id="loginsubmit" class="btn btn-primary">Login</button>
+        </div>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+    </div>
+</div>
+
+<script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+
+</script>
+
+
+<script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js/apicals.js' %}"></script>
+<script src="{% static 'js/adminajax.js' %}"></script>
+<script>
+
+    $("#loginsubmit").on("click",function() {
+    var username = String($("#inputEmail").val());
+    var password =String($("#inputPassword").val());
+if (username=='' | password ==''){
+   if (username =='' & password ==''){
+       $("#dialogboxLogin").show();
+       $("#errorMsgLogin").html('Please Enter Username and password');
+       $("#dialogboxLogin").delay(2000).fadeOut();
+    }
+     else if  (password ==''){
+        $("#dialogboxLogin").show();
+       $("#errorMsgLogin").html('Please Enter password');
+       $("#dialogboxLogin").delay(2000).fadeOut();
+    }
+
+    else if (username ==''){
+        $("#dialogboxLogin").show();
+       $("#errorMsgLogin").html('Please Enter Username');
+       $("#dialogboxLogin").delay(2000).fadeOut();
+    }
+        console.log('inside if condition');
+}
+
+else {
+    var newlogin_data ={
+                "username": String($("#inputEmail").val()),
+                "password": String($("#inputPassword").val())
+
+            } ;
+
+        <!--var a={"email":"manoharsompalli@gmail.com","password":"manoharchow"};-->
+            $.ajax({
+         type: "POST",
+         url: "/login/",
+         data: JSON.stringify(newlogin_data),
+         contentType: "application/json",
+         dataType: "json",
+         success: function (data, status) {
+
+            console.log("check your credintials",data);
+            var obj = JSON.parse(data)
+            console.log(obj.success);
+            var a = obj.username;
+            console.log(a);
+            if(obj.success  == "resend"){
+                <!--myFunction()-->
+                window.location.pathname='/resendpassword/'+a+'/'
+                <!--+usrname+"/"-->
+
+                }
+                else if(obj.usertype == 1) {
+                window.location.pathname='/labtechniciandashboard/'
+                }
+                else if (obj.usertype== 2){
+                    window.location.pathname='/receptionistdashboard/';
+               }
+                else if (obj.usertype== 3){
+                    window.location.pathname='/admindashboard/';
+               }
+                else if (obj.usertype== 4){
+                    window.location.pathname='/pharmacistdashboard/';
+               }
+                else if (obj.usertype== 5){
+                    window.location.pathname='/nursedashboard/';
+               }
+               else if (obj.usertype== 6){
+                    window.location.pathname='/physiciandashboard/';
+               }
+               else if (obj.usertype== 7){
+                    window.location.pathname='/patientdashboard/';
+               }
+
+
+        },
+
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //Process error actions
+                    //alert( XMLHttpRequest.responseText);
+                    console.log(XMLHttpRequest.status + ' ' +
+                         XMLHttpRequest.statusText);
+                         var abc = XMLHttpRequest.responseJSON;
+                         console.log(abc);
+                         $("#dialogboxLoginuser").show();
+                         $("#errorMsgLoginuser").html('Please Enter  Valid Credentials');
+                         $("#dialogboxLoginuser").delay(2000).fadeOut();
+
+                    return false;
+                  }
+                });
+
+            }
+
+    });
+    <!--$("#resend").on("click",function() {-->
+    <!--var newlogin_data ={-->
+                <!--"username": String($("#inputEmail").val()),-->
+
+
+            <!--} ;-->
+
+        <!--&lt;!&ndash;var a={"email":"manoharsompalli@gmail.com","password":"manoharchow"};&ndash;&gt;-->
+        <!--$.ajax({-->
+            <!--type: "POST",-->
+            <!--url: "/resend/",-->
+            <!--data: JSON.stringify(newlogin_data),-->
+            <!--contentType: "application/json",-->
+            <!--dataType: "json",-->
+            <!--success: function (data, status) {-->
+                <!--&lt;!&ndash;console.log("check your credintials",status);&ndash;&gt;-->
+                <!--&lt;!&ndash;if(status=="resend"){&ndash;&gt;-->
+                <!--&lt;!&ndash;myFunction()&ndash;&gt;-->
+
+                <!--&lt;!&ndash;}&ndash;&gt;-->
+                <!--window.location.pathname = '/userlogin/';-->
+            <!--},-->
+
+            <!--error: function (XMLHttpRequest, textStatus, errorThrown) {-->
+                <!--//Process error actions-->
+                <!--alert(XMLHttpRequest.responseText);-->
+                <!--console.log(XMLHttpRequest.status + ' ' +-->
+                    <!--XMLHttpRequest.statusText);-->
+                <!--return false;-->
+            <!--}-->
+        <!--});-->
+
+
+    <!--});-->
+
+    <!--function myFunction() {-->
+  <!--var x = document.getElementById("myDIV");-->
+  <!--if (x.style.display === "none") {-->
+    <!--x.style.display = "block";-->
+  <!--}-->
+<!--}-->
+
+</script>
+
+<script>
+var input = document.getElementById("inputEmail");
+   var input1 = document.getElementById("inputPassword");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("loginsubmit").click();
+  }
+
+
+});
+input1.addEventListener("keyup", function(event){
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("loginsubmit").click();
+  }
+
+
+});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,65 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch">
+    <div>
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <mat-icon>add_box</mat-icon>
+                <span><b>Add Product</b></span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <form class="form-container" [formGroup]="addProductForm" (ngSubmit)="save()">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2em">
+                <div fxFlex="30%">
+                    <mat-form-field class="form-field">
+                        <input matInput placeholder="Name" formControlName="name" required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="30%">
+                    <mat-form-field class="form-field">
+                        <input type="text" placeholder="Category" required formControlName="category" matInput
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let pc of productCategories$ | async" [value]="pc.productCategory">
+                                {{pc.productCategory}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2em">
+                <div fxFlex="30%">
+                    <mat-form-field class="form-field">
+                        <input matInput formControlName="quantity" placeholder="Quantity" required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="30%">
+                    <mat-form-field class="form-field">
+                        <input type="number" formControlName="price" matInput placeholder="Price per quantity" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2em">
+                <div fxFlex="64%">
+                    <mat-form-field class="form-field">
+                        <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="64%">
+                    <button class="save-button" mat-raised-button color="primary" type="submit" [disabled]="!addProductForm.valid">Save</button>
+                </div>
+            </div>
+        </form>
+<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+
+        <!-- <div fxFlex="60%">
+        </div>
+        <div fxFlex="40%">
+        </div> -->
+    </div>
+
+</div>
+

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Patient Laboratory Test Details </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ehr.css'%}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href=#>HMS LAMJINGBA</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item admin-name" data-toggle="tooltip" data-placement="right" title="Admin Name">
+
+                    <span class="nav-link-text"><b style="font-size:16px">Laboratorist</b></span>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href='/labtechniciandashboard/'>
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        <span class="nav-link-text">Dashboard</span></a>
+                </li>
+
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laboratorist">
+                    <a class="nav-link" style="background-color:#64c1b1;" href='/patients_list_view_laboratorist/'>
+                        <i class="fa fa-flask" aria-hidden="true"></i>
+                        <span class="nav-link-text">Lab Tests</span></a>
+                </li>
+
+
+            </ul>
+
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+                <li> <a onclick="window.location.pathname='/logout/'" data-toggle="modal" data-target="#exampleModal"
+                        style="color:white;">
+                        Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 card"
+                style= "/*max-width: 80%; border: 4px solid rgba(0,0,0,0.300);*/">
+                <div class="content-details ">
+
+                    <div class="row">
+                        <br><br>
+                        <h3>&nbsp; Complete Blood Count</h3>
+
+                        <div class="col-md-12 ">
+                            <div class="btn add-btn right">
+                                <i class="fa fa-plus fa-lg adding test-details-add-form" aria-hidden="true"></i>
+                            </div>
+                            <!-- <div class="Search">
+                                    <input id="myInput" type="search" class="patientinput form-control"
+                                        data-table="order-table" placeholder="Search">
+                                </div> -->
+                        </div>
+
+                        <div class="manage-table"  >
+                            <div id="test-details-form" style="display: none" title="Complete Blood Count">
+                                <form autocomplete="off">
+                                    {% csrf_token %}
+                                    <fieldset>
+                                        <div class="fields">
+                                            <div class="user-info">
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-3">
+                                                        <label for="attribute">Attribute Name<span style="color:red">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <!--<input type="text" name="attribute" id="attribute" value="" placeholder="Enter attribute name"-->
+                                                        <!--class="form-control" />-->
+                                                        <select class="form-control" id="attribute">
+                                                            <option value="" selected disabled>Select Attribute Name</option>
+                                                            <option value="White Blood Cells (WBC)">White Blood Cells (WBC)
+                                                            </option>
+                                                            <option value="Red Blood Cells (RBC)">Red Blood Cells (RBC)</option>
+                                                            <option value="Hemoglobin (HB/HGB)">Hemoglobin (HB/HGB)</option>
+                                                        </select>
+                                                    </div>
+                                                </br>
+                                                </br>
+                                                    <!--<div class="col-md-12">-->
+                                                    <div class="col-md-3">
+                                                        <label for="refval">Reference Value<span style="color:red">*</span></label>
+                                                    </div>
+                                                </br>
+                                                </br>
+                                                    <div class="col-md-9">
+                                                        <div class="input-group">
+                                                            <input type="number" id="referenceMinValue"
+                                                                class="form-control" placeholder="Min Value" />
+                                                            <span class="input-group-addon">&emsp; &emsp; - &emsp;
+                                                                &emsp;</span>
+                                                            <input type="number" id="referenceMaxValue"
+                                                                class="form-control" placeholder="Max Value" />
+                                                            <!--<input type="text" name="refval" id="refval" value=""-->
+                                                            <!--class="form-control" />-->
+                                                        </div>
+                                                    </div>
+                                                </br>
+                                                </br>
+                                                    <div class="col-md-3">
+                                                        <label for="units">Units<span style="color:red">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <!-- <input type="number" name="duration" id="duration" value=""
+                                                                        class="form-control" /> -->
+                                                        <!--<input type="number" class="form-control" id="units" name="units" placeholder="Enter units"/>-->
+                                                        <select class="form-control" id="units">
+                                                            <option value="" selected disabled>Select Units</option>
+                                                            <option value="K/mcl">K/mcl</option>
+                                                            <option value="g/dL">g/dL</option>
+                                                            <!--<option value="Hemoglobin">Hemoglobin(HB/Hgb)</option>-->
+                                                        </select>
+                                                        
+                                                    </div>
+                                                <!-- </br>
+                                                </br> -->
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="status" id="dialogbox1" style="display: none;text-align: center">
+                                                <span id="errorMsgattribute" style="font-size:12px; color:red;"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogbox2" style="display: none;text-align: center">
+                                                <span id="errorMsgreferenceMinValue" style="font-size:12px; color:red"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogbox3" style="display: none;text-align: center">
+                                                <span id="errorMsgreferenceMaxValue" style="font-size:12px; color:red"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogbox4" style="display: none;text-align: center">
+                                                <span id="errorMsgunits" style="font-size:12px; color:red"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogbox5" style="display: none;text-align: center">
+                                                <span id="errorMsgMinMaxValidation" style="font-size:12px; color:red"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogbox6" style="display: none;text-align: center">
+                                                <span id="errorMsgMinMaxValidation2" style="font-size:12px; color:red"
+                                                    class="alert " role="alert">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped order-table table " style="font-size: 13px;">
+                        <thead >
+                            <tr >
+                                <th>S.No.</th>
+                                <th>Attribute Name</th>
+                                <th>Reference Range</th>
+                                <!-- <th>Reference Value(Min)</th>
+                                <th>Reference Value(Max)</th> -->
+                                <th>Units</th>
+                                <th>Created On</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody  id="cbc_data">
+                        </tbody>
+                    </table>
+                    <div class="cbc_nodata" style="background-color: #ffff;color:tomato"></div>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script>
+        var pat_id = '{{ pat_id }}';
+        // console.log(pat_id)
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+        window.drf = {
+            csrfHeaderName: "X-CSRFTOKEN",
+            csrfCookieName: "csrftoken"
+        };
+
+    </script>
+
+    <script>
+        (function (document) {
+            'use strict';
+
+            var LightTableFilter = (function (Arr) {
+
+                var _input;
+
+                function _onInputEvent(e) {
+                    _input = e.target;
+                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                    Arr.forEach.call(tables, function (table) {
+                        Arr.forEach.call(table.tBodies, function (tbody) {
+                            Arr.forEach.call(tbody.rows, _filter);
+                        });
+                    });
+                }
+
+                function _filter(row) {
+                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                }
+
+                return {
+                    init: function () {
+                        var inputs = document.getElementsByClassName('patientinput');
+                        Arr.forEach.call(inputs, function (input) {
+                            input.oninput = _onInputEvent;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function () {
+                if (document.readyState === 'complete') {
+                    LightTableFilter.init();
+                }
+            });
+
+        })(document);
+
+    </script>
+    <script>
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+
+    </script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/sb-admin.js' %}"></script>
+    <!-- <script src="{% static 'js/adminscript.js' %}"></script> -->
+    <script src="{% static 'js/laboratoryDashboard.js' %}"></script>
+    <script src="{% static 'js/adminajax.js' %}"></script>
+    
+    
+    <script>
+        
+    </script>
+    
+</body>
+
+</html>

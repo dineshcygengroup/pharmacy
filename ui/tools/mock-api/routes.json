@@ -1,0 +1,7 @@
+{
+    "api/productCategory": "/productCategory",
+    "api/products": "/products",
+    "api/vendors": "/vendors",
+    "api/purchaseOrders": "/purchaseOrders",
+    "api/departments": "/departments"
+}

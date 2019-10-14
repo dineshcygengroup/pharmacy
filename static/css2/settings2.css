@@ -1,0 +1,272 @@
+.setting-box{
+    padding: 10px 30px;
+}
+.settings-div{
+    margin-top: 50px;
+}
+.setting-subbox{
+    overflow: hidden;
+    box-shadow: 0px 0px 6px 0px #454545;
+}
+.settings-content,.settings-button{
+    padding: 10px;
+    font-size: 15px;
+}
+.settings-head{
+    width: fit-content;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    border: none;
+    background: rgba(17, 45, 65, 0.6);
+}
+.edit,.edit1,.edit2,.edit3{
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 4px;
+    background: #017b8b;
+}
+button{
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 4px;
+    background: #017b8b;
+}
+.settings-button{
+    float: right;
+}
+.admin {
+
+    border: 2px solid #efefef;
+    margin-top: 70px;
+    position:relative;
+}
+.upload-profile{
+    height: 217.5px;
+    padding: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 217.5px;
+}
+.profile-img{
+width:200px;
+}
+.center {
+    width: 70%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    float:right;
+}
+
+.hideform {
+    display: none;
+}
+.profile {
+    z-index: 1;
+    padding: 2px 20px;
+    float: left;
+    border-collapse: inherit !important;
+}
+.edit-profile{
+    z-index: 2;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .upload {
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+.profile-info {
+    overflow: hidden;
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+
+.close{
+    border: none;
+    color: #777676;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.profile-content{
+    padding: 5px;
+    color: #777676;
+}
+.edit-info{
+    padding: 5px;
+}
+.edit-name{
+    padding: 5px;
+    color: #017b8b;
+    font-weight: bold;
+}
+.edit-content{
+    padding:10px;
+}
+.form-control{
+    font-size: 14px;
+}
+.profile-name{
+    font-size: 15px;
+    font-weight: bold;
+    color: #017b8b;
+    padding: 10px 25px;
+}
+.form-name{
+    color: #777676;
+    padding: 5px 10px;
+    font-size: 15px;
+    /* font-weight: bold; */
+}
+.form-input{
+
+    padding: 5px 10px;
+}
+
+
+input.text {
+    margin-bottom: 12px;
+    width: 95%;
+   padding: .4em;
+ }
+ fieldset {
+    padding: 0;
+   border: 0;
+   margin-top: 25px;
+  }
+ h1 {
+    font-size: 1.2em;
+    margin: .6em 0;
+ }
+div#users-contain {
+     width: 300px;
+     margin: 20px 0;
+     box-shadow: 0px 1px 6px #454545
+ }
+  div#users-contain table {
+    margin: 1em 0;
+     border-collapse: collapse;
+    width: 100%;
+  }
+ div#users-contain table td, div#users-contain table th {
+    padding: .6em 10px;
+    text-align: left;
+    color: #888686;
+    font-size: 15px;
+ }
+ .ui-dialog .ui-state-error {
+     padding: .3em;
+  }
+ .validateTips {
+    border: 1px solid transparent;
+   padding: 0.3em;
+  }
+ #dialog-form ,#dialog-form1,#dialog-form2,#dialog-form3{
+    display: none;
+ }
+
+.ui-dialog {
+   position: absolute;
+    height: auto;
+    width: 500px !important;
+    top: 154px;
+        left: 496.5px;
+        display: block;
+}
+.ui-dialog-content {
+    display: block;
+    width: auto;
+    min-height: 0px;
+    max-height: none;
+     height:  100% !important;
+}
+.ui-widget-header {
+    border: none !important;
+    background:none !important;
+     color:black;
+    font-weight: bold;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+
+    border: none;
+    background: white;
+}
+.ui-dialog .ui-dialog-titlebar-close :before,.ui-dialog .ui-dialog-titlebar-close :after{
+    content: '✖';
+    border: none !important;
+    background: white !important;
+}
+label{
+    font-size: 15px;
+}
+.user-info{
+    padding: 10px;
+}
+.user-profile{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.ui-widget-content a {
+     color:white !important;
+     text-decoration: none;
+}
+.info-name{
+    text-align: center;
+    color: #017b8b;
+    padding: 5px;
+    font-size: 18px;
+}
+.create-btn{
+    text-align: center;
+}
+.manage-div {
+    margin-top: 50px;
+    border: 2px solid #efefef;
+    padding: 10px;
+}
+.manage-name{
+    font-size: 17px;
+    font-weight: bold;
+    color: #107b8b;
+    padding: 10px 0px;
+}
+
+.manage-search {
+    padding: 10px 15px;
+}
+.manage-adduser{
+    float: right;
+    border: none;
+    background: #017b8b;
+    color: white;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 4px;
+}
+.manage-add{
+    padding: 15px;
+}
+#manage-form{
+    display: none;
+}
+
+.hide{
+
+display:none;
+}
+.upload-file{
+    padding: 10px;
+}
+#remove{
+    background: none ;
+    color: #017b8b;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
+}

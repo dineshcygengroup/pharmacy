@@ -1,0 +1,205 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js" type="text/javascript"></script>
+    <script type=text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!--<link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css2/ehrpatient.css' %}" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+
+</head>
+<style>
+    .ui-button-text-only .ui-button-text {
+        background: white !important;
+    color: #017b8b ! important;
+    font-weight: Bold ! important;
+    font-size: 16px;
+}
+.ui-widget-header {
+    border: none !important/*{borderColorHeader}*/;
+    background: #ffffff !important;
+    color: #017b8b !important/*{fcHeader}*/;
+    font-weight: bold !important;
+    Font-size: 15px !important;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: none !important;
+    }
+
+        #selectpatient {
+        margin: 20px;
+    }
+    tr:hover {
+        outline: 1px #017b8b;
+        background-color:#D4CCCC;
+    }
+    </style>
+
+
+<body>
+
+ <div id="content">
+
+          <div class="navbar1">
+
+  <div class="dropdown1">
+    <button class="dropbtn1"><img src="{% static 'img/user.png'%}">
+    </button>
+    <div class="dropdown-content1">
+      <a href="#">My Account</a>
+      <a href="#">Sign out</a>
+
+    </div>
+  </div>
+</div>
+        <div class="col-sm-12 container_body">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="manage-div">
+                    <div class="manage-name">
+                        Patient
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 manage-search"><input type="search" id="myInput"
+                                                                                     name="search-user"
+                                                                                     placeholder="Search by Email"
+                                                                                     class="form-control"
+                                                                                     onkeyup="myFunction()">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 "  id="manage-addpatient"><input type="button"
+                                                                                       name="manage-adduser"
+                                                                                       value="+ Add-Patient"
+                                                                                       class="manage-adduser">
+                        </div>
+                    </div>
+                    <div class="manage-table">
+                        <div id="patient-form" title="Add New Patient">
+                            <form>
+                                <fieldset>
+                                    <div class="fields">
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="fname">First Name</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="fname" id="fname" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="lname"> Last Name</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="lname" id="lname" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="email"> Email</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="email" id="email" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="contact">contact</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="number" name="contact" id="contact" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="contact">Gender</label></div>
+                                                <div class="col-md-4">
+                                                    <select name="Gender" id="Gender"
+                                                            class="form-control">
+                                                        <option value="">--select--</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="Birth">Birth Date</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="date" name="Birth" id="Birth" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="organisation">Organisation</label></div>
+                                                <div class="col-md-10">
+                                                    <input type="text" name="Birth" id="organisation" value=""
+                                                           class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                        <div class="manage-table">
+                            <table class="table table-bordered" id="myTable" style="    font-size: 13px;">
+                                <tbody>
+                                <tr id="selectpatient">
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    var user_id='{{request.user.id}}';
+    var orgnastion_id='{{request.user.orgnastion_id}}';
+</script>
+ <script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+      </script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js2/patientlist.js' %}"></script>
+<script src="{% static 'js2/services.js' %}"></script>
+<script>
+        function myFunction() {
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+</script>
+
+
+
+</body>
+</html>

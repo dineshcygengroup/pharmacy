@@ -1,0 +1,21 @@
+.root-container {
+    margin:0;
+    position: relative;
+    overflow: auto;
+    .side-bar-container {
+        height: 90vh;
+        overflow: auto;
+        .side-bar {
+            width: 20%;
+            position: absolute;
+            a {
+                mat-icon {
+                    padding: 1%;
+                }
+            }
+        }
+        .active-list-item {
+            color: #3F51B5 !important;
+        }
+    }
+}

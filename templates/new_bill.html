@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New Billing</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
+   <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'css/materialize_datatable.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+         <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+
+        <style>
+        #logo-container {
+            height: 100%
+        }
+
+        main {
+            padding: 1%;
+        }
+
+        .fixed-action-btn {
+            right: 5px;
+            top: 53px !important;
+        }
+
+        .heading {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .risk_scores {
+            display: flex;
+
+        }
+
+        .cards {
+            min-height: 100%;
+
+            /* max-height:430px */
+        }
+        @media screen and (max-width: 600px) {
+                .risk_scores {
+                    flex-direction: column;
+                }
+         }
+
+
+        .disclaimer {
+            padding: 15px;
+            font-size: 11px;
+            text-align: justify;
+            border: 2px solid #585353;
+        }
+
+        .paragraph {
+            font-size: 15px
+        }
+        .ul{
+            list-style: disc !important;
+        }
+
+        .paginate-button{
+            background-color:blue !important;
+        }
+         th,td{
+             text-align:center
+         }
+         .select-dropdown{
+             max-height:200px !important;
+             overflow-y:auto !important
+         }
+
+    </style>
+</head>
+
+<body>
+   <div id="content">
+
+    <div class="navbar1">
+        <div class="dropdown1">
+            <button class="dropbtn1"><img src="{% static 'img/user.png'%}">
+            </button>
+            <div class="dropdown-content1">
+                <a href="#">My Account</a>
+                <a href="#">Sign out</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Main-->
+    <main>
+        <!--Account Settings-->
+        <ul id="accountsum" class="dropdown-content">
+            <li><a href="#!"><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="home.html"><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+
+        <div class="container-fluid">
+                      <div class="row">
+                          <!-- New Billing  -->
+                          <div class="col m8 s12">
+                              <div class="card">
+                                  <div class="card-content">
+                                      <input type="hidden" id="patientcode" value="">
+                                      <!-- Search -->
+                                        <div class="row">
+                                                <div class="input-field col m4 s12">
+                                                        <select id="patient_search">
+                                                            <option disabled selected>Select Patient</option>
+                                                            {% for i in pateitnlist %}
+                                                            <option value="{{i.id}}">{{i.first_name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                </div>
+                                                <div class="input-field col m4 s12">
+                                                        <select id="user_search">
+                                                            <option disabled selected>Select User</option>
+                                                            <option>Manohar</option>
+                                                            <option>Suhaas</option>
+                                                            <option>Srinithi</option>
+                                                        </select>
+                                                </div>
+                                                <!--<div class="col m1 s6 center">-->
+                                                    <!--<br>-->
+                                                    <!--<button class="btn indigo lighten-2">Search</button>-->
+                                                <!--</div>-->
+                                                <div class="col m3 s6 center">
+                                                        <br>
+                                                        <button class="btn indigo lighten-2" id="add_billing">Add Item/Service</button>
+                                                </div>
+                                        </div>
+                                        <div id="billing_details">
+                                            <!-- billing table -->
+                                            <input type="hidden" value="" id="billidvalue">
+                                                <table id="billing_tbl">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item/Service</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Total : </th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th id="billtableitemstotal"></th>
+                                                            </tr>
+                                                        </tfoot>
+                                                </table>
+                                                <br>
+                                                <!-- Charges table -->
+                                                <div id="charges">
+                                                        <h6 class="blue-text text-lighten-2 center">Taxes/Service Charges </h6>
+                                                        <table id="tax_table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Tax name</th>
+                                                                    <th>Notes</th>
+                                                                    <th>Percentage</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                            <tfoot>
+
+                                                            </tfoot>
+                                                        </table>
+                                               </div>
+                                               <!--Payment table -->
+                                               <div id="pay_disp_div">
+                                                    <h6 class="blue-text text-lighten-2 center">Payment Details </h6>
+                                                    <table id="pay_tab">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Payment Mode</th>
+                                                                <th>Amount</th>
+                                                                <th>Description</th>
+                                                                <th>Due Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                        <tfoot>
+
+                                                        </tfoot>
+                                                    </table>
+                                           </div>
+                                               <!-- add payment button -->
+                                               <div class="row">
+                                                   <br>
+                                                   <div class="col m3 s12 right">
+                                                        <button id="add_payment" class="btn purple lighten-2" >
+                                                                <i class="material-icons" style="vertical-align:middle">attach_money</i>
+                                                            &nbsp;Add payment</button>
+                                                   </div>
+                                               </div>
+                                        </div>
+
+                                        <!--New Billing  -->
+                                        <div class="card" id="new_billing" hidden>
+                                            <div class="card-content">
+                                                <div class="row">
+                                                        <span class="col m4 card-title left">Add New item/Service</span>
+                                                        <span class="col m1 right"><button class="btn btn-floating" id="back">
+                                                            <i class="material-icons tiny">arrow_back</i></button></span>
+                                                </div>
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="input-field col m3 s12">
+                                                            <input type="text" id="item_name" required>
+                                                            <label for="item_name">Item/Service Name</label>
+                                                        </div>
+                                                        <div class="input-field col m2 s12">
+                                                            <input type="number" id="quantity" value="1" required>
+                                                            <label for="quantity">Quantity</label>
+                                                        </div>
+                                                        <div class="input-field col m2 s12">
+                                                                <input type="number" id="price" required>
+                                                                <label for="price">Price</label>
+                                                        </div>
+                                                        <div class="input-field col m3 s12">
+                                                                <input type="number" id="amount" readonly required>
+                                                                <label for="amount">Due Amount</label>
+                                                        </div>
+                                                        <div class="col m2 s12 right">
+                                                            <br>
+                                                            <!-- <button id="submit" class="btn btn-accent">Save</button> -->
+                                                            <a id="instantsubmit" class="btn btn-accent">Save</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!--payment card -->
+                                        <div id="payment" hidden>
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <a class="btn btn-floating btn-small right" id="back_to_payment"><i class="material-icons">arrow_back</i></a>
+                                                    <span class="card-title">Add payment</span>
+                                                    <div class="row">
+                                                       <div class="col m3 s12 input-field">
+                                                           <select id="payment_type">
+                                                               <option selected disabled>Select Payment type</option>
+                                                               <option>Cash</option>
+                                                               <option>Credit Card</option>
+                                                               <option>Debit Card</option>
+                                                               <option>Internet Banking</option>
+                                                               <option>Cheque</option>
+                                                           </select>
+                                                       </div>
+                                                       <div class="input-field col m3 s12">
+                                                          <input type="number" id="payable_amount">
+                                                          <label for="payable_amount">Amount</label>
+                                                       </div>
+                                                       <div class="input-field col m3 s12">
+                                                           <textarea class="materialize-textarea" id="payment_description"></textarea>
+                                                           <label for="payment_description">Payment notes</label>
+                                                       </div>
+                                                       <div class="col m3 s12">
+                                                           <br>
+                                                           <button class="btn amber" id="submit_payment">Submit</button>
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                          <!-- Extras and Add ons -->
+                          <div class="col m4 s12">
+                              <div class="card">
+                                  <div class="card-content">
+                                      <span class="card-title grey-text text-darken-3">
+                                          <i class="material-icons deep-orange-text">all_inclusive</i>&nbsp; Easy Access</span>
+                                      <ul class="collapsible">
+                                          <li class="active">
+                                              <div class="collapsible-header teal white-text">
+                                                  <i class="material-icons">assignment</i>Add Item/Service Code
+                                              </div>
+                                              <div class="collapsible-body">
+                                                    <!-- Item List-->
+                                                    <div class="" id="added_items">
+                                                        <div class="right"> <button id="add_item_to_list" class="btn btn-floating blue"><i class="material-icons">add</i></button></div>
+                                                            <ul class="collection" id="item_list">
+                                                                    <li class="collection-header"><h5>Added Items</h5> </li>
+
+                                                            </ul>
+                                                    </div>
+                                                    <!--Add Item code form -->
+                                                    <div id="add_item_form" hidden>
+                                                        <a href="#!" id="to_list" class=" btn btn-floating right"><i class="material-icons tiny">arrow_back</i></a>
+
+                                                            <div class="row">
+                                                                    <div class=" col s12 input-field">
+                                                                            <input type="text" id="item" required>
+                                                                            <label for="item">Item Name</label>
+                                                                    </div>
+                                                                    <div class=" col s12 input-field">
+                                                                            <textarea class="materialize-textarea" id="desc" required></textarea>
+                                                                            <label for="desc">Description</label>
+                                                                    </div>
+                                                                    <div class=" col s12 input-field">
+                                                                            <input type="number" id="cost" required>
+                                                                            <label for="cost">Price</label>
+                                                                    </div>
+                                                                    <div class="col s12 ">
+                                                                        <button type="" class="btn  red right" id="save_to_item_codes">Submit</button>
+                                                                    </div>
+                                                            </div>
+
+                                                    </div>
+                                              </div>
+                                          </li>
+                                          <li>
+                                                <div class="collapsible-header teal white-text">
+                                                    <i class="material-icons">attach_money</i>Add Taxes and other charges</div>
+                                                <div class="collapsible-body">
+                                                    <!-- Added Taxes -->
+                                                        <div class="" id="added_taxes">
+                                                                <div class="right"> <button id="add_tax_to_list" class="btn btn-floating blue"><i class="material-icons">add</i></button></div>
+                                                                    <ul class="collection" id="tax_list">
+                                                                            <li class="collection-header"><h5>Added Taxes/Charges</h5> </li>
+
+                                                                    </ul>
+                                                        </div>
+                                                        <!-- tax form-->
+                                                        <div id="add_tax_form" hidden>
+                                                                <a href="#!" id="to_taxes" class=" btn btn-floating right"><i class="material-icons tiny">arrow_back</i></a>
+
+                                                                    <div class="row">
+                                                                            <div class=" col s12 input-field">
+                                                                                    <input type="text" id="tax" required>
+                                                                                    <label for="tax">Tax Name</label>
+                                                                            </div>
+
+                                                                            <div class=" col s12 input-field">
+                                                                                    <input type="number" id="percentage" required>
+                                                                                    <label for="percentage">Percentage</label>
+                                                                            </div>
+                                                                            <div class="col s12 ">
+                                                                                <button type="" class="btn  red green" id="save_to_taxes">Save</button>
+                                                                            </div>
+                                                                    </div>
+
+                                                        </div>
+                                                </div>
+                                          </li>
+                                      </ul>
+                                  </div>
+                        </div>
+                </div>
+        </div>
+             </div>
+    </main>
+    <footer class="">
+
+    </footer>
+
+
+
+
+    <!--  Scripts-->
+     <script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+      </script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/init.js' %}" ></script>
+    <script src="{% static 'js/materialize.js' %}" ></script>
+
+    <script src="{% static 'js/csrf.js' %}"></script>
+  <script src="{% static 'js/apicals.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+
+
+
+
+
+ var patient_id='';
+var user_id="{{request.user.id}}";
+var orgid='{{request.user.orgnastion_id}}';
+var orderid_id='{{orderid_id}}';
+if(window.location.pathname.indexOf("onebillingview") == -1){
+                 var str=window.location.pathname;
+                  orderid_id=str.split("/")[str.split("/").length-2];
+
+                   }
+
+if("{{orderdetails}}"!=''){
+$("#patient_search").val("{{orderdetails.orderfor_id}}");
+$("#patientcode").val("{{orderdetails.orderfor_id}}");
+
+}
+$(document).ready(function(){
+
+    $("select#patient_search").change(function(){
+        var selectedCountry = $("#patient_search option:selected").val();
+        $("#patientcode").val(String(selectedCountry));
+
+    });
+
+});
+
+        $(document).ready(function () {
+            $(".modal").modal();
+            $('.collapsible').collapsible();
+            $('.dropdown-trigger').dropdown({ hover: true });
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+            });
+            $('select').formSelect();
+
+            var table_data=[
+
+            ];
+
+            var tax_data=[
+
+            ];
+
+
+
+
+
+
+
+            var total=0;
+            var totalWithTax=0;
+            function generateBillingTable(){
+                var totalQuantity=0;
+                var totalPrice=0;
+                var totalAmount=0;
+             table_data.forEach((obj)=>{
+                var row='<tr>';
+                    row= row+'<td>'+obj.item+'</td>';
+                    row= row+'<td>'+obj.price+'</td>';
+                    row= row+'<td>'+obj.quantity+'</td>';
+                    row= row+'<td>'+obj.amount+'</td>';
+                    $("#billing_tbl tbody").append(row);
+                  totalPrice=totalPrice+obj.price;
+                  totalQuantity=totalQuantity+obj.quantity;
+                  totalAmount=totalAmount+obj.amount;
+                  $("#billtableitemstotal").text()=totalAmount;
+
+             });
+             total=totalAmount;
+            }
+            function clearTable(){
+                $("#billing_tbl tbody").html('');
+                 $("#billing_tbl tfoot").html('');
+            }
+            function clearTaxTable(){
+                $("#tax_table tbody").html('');
+                 $("#tax_table tfoot").html('');
+            }
+            function generateTaxTable(){
+                var totalTax=0;
+                tax_data.forEach((tax)=>{
+                    var row='<tr>';
+                    row=row+ '<td>'+tax.name+'</td>'
+                    row=row+ '<td>--</td>';
+                    row=row+ '<td>'+tax.percentage+'%</td>'
+                    row=row+ '<td>'+(tax.percentage/100)*total+'</td>';
+                    totalTax=totalTax+(tax.percentage/100)*total;
+
+                    $("#tax_table tbody").append(row);
+                    $("#tax_table tfoot").html(
+                        '<tr>'+
+                          '<th>Total with charges</th>'+
+                          '<th></th>'+
+                          '<th></th>'+
+                          '<th>'+(totalTax+total)+'</th>'+
+                         '</tr>'
+                    );
+                    totalWithTax=totalTax+total
+
+                })
+
+            }
+            function drawTables(){
+                clearTable();
+                 generateBillingTable();
+                 clearTaxTable();
+                 generateTaxTable();
+            }
+
+
+            generateBillingTable();
+            generateTaxTable();
+
+                $("#add_billing").click(function(){
+                   $("#billing_details").hide();
+                   $("#new_billing").show();
+                });
+                $("#back").click(function(){
+                   $("#new_billing").hide();
+                   $("#billing_details").show();
+                }) ;
+
+                $("#price").change(function(){
+                    $("#amount").val(
+                        parseFloat($(this).val())*parseFloat($("#quantity").val())
+                    );
+                })
+
+
+
+                $("#add_item_to_list").click(function(){
+                    $("#added_items").hide();
+                    $("#add_item_form").show();
+                }) ;
+                $("#to_list").click(function(){
+                    $("#added_items").show();
+                    $("#add_item_form").hide();
+                }) ;
+                $("#add_tax_to_list").click(function(){
+                    $("#added_taxes").hide();
+                    $("#add_tax_form").show();
+                }) ;
+                $("#to_taxes").click(function(){
+                    $("#added_taxes").show();
+                    $("#add_tax_form").hide();
+                }) ;
+
+                $(document).on("click",".add_to_table",function(){
+                var newitemtobilll_data = {
+                "itemcode": $(this).siblings(".title").html(),
+                "itemquantity": 1,
+                "amount": $(this).siblings(".secondary-content").html(),
+                "bilid": orderid_id,
+
+                "orderedby": user_id,
+                "orderfor": $("#patientcode").val()
+            }
+            save_newitemtobilll(newitemtobilll_data, function(data, status) {
+                if (status == "success") {
+
+
+
+
+                if(window.location.pathname=="/onebillingview/"){
+                    orderid_id=data.bilid;
+                 window.location.pathname='/billsreport/'+orderid_id;
+                 }
+                var fullamountofrow=data.itemquantity*data.amount;
+                var row='<tr>';
+                    row= row+'<td>'+ data.itemcode+'</td>';
+                    row= row+'<td>'+data.amount+'</td>';
+                    row= row+'<td>'+data.itemquantity+'</td>';
+                    row= row+'<td>'+fullamountofrow+'</td>';
+                    $("#billing_tbl tbody").append(row);
+                    $("#tax").val("");
+                    $("#percentage").val("");
+
+
+                }
+                });
+
+                });
+
+                $(document).on("click",".add_to_tax_table",function(){
+                  var name=  $(this).siblings(".title").html();
+
+                  var percent=  $(this).siblings(".secondary-content").html();
+
+                 var servicetax_data = {
+                "taxcode": $(this).siblings(".title").html(),
+                "taxpercentage": $(this).siblings(".secondary-content").html(),
+                "orderid":orderid_id
+
+            }
+
+            save_newtaxtobilll(servicetax_data, function(data, status) {
+                if (status == "success") {
+
+
+                for (var key in data){
+                  console.log( key, data[key] );
+                }
+
+
+
+                var val=$('#billtableitemstotal').html();
+                alert(val);
+                                   var row='<tr>';
+                    row= row+'<td>'+ servicetax_data.taxcode+'</td>';
+                    row= row+'<td>'+"---"+'</td>';
+                    row= row+'<td>'+servicetax_data.taxpercentage+'</td>';
+                    row=row+ '<td>'+((parseInt(servicetax_data.taxpercentage))/100*(parseInt(val))).toFixed(1)+'</td>';
+                    totalTax=totalTax+(parseInt(servicetax_data.taxpercentage))/100*(parseInt(val));
+                    $("#tax_table tbody").append(row);
+                    $("#tax_table tfoot").html(
+                        '<tr>'+
+                          '<th>Total with charges</th>'+
+                          '<th></th>'+
+                          '<th></th>'+
+                          '<th>'+(totalTax+val).toFixed(1)+'</th>'+
+                         '</tr>'
+                    );
+                    alert(String(row));
+
+
+
+                }
+                });
+
+                });
+
+                $("#add_payment").click(function(){
+                    $(this).hide();
+                    $("#payment").show();
+                });
+                $("#back_to_payment").click(function(){
+                    $("#payment").hide();
+                    if($("#pay_tab tbody tr").length>0){
+                        $("#pay_disp_div").show();
+                        $("#add_payment").hide();
+                    }
+                    else $("#add_payment").show();
+                });
+
+                if($("#pay_tab tbody tr").length<=0){
+                    console.log("low")
+                    $("#pay_disp_div").hide();
+                }
+
+
+
+
+
+
+var load_billtable = function(){
+
+ var totalnext=0;
+   var totalAmount=0;
+         get_newitemtobilll_data(function(data, status) {
+
+            var row = ""
+
+            if (data.length >= 0) {
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+
+                    var alr = data[i]
+
+                                   var row='<tr>';
+
+                   var fullamountofrow=alr.itemquantity*alr.priceofitem;
+                    row= row+'<td>'+ alr.itemcode+'</td>';
+                    row= row+'<td>'+alr.priceofitem+'</td>';
+                    row= row+'<td>'+alr.itemquantity+'</td>';
+                    row= row+'<td>'+fullamountofrow+'</td>';
+                    totalAmount=totalAmount+fullamountofrow;
+                    $("#billing_tbl tbody").append(row);
+                    $("#billtableitemstotal").html(totalAmount);
+
+                }
+
+
+            }
+            totalAmount=gettotalbeforetax(totalAmount);
+
+
+         });
+
+ function gettotalbeforetax(val){
+
+         get_billtaxtable_data(function(data, status) {
+
+            var row = ""
+            totalTax=0;
+            if (data.length >= 0) {
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+
+                    var alr = data[i]
+
+                                   var row='<tr>';
+                    row= row+'<td>'+ alr.taxcode+'</td>';
+                    row= row+'<td>'+"---"+'</td>';
+                    row= row+'<td>'+alr.taxpercentage+'</td>';
+                    row=row+ '<td>'+((parseInt(alr.taxpercentage))/100*(parseInt(val))).toFixed(1)+'</td>';
+                    totalTax=totalTax+(parseInt(alr.taxpercentage))/100*(parseInt(val));
+                    $("#tax_table tbody").append(row);
+                    $("#tax_table tfoot").html(
+                        '<tr>'+
+                          '<th>Total with charges</th>'+
+                          '<th></th>'+
+                          '<th></th>'+
+                          '<th>'+(totalTax+val).toFixed(1)+'</th>'+
+                         '</tr>'
+                    );
+
+
+                }
+
+gettotalaftertax(totalTax+val)
+            }
+         });
+
+ }
+
+ function gettotalaftertax(val){
+ get_paymentobilll_data(function(data, status) {
+
+            var row = ""
+
+             if (status == "success") {
+            console.log("payments mthod sa adn amount")
+                console.log(data)
+                var alr = data
+
+                var row=$('<tr></tr>' );
+                    var due=val-parseFloat(alr.amoumtpaid);
+                       var paytype=        '<td>'+alr.paymenttype+'</td>';
+                       var payamount=       '<td>'+alr.amoumtpaid+'</td>';
+                       var paydescription=    '<td>'+alr.description+'</td>';
+                       var paydue=      '<td>'+due.toFixed(1)+'</td>';
+                        $("#pay_disp_div").show();
+                        row.append(paytype,payamount,paydescription,paydue);
+                        $("#pay_tab tbody").html(row);
+
+                }
+
+
+
+         });
+          }
+
+
+ }
+load_billtable();
+
+
+$("#instantsubmit").on("click",function() {
+var newitemtobilll_data = {
+                "itemcode": $("#item_name").val(),
+                "itemquantity": $("#quantity").val(),
+                "amount": $("#price").val(),
+                "bilid": orderid_id,
+
+                "orderedby": user_id,
+                "orderfor": $("#patientcode").val()
+            }
+            save_newitemtobilll(newitemtobilll_data, function(data, status) {
+                if (status == "success") {
+
+
+
+
+                if(window.location.pathname=="/onebillingview/"){
+                    orderid_id=data.bilid;
+                 window.location.pathname='/billsreport/'+orderid_id;
+                 }
+                var fullamountofrow=$("#quantity").val()*$("#price").val();
+                var row='<tr>';
+                    row= row+'<td>'+ $("#item_name").val()+'</td>';
+                    row= row+'<td>'+$("#price").val()+'</td>';
+                    row= row+'<td>'+$("#quantity").val()+'</td>';
+                    row= row+'<td>'+fullamountofrow+'</td>';
+                    $("#billing_tbl tbody").append(row);
+                    $("#tax").val("");
+                    $("#percentage").val("");
+
+
+                }
+                });
+});
+var load_servicetax = function(){
+         get_servicetax_data(function(data, status) {
+
+            var servicetax_view = ""
+
+            if (data.length >= 0) {
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+                    var alr = data[i]
+                    var servicetax_view='<li class="collection-item avatar">'+
+                                '<a class="add_to_tax_table" href="#!"><i class="material-icons circle tiny green">add</i></a>'+
+                                 '<span class="title">'+alr.taxcode+'</span>'+
+                                 '<span class="secondary-content">'+alr.taxpercentage+'%</span>'+
+                            '</li>'
+                         $("#tax_list").append(servicetax_view);
+
+                }
+
+
+            }
+         });
+    }
+load_servicetax();
+  $("#save_to_taxes").on("click",function() {
+
+
+
+
+            var servicetax_data = {
+                "taxcode": $("#tax").val(),
+                "taxpercentage": $("#percentage").val()
+
+            }
+            save_servicetax(servicetax_data, function(data, status) {
+                if (status == "success") {
+                var li='<li class="collection-item avatar">'+
+                                '<a class="add_to_tax_table" href="#!"><i class="material-icons circle tiny green">add</i></a>'+
+                                 '<span class="title">'+$("#tax").val()+'</span>'+
+                                 '<span class="secondary-content">'+$("#percentage").val()+'%</span>'+
+                            '</li>'
+                         $("#tax_list").append(li);
+                    $("#tax").val("");
+                    $("#percentage").val("");
+
+
+                }
+            });
+
+});
+    var load_servicecodes = function(){
+get_servicecodes_data(function(data, status) {
+
+
+            var servicecode_view = ""
+
+            if (data.length >= 0) {
+
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+
+                    var alr = data[i]
+                    servicecode_view +='<li class="collection-item avatar"><a class="add_to_table" href="#"><i class="material-icons circle tiny green">add</i></a><span class="title">'+String(alr.itemcode)+'</span>';
+                    servicecode_view += '<p>'+String(alr.itemdescription )+'</p><span class="secondary-content">'+String(alr.priceofitem)+'</span></li>';
+
+                }
+
+
+                $("#item_list").html(servicecode_view)
+            }
+         });
+    }
+         load_servicecodes();
+    $("#save_to_item_codes").on("click",function() {
+var servicecode_data = {
+
+                "itemcode": $("#item").val(),
+                "itemdescription": $("#desc").val(),
+                "priceofitem": $("#cost").val()
+
+            }
+            save_servicecode(servicecode_data, function(data, status) {
+                if (status == "success") {
+                var x='<li class="collection-item avatar"><a class="add_to_table" href="#"><i class="material-icons circle tiny green">add</i></a><span class="title">'+String($("#item").val())+'</span>';
+                var y='<p>'+String($("#desc").val())+'</p><span class="secondary-content">'+String($("#cost").val())+'</span></li>';
+                       $("#itemlist").append(x+y);
+                    $("#item").val("");
+                    $("#item").val("");
+                    $("#desc").val("");
+                    $("#cost").val("");
+
+
+
+                }
+                else {
+                alert("somting went worng");
+                }
+            });
+
+    });
+
+if($("#pay_tab tbody tr").length==0){
+$("#submit_payment").on("click",function() {
+                    console.log($("#payment_type").val()+" "+$("#payable_amount").val()+" "+$("#payment_description").val())
+                    console.log(totalWithTax-parseFloat($("#payable_amount").val()));
+                    var due=totalWithTax-parseFloat($("#payable_amount").val());
+                    alert(due);
+                    alert($("#payable_amount").val());
+                    var newpaymentobilll_data = {
+                "paymenttype": $("#payment_type").val(),
+                "amoumtpaid": $("#payable_amount").val(),
+                "description": $("#payment_description").val(),
+                "bilid": orderid_id,
+
+
+            }
+
+
+            save_newpaymentobilll(newpaymentobilll_data, function(data, status) {
+                if (status == "success") {
+                    var row=$('<tr></tr>' );
+                       var paytype=        '<td>'+$("#payment_type").val()+'</td>';
+                       var payamount=       '<td>'+$("#payable_amount").val()+'</td>';
+                       var paydescription=    '<td>'+$("#payment_description").val()+'</td>';
+                       var paydue=      '<td>'+due+'</td>';
+                        $("#pay_disp_div").show();
+                        row.append(paytype,payamount,paydescription,paydue);
+                        $("#pay_tab tbody").html(row);
+                        $("#payment").hide();
+                        }
+                });
+ });
+
+}
+
+
+                $("#pay_tab tbody ").on("click","tr",function(){
+                    $("#pay_disp_div").hide();
+                   var type= $(this).find("td").eq(0).html();
+                   var amount= $(this).find("td").eq(1).html();
+                   var desc= $(this).find("td").eq(2).html();
+                    $("#payment_type").val(type);
+                   $("#payable_amount").val(amount);
+                   $("#payment_description").val(desc);
+                   $("#payment").show();
+                   var newpaymentobilll_data = {
+                "paymenttype": type,
+                "amoumtpaid": amount,
+                "description": desc,
+                "bilid": orderid_id,
+
+
+            }
+            if($("#pay_tab tbody tr").length>0){
+
+            $("#submit_payment").on("click",function() {
+            update_paymentobilll_data(newpaymentobilll_data, function(data, status) {
+                if (status == "success") {
+                   var row=$('<tr></tr>' );
+                       var paytype=        '<td>'+$("#payment_type").val()+'</td>';
+                       var payamount=       '<td>'+$("#payable_amount").val()+'</td>';
+                       var paydescription=    '<td>'+$("#payment_description").val()+'</td>';
+                       var paydue=      '<td>'+due+'</td>';
+                        $("#pay_disp_div").show();
+                        row.append(paytype,payamount,paydescription,paydue);
+                        $("#pay_tab tbody").html(row);
+                        $("#payment").hide();
+                        }
+                });
+                });
+                }
+
+    });
+
+
+
+
+        });
+
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+

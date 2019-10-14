@@ -1,0 +1,74 @@
+<div>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <mat-icon>person_add</mat-icon> &nbsp;
+            <span><b>Supplier Details</b></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container">
+        <form class="form-container" [formGroup]="addSupplierForm">
+            <mat-form-field class="input-field">
+                <input matInput placeholder="Supplier Name" required formControlName="name">
+                <mat-icon matSuffix>business</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+                <input matInput placeholder="Contact Person" required formControlName="contactPerson">
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+                <span matPrefix>+91 &nbsp;</span>
+                <input type="tel" matInput placeholder="Mobile Number" formControlName="phoneNumber"
+                maxlength="10" minlength="10" required>
+                <mat-error>
+                    Please enter a valid mobile number of 10 digits and not starts with zero
+                </mat-error>
+                <mat-icon matSuffix>phone_android</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+                <span matPrefix>+91 &nbsp;</span>
+                <input type="tel" matInput placeholder="Alternate Mobile Number" formControlName="altPhoneNumber"
+                maxlength="10" minlength="10" pattern="^[1-9]{1,10}$">
+                <mat-error>
+                    Please enter a valid mobile number of 10 digits and not starts with zero
+                </mat-error>
+                <mat-icon matSuffix>phone_iphone</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+                <span matPrefix>+91 &nbsp;</span>
+                <input type="tel" matInput placeholder="Landline Number" formControlName="landlineNumber"
+                maxlength="10" minlength="10" pattern="^[1-9]{1,10}$">
+                <mat-error>
+                    Please enter a valid landline number of 10 digits and not starts with zero
+                </mat-error>
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            
+            <mat-form-field class="input-field">
+                <input type="email" matInput placeholder="Email" required formControlName="email" email>
+                <mat-error>
+                    Please enter a valid landline number of 10 digits and not starts with zero
+                </mat-error>
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+                <textarea matInput placeholder="Postal Address" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="5" required formControlName="address"></textarea>
+                <mat-icon matSuffix>contact_mail</mat-icon>
+            </mat-form-field>
+
+            <div class="input-field">
+                <button type="submit" mat-raised-button color="primary" [disabled]="!addSupplierForm.valid"
+                    (click)="saveAndAdd()">Save and Add another</button>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!addSupplierForm.valid"
+                    (click)="onSave()">Save</button>
+            </div>
+<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+        </form>
+    </div>
+</div>

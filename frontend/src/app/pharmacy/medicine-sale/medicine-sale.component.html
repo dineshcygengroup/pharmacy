@@ -1,0 +1,235 @@
+<div class="container">
+    <div fxLayout='column' fxLayoutAlign="start stretch" fxLayoutGap="1%">
+        <div>
+            <mat-toolbar>
+                <mat-toolbar-row>
+                    <mat-icon matSuffix>shopping_cart</mat-icon>
+                    <span>&nbsp;&nbsp;Medicine Sale</span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+        </div>
+        <form>
+            <div fxLayout="row">
+                <div fxFlex="33%">
+
+                    <mat-form-field class="input-field">
+                        <mat-label>Customer</mat-label>
+                        <mat-select [formControl]="customer" required>
+                            <mat-option *ngFor="let customer of customerTypeList" [value]="customer.customerType">{{customer.customerType}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div fxFlex="33%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value=='in-patient'">
+                        <mat-form-field class="input-field">
+                        <mat-label>UHID</mat-label>
+                        <mat-select [formControl]="patients" required>
+                            <mat-option *ngFor="let patient of patientList" [value]="patient.UHID">{{patient.UHID}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </ng-container>
+
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input type="text" matInput placeholder="Patient Name" required [formControl]="patientName">
+                    </mat-form-field></ng-container>
+                </div>
+                <div fxFlex="33%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input type="text" matInput placeholder="Doctor Name" required [formControl]="referredDoctorName">
+                    </mat-form-field></ng-container>
+
+                </div>
+
+            </div>
+            <div fxLayout="row">
+                <div fxFlex="32%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input type="text" placeholder="Medicine Name" matInput [formControl]="selectedMedicine" [matAutocomplete]="name" required>
+                        <mat-autocomplete autoActiveFirstOption #name="matAutocomplete" [displayWith]="displayMedicineName">
+                            <mat-option *ngFor="let medicine of filteredMedicineList | async" [value]="medicine">
+                                {{medicine.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field></ng-container>
+                    <ng-container *ngIf="customer.value=='in-patient'">
+                        <mat-form-field class="input-field">
+                            <mat-label>Select Date</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="" [value]="">
+                            </mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                    </ng-container>
+
+                </div>
+                <div fxFlex="15%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input type="number" matInput placeholder="quantity" required [formControl]="selectedQuantity">
+                        <mat-hint align="end"><strong>Units</strong> </mat-hint>
+                    </mat-form-field></ng-container>
+                    <!--<ng-container *ngIf="customer.value=='in-patient'">-->
+                    <!--<mat-form-field class="input-field">-->
+                        <!--<input matInput placeholder="Doctor Name" readonly>-->
+                    <!--</mat-form-field></ng-container>-->
+                    <ng-container *ngIf="customer.value=='in-patient'">
+                        <button mat-raised-button color="primary">Search</button>&nbsp;</ng-container>
+                    <ng-container *ngIf="customer.value=='in-patient'">
+                        <button mat-raised-button color="primary">Load</button></ng-container>
+                </div>
+                <div fxFlex="15%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <mat-label>Payment</mat-label>
+                        <mat-select [formControl]="paymentOption" required>
+                            <mat-option *ngFor="let option of paymentOptions" [value]="option.paymentType">{{option.paymentType}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field></ng-container>
+                </div>
+                <div fxFlex="9%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input matInput placeholder="Category" [value]="selectedMedicineCategory" readonly>
+                    </mat-form-field></ng-container>
+                </div>
+                <div fxFlex="9%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input matInput placeholder="Selling Price" [value]="selectedMedicinePrice" readonly>
+                    </mat-form-field></ng-container>
+                </div>
+                <div fxFlex="10%" fxFlexOffset="2%">
+                    <ng-container *ngIf="customer.value!='in-patient'">
+                    <mat-form-field class="input-field">
+                        <input matInput placeholder="Stock available" [value]="selectedMedicineAvailableQuantity" readonly>
+                    </mat-form-field></ng-container>
+
+                </div>
+
+            </div>
+            <ng-container *ngIf="customer.value!='in-patient'">
+            <div fxLayout="row">
+                <div fxFlex="100%">
+                    <div class="table-container mat-elevation-z8">
+                        <table mat-table [dataSource]="tableValues" matSort>
+                            <ng-container matColumnDef="table-header">
+                                <th mat-header-cell *matHeaderCellDef colspan="5">
+                                    <button mat-raised-button color="primary" (click)='addToOrderList()'><mat-icon>add</mat-icon></button>
+                                    <button mat-raised-button color="accent" (click)='saveSale()' [disabled]='isEnabled()'><mat-icon>save</mat-icon></button>
+                                    <button mat-raised-button color="primary" printSectionId="print-section" ngxPrint><mat-icon>print</mat-icon></button>
+                                    <mat-label class="total-price"><b>Total Price: {{getTotalCost()}}</b></mat-label>
+                                </th>
+                            </ng-container>
+                            <!--in patient-->
+                            <!--<ng-container matColumnDef="table-header" *ngIf="customer.value=='in-patient'">-->
+                                <!--<th mat-header-cell *matHeaderCellDef colspan="5">-->
+                                    <!--<button mat-raised-button color="primary" (click)='addToOrderList()'><mat-icon>add</mat-icon></button>-->
+                                    <!--<button mat-raised-button color="accent" (click)='saveSale()' [disabled]='isEnabled()'><mat-icon>save</mat-icon></button>-->
+                                    <!--<button mat-raised-button color="primary" printSectionId="print-section" ngxPrint><mat-icon>print</mat-icon></button>-->
+                                    <!--<mat-label class="total-price"><b>Total Price: {{getTotalCost()}}</b></mat-label>-->
+                                <!--</th>-->
+                            <!--</ng-container>-->
+                            <ng-container matColumnDef="medicineName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="sellingPrice">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> MRP </th>
+                                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="quantity">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="amount">
+                                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                                <td mat-cell *matCellDef="let element"> {{element.quantity * element.price}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>Action</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-icon-button color="warn" (click)="deleteMedicine(element)">
+                                        <mat-icon>delete </mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="['table-header']; sticky: true"></tr>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+
+     <span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+                </div>
+            </div>
+            </ng-container>
+    </form>
+    </div>
+</div>
+
+
+<div id="print-section">
+    <div fxLayout='column' fxLayoutAlign="start stretch" fxLayoutGap="1%">
+        <h1 id="firm_name">{{config.firm_name}}</h1>
+        <div fxLayout="row">
+            <div fxFlex="65%">
+                <div fxLayout="row" class="row-item">{{config.address}}</div>
+                <!--<div fxLayout="row" class="row-item">Phone Number: {{config.phone_number}}</div>                -->
+            </div>
+            <!--<div fxFlex="35%">-->
+                <!--<div fxLayout="row" class="row-item" *ngIf="config.dl_number"> DL.No: {{config.dl_number}}</div>-->
+                <!--<div fxLayout="row" class="row-item" *ngIf="config.gst_number"> GST.No: {{config.gst_number}}</div>-->
+            <!--</div>-->
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div fxFlex="65%">
+                <div fxLayout="row" class="row-item">Name: {{patientName.value}}</div>
+                <div fxLayout="row" class="row-item">Doctor: {{referredDoctorName.value}}</div>
+            </div>
+            <div fxFlex="35%">
+                <div fxLayout="row" class="row-item">Date: {{today | date}}</div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div fxFlex="25%">Product Name</div>
+            <div fxFlex="25%">MRP</div>
+            <div fxFlex="25%">Quality</div>
+            <div fxFlex="25%">Amount</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" *ngFor="let medicine of tableValues">
+            <div fxFlex="25%">{{medicine.name}}</div>
+            <div fxFlex="25%">{{medicine.price}}</div>
+            <div fxFlex="25%">{{medicine.quantity}}</div>
+            <div fxFlex="25%">{{medicine.price * medicine.quantity}}</div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <mat-label class="total-price"><b>Net Amount: {{getTotalCost()}}</b></mat-label>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row" *ngIf="config.footer_text">
+            <div fxFlex="100%">
+                <mat-label>{{config.footer_text}}</mat-label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <mat-toolbar>
+      <mat-toolbar-row>
+          <mat-icon>list_alt</mat-icon> &nbsp;
+          <span><b>Medicine Sale List</b></span>
+      </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="table-container">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Order No </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="patientName">
+              <th mat-header-cell *matHeaderCellDef> Patient Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.patientName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="referredDoctorName">
+              <th mat-header-cell *matHeaderCellDef> Doctor Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.referredDoctorName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="paymentOption">
+              <th mat-header-cell *matHeaderCellDef> Payment Option </th>
+              <td mat-cell *matCellDef="let element"> {{element.paymentOption}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="saleStatus">
+              <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+              <td mat-cell *matCellDef="let element"> {{element.saleStatus}} </td>
+          </ng-container>
+
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+              <div class="example-element-detail"
+                  [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="medicine-details" *ngIf="expandedElement?.medicine_list">
+                  <div class="medicine-details-header">
+                      <div class="medicine-details-header-item">Medicine Name</div>
+                      <div class="medicine-details-header-item">Category</div>
+                      <div class="medicine-details-header-item">Quantity</div>
+                      <div class="medicine-details-header-item">Selling Price</div>
+                  </div>
+                  <div *ngFor="let element of expandedElement.medicine_list">
+                    <div class="medicine-details-item">{{element.medicineName}}</div>
+                    <div class="medicine-details-item">{{element.category}}</div>
+                    <div class="medicine-details-item">{{element.quantity}}</div>
+                    <div class="medicine-details-item">{{element.sellingPrice}}</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element"
+              (click)="expandedElement = expandedElement === element ? null : element">
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+  </div>
+<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+</div>

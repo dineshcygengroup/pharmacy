@@ -1,0 +1,169 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+    <table width="100%"   cell-spacing="0" align="center" cell-padding="0" style=" box-shadow: 1px 1px 9px 0px #454545;border:none !important; max-width:600px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        <tr>
+            <td width="100%" height="100%">
+                <table width="100%"  align="center" cell-spacing="0" cell-padding="0" style="max-width:600px;">
+                    <tr>
+                        <td  align="center" style="padding: 20px; font-weight: bold; font-size:22px;">
+                            Referral Form
+                        </td>
+                    </tr>
+                    </table>
+                    <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                            <tr>
+                        <td width="40%"  style="padding:5px; font-size:15px;" >
+                            Referred By:
+                        </td>
+                       
+                        <td width="30%"  style="padding:5px; font-size:15px;">
+                            Name:{{user.name}}
+                        </td>
+                        <td width="30%"  style="padding:5px; font-size:15px;">
+                            Position:{{user.user_type}}
+                        </td>
+                    </tr>
+                    </table>
+                    <table width="100%" border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px;  border-collapse:collapse;">
+                  <tr>
+                        <td width="40%"  style="padding:5px; font-size:15px;">
+                           <b> Initiating Facility</b><br>
+                            Name and Address:
+                        </td>
+                       
+                        <td width="30%"  style="padding:5px; font-size:15px;">{{user.orgnastion.orgnastion}}</td>
+                        <td width="30%"  style="padding:5px; font-size:15px;" >
+                            Date Of Referral:
+                        </td>
+                       
+                    </tr>
+                    </table>
+                    <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">                  <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                            Telephone Arrangements Made:
+                        </td>
+                        <td width="10%"  style="padding:5px; font-size:15px;">
+                            Yes
+                        </td>
+                        <td width="10%"  style="padding:5px; font-size:15px;">
+                            No
+                        </td>
+                        <td width="20%"  style="padding:5px; font-size:15px;">
+                            Facility Tel No.<br>
+                        </td>
+                        <td width="20%"  style="padding:5px; font-size:15px;">
+                            Fax No.<br>
+                        </td> 
+                        </tr>
+                    </table>
+                   <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">  
+                       <tr>
+                        <td width="40%"  style="padding:5px; font-size:15px;">
+                        <b>Referred To Facility</b><br>
+                        Name and Address:
+                    </td>
+                    <td width="60%"  style="padding:5px; font-size:15px;">{{referedto.doctorname}}</td>
+                    </tr>
+                    </table>
+                    <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+                    <tr>
+                            <td width="40%"  style="padding:5px; font-size:15px;">Client Name</td>
+                            <td width="60%"  style="padding:5px; font-size:15px;">{{client.first_name}} {{client.last_name}}</td>
+                </tr>
+               </table>
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+                <tr>
+                        <td width="40%"  style="padding:5px; font-size:15px;">
+                    Identity Number:
+                </td>
+                <td width="20%"  style="padding:5px; font-size:15px;"></td>
+                <td width="20%"  style="padding:5px; font-size:15px;">
+                    Age:{{client.dob}}
+                </td>
+                <td width="20%"  style="padding:5px; font-size:15px;">
+                    Sex:{{client.gender}}
+                </td>
+                </tr>
+                </table>
+                <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+               <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                       Client Phone no:{{client.phne}}
+                   </td>
+                   <td width="60%"  style="padding:5px; font-size:15px;">{{client.phne}}</td>
+               </tr>
+               </table>
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+               <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                       Client History:
+                   </td>
+                    <td width="60%"  style="padding:5px; font-size:15px;"></td>
+               </tr>
+               </table>   
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+               <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                       Findings:
+                   </td>
+                   <td width="60%"  style="padding:5px; font-size:15px;"></td>
+               </tr>
+               </table>
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+               <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                       Treament given:
+                   </td>
+                   <td width="60%"  style="padding:5px; font-size:15px;"></td>
+               </tr>
+               </table>
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+               <tr>
+                    <td width="40%"  style="padding:5px; font-size:15px;">
+                       Reason for Referral:
+                   </td>
+                   <td width="60%"  style="padding:5px; font-size:15px;">
+                       </td>
+               </tr>
+               </table>
+               <table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+<tr>
+        <td width="40%"  style="padding:5px; font-size:15px;">
+        Documents Accompanying Referral:
+    </td>
+    <td width="60%"  style="padding:5px; font-size:15px;">
+        </td>
+</tr>
+</table>
+<table width="100%"  border="1" align="center" cell-spacing="0" cell-padding="0" style="max-width:600px; border-collapse:collapse;">
+                
+<tr>
+        <td width="40%"  style="padding:5px; font-size:15px;">
+        Print Name, Sign and Date:
+    </td>
+    <td width="20%"  style="padding:5px; font-size:15px;">Name:</td>
+    <td width="20%"  style="padding:5px; font-size:15px;">Sign:</td>
+    <td width="20%"  style="padding:5px; font-size:15px;">Date:</td>
+</tr>
+
+   </table>           
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

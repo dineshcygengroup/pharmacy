@@ -1,0 +1,121 @@
+{
+  "productcategory": [
+    {
+      "id": 1,
+      "productCategory": "Machine"
+    },
+    {
+      "id": 2,
+      "productCategory": "Ventilator"
+    },
+    {
+      "id": 3,
+      "productCategory": "ICU equipment"
+    },
+    {
+      "id": 4,
+      "productCategory": "Surgery tools"
+    },
+    {
+      "id": 5,
+      "productCategory": "Icu infra"
+    },
+    {
+      "id": 6,
+      "productCategory": "Medicines"
+    },
+    {
+      "id": 7,
+      "productCategory": "Medical software"
+    },
+    {
+      "id": 8,
+      "productCategory": "Heart studs"
+    },
+    {
+      "id": 9,
+      "productCategory": "Branchy therapy equipment"
+    },
+    {
+      "id": 10,
+      "productCategory": "scanners"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "scanners",
+      "description": "High resolution ct scanner",
+      "name": "CT scanner",
+      "price": 1000000,
+      "quantity": "1"
+    },
+    {
+      "category": "scanners",
+      "description": "Big Bore MRI scanner",
+      "name": "MRI Scanner",
+      "price": 2332,
+      "quantity": "2",
+      "createdAt": 1566670687208,
+      "id": 2
+    }
+  ],
+  "vendors": [
+    {
+      "name": "Sample vendor",
+      "phoneNumber": "8888888888",
+      "contactName": "vendor1",
+      "address": "hyd",
+      "email": "vendor1@gmail.com",
+      "website": "www.commerce.com",
+      "remarks": "ddd",
+      "createdAt": 1568218753042,
+      "id": 1
+    }
+  ],
+  "purchaseOrders": [
+    {
+      "orderDate": "2019-09-11T17:28:07.025Z",
+      "requestedDate": "2019-09-19T18:30:00.000Z",
+      "requestedDepartment": "Dept-1",
+      "remarks": "",
+      "product_list": [
+        {
+          "vendorName": 1,
+          "productName": 1,
+          "quantity": "5"
+        }
+      ],
+      "createdAt": 1568222902483,
+      "id": 1
+    },
+    {
+      "orderDate": "2019-09-12T12:44:36.057Z",
+      "requestedDate": "2019-09-18T18:30:00.000Z",
+      "requestedDepartment": "Dept-1",
+      "remarks": "",
+      "product_list": [
+        {
+          "vendorID": 1,
+          "productID": 1,
+          "quantity": "1"
+        },
+        {
+          "vendorID": 1,
+          "productID": 2,
+          "quantity": "1"
+        }
+      ],
+      "createdAt": 1568292807822,
+      "id": 2
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "departmentName": "Dept-1",
+      "contactName": "person-1",
+      "phoneNumber": 8888888888
+    }
+  ]
+}

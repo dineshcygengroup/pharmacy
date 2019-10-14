@@ -1,0 +1,44 @@
+<div class="content" fxLayout="row" fxLayout.xs="column">
+  <div fxFlex="28%" [routerLink]='appWebUrls.vendorList' class="pointer-cursor">
+    <mat-card class="card">
+        <mat-card-header>
+          <div mat-card-avatar >
+            <mat-icon color="primary">group</mat-icon>
+          </div>
+          <mat-card-title>Vendors</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="card-content">{{dashboardData?.vendorcount}}</div>
+        </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="28%" [routerLink]='appWebUrls.purchaseOrderList' class="pointer-cursor">
+    <mat-card class="card">
+        <mat-card-header>
+          <div mat-card-avatar >
+            <mat-icon color="primary">shopping_cart</mat-icon>
+          </div>
+          <mat-card-title>Purchase Orders</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="card-content">{{dashboardData?.purchase}}</div>
+        </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="28%" [routerLink]='appWebUrls.productList' class="pointer-cursor">
+    <mat-card class="card">
+        <mat-card-header>
+          <div mat-card-avatar >
+            <mat-icon color="primary">list</mat-icon>
+          </div>
+          <mat-card-title>Active Products</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="card-content">{{dashboardData?.active}}</div>
+        </mat-card-content>
+    </mat-card>
+  </div>
+
+  </div>
+<span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>

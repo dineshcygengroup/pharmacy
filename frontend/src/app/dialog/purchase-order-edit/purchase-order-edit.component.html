@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<hr />
+<mat-dialog-content>
+    <div class="container">
+        <form class="form-container" [formGroup]="orderEditForm">
+            <div class="form-column">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Medicine Name</mat-label>
+                    <input matInput placeholder="Medicine Name" formControlName="medicine" readonly>
+                </mat-form-field>
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Supplier Name</mat-label>
+                    <input matInput placeholder="Supplier Name" formControlName="supplier" readonly>
+                </mat-form-field>
+                <mat-form-field class="mini-input-field" appearance="fill">
+                    <mat-label>Fulfillment date</mat-label>
+                    <input matInput placeholder="Required by" [value]="data.purchaseOrder.fulfillmentDate | date: 'dd/MM/yyyy'"
+                        readonly>
+                </mat-form-field>
+                <mat-form-field class="mini-input-field">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput placeholder="Quantity" formControlName="quantity">
+                </mat-form-field>
+                <mat-form-field class="mini-input-field">
+                    <mat-label>Payment type</mat-label>
+                    <mat-select formControlName="paymentType">
+                        <mat-option *ngFor="let option of paymentOptions" [value]="option.paymentType">
+                        {{option.paymentType}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="input-field">
+                    <input matInput  placeholder="Batch Number" formControlName="batchNumber">
+                </mat-form-field>
+                <mat-form-field class="input-field">
+                    <input matInput [matDatepicker]="picker" formControlName="expiryDate" [min]="todayDate" 
+                        placeholder="Expiry Date" [attr.disabled]="true">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker [attr.disabled]="false"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="mini-input-field">
+                    <input matInput  placeholder="Cost Price" formControlName="costPrice">
+                </mat-form-field>
+                <mat-form-field class="mini-input-field">
+                    <input matInput  placeholder="MRP" formControlName="maxRetailPrice">
+                </mat-form-field>
+                <mat-form-field class="mini-input-field">
+                    <mat-label>Purchase Tax</mat-label>
+                    <mat-select formControlName="purchaseTax" required>
+                        <mat-option *ngFor="let option of purchaseTaxList" [value]="option.purchaseTax">
+                        {{option.purchaseTax}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="save()">Received</button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

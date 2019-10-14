@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<form id="searchform" method="get" role="search">
+    <input id="searchfield" />
+    <input type="submit" name="go" value="go!" />
+</form>
+<script>
+$("#searchfield").click(function(){
+var arr = [];
+$.getJSON("coptcodes.json", function(data) {
+    $.each(data, function(key, value) {
+        if ($.inArray(value.name, arr) === -1) {
+            arr.push(value.name)
+        }
+    })
+    console.log(arr)
+});
+}
+);
+</script>
+</body>
+
+</html>

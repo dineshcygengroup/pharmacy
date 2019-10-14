@@ -1,0 +1,74 @@
+<div class="container" fxLayout='column' fxLayoutAlign="start stretch" fxLayoutGap="1%">
+  <div>
+    <mat-toolbar>
+      <mat-toolbar-row>
+          <mat-icon>person_add</mat-icon> &nbsp;
+          <span><b>Vendor Details</b></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div fxLayout='row'>
+    <div fxFlex=40%>
+      <form [formGroup]="addVendorForm">
+        <div>
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Name" formControlName="name" required>
+            <mat-icon matSuffix>business</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Contact Name" formControlName="contactName" required>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+              <span matPrefix>+91 &nbsp;</span>
+              <input type="tel" matInput placeholder="Mobile Number" formControlName="phoneNumber"
+              maxlength="10" minlength="10" required>
+              <mat-error>
+                  Please enter a valid mobile number of 10 digits and not starts with zero
+              </mat-error>
+              <mat-icon matSuffix>phone_android</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+              <input type="email" matInput placeholder="Email" required formControlName="email" email required>
+              <mat-error>
+                  Please enter a valid landline number of 10 digits and not starts with zero
+              </mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Website" formControlName="website" required>
+            <mat-icon matSuffix>public</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+            <textarea matInput placeholder="Add address" formControlName="address"
+              cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" required></textarea>
+            <mat-icon matSuffix> place</mat-icon>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="input-field">
+            <textarea matInput placeholder="Remarks" formControlName="remarks"
+            cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" required></textarea>
+            <mat-icon matSuffix>edit</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="input-field">
+          <button type="submit" mat-raised-button color="primary" class="submit-button"
+            [disabled]="!addVendorForm.valid" (click)="save()">Save</button>
+        </div>
+      </form>
+    </div>
+    <span class="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+        style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+  </div>
+</div>

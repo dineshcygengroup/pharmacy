@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ehr.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" /> -->
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="bootstrap-multiselect.css" type="text/css"/> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap-multiselect.css'%}">
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js.map"></script>
+    <!-- <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  -->
+    <script type="text/javascript" src="bootstrap-multiselect.js"></script>
+    <style>
+        .specialityContent {
+            position: relative;
+            z-index: 1000;
+        }
+
+        .ui-autocomplete {
+            position: relative !important;
+            height: 200px;
+            width: 200px;
+            font-size: 12px !important;
+            /* overflow: visible; */
+            overflow: auto;
+            z-index: 1000 !important;
+        }
+
+        #docspeciality {
+            z-index: 80;
+        }
+
+        .required label:after {
+            color: #e32;
+            content: '*';
+            display: inline;
+        }
+
+        .btn {
+            white-space: initial !important;
+            background-color: white !important;
+            border-color: #cccccc;
+            color: black;
+            overflow: hidden;
+            height: 35px !important;
+            width: 193px !important;
+        }
+
+        .dropdown-menu {
+            transform: translate3d(0px, 40px, 0px) !important;
+            max-height: 200px;
+            overflow: scroll;
+        }
+        ::-webkit-scrollbar {
+            width: 0.4em !important;
+            height:  0 !important;
+        }
+
+        .multiselect-clear-filter {
+            display: none;
+        }
+        .multiselect-search{
+            margin-right: 8px;
+        }
+
+        body {
+overflow : scroll;
+}
+
+  ::-webkit-scrollbar {
+            width: 0.4em !important;
+            height:  0 !important;
+        }
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: white;
+   color: black;
+   text-align: center;
+}
+.watermark{
+     position:fixed;
+     bottom:5px;
+     right:5px;
+     opacity:0.5;
+     z-index:99;
+
+}
+
+       
+    </style>
+    <script>
+        // $(function () {
+        //     var availableTags = [
+
+        //         "Allergy & Immunology",
+        //         "Anesthesiology",
+        //         "Colon & Rectal Surgery",
+        //         "Dermatology",
+        //         "Emergency Medicine",
+        //         "Family Medicine",
+        //         "Family Practice",
+        //         "Internal Medicine",
+        //         "Internal Medicine-Pediatrics",
+        //         "Medical Genetics",
+        //         "Neurological Surgery",
+        //         "Neurology",
+        //         "Nuclear Medicine",
+        //         "Obstetrics & Gynecology",
+        //         "Ophthalmology",
+        //         "Orthopaedic Surgery",
+        //         "Otolaryngology",
+        //         "Pathology-Anatomic & Clinical",
+        //         "Physical Medicine & Rehabilitation",
+        //         "Plastic Surgery",
+        //         "Preventive Medicine",
+        //         "Psychiatry",
+        //         "Radiology-Diagnostic",
+        //         "Surgery-General",
+        //         "Thoracic Surgery",
+        //         "Urology",
+        //         "Advanced Heart Failure",
+        //         "Heart Transplant Cardiology",
+        //         "Cardiovascular Disease",
+        //         "Clinical Cardiac Electrophysiology",
+        //         "Critical Care Medicine",
+        //         "Endocrinology",
+        //         "Diabetes ",
+        //         "Metabolism",
+        //         "Gastroenterology",
+        //         "Geriatric Medicine",
+        //         "Hematology",
+        //         "Oncology",
+        //         "Infectious Disease",
+        //         "Interventional Cardiology",
+        //         "Nephrology",
+        //         "Oncology",
+        //         "Pulmonary Disease",
+        //         "Critical Care Medicine",
+        //         "Rheumatology",
+        //         "Sports Medicine",
+        //         "Transplant Hepatology",
+        //         "Biochemical Genetics",
+        //         " Molecular Genetic Pathology",
+        //         "Endovascular Surgical Neuroradiology",
+        //         "Child Neurology",
+        //         "Clinical Neurophysiology",
+        //         "Endovascular Surgical Neuroradiology",
+        //         "Neuromuscular Medicine",
+        //         "Pain Medicine",
+        //         "Female Pelvic Medicine & Reconstructive Surgery",
+        //         "Ophthalmic Plastic & Reconstructive Surgery",
+        //         "Adult Reconstructive Orthopaedics",
+        //         "Foot Ankle Orthopaedics",
+        //         "Ankle Orthopaedics",
+        //         "Hand Surgery",
+        //         "Musculoskeletal Oncology",
+        //         "Orthopaedic Sports Medicine",
+        //         "Foot & Ankle Orthopaedics",
+        //         "Orthopaedic Surgery of the Spine",
+        //         "Orthopaedic Trauma",
+        //         " Pediatric Orthopaedics",
+        //         "Otology - Neurotology",
+        //         "Pediatric Otolaryngology",
+        //         "Blood Banking - Transfusion Medicine",
+        //         "Chemical Pathology",
+        //         "Cytopathology",
+        //         "Forensic Pathology",
+        //         "Hematology",
+        //         "Medical Microbiology",
+        //         "Neuropathology",
+        //         "Pediatric Pathology",
+        //         "Adolescent Medicine",
+        //         "Child Abuse Pediatrics",
+        //         "Developmental-Behavioral Pediatrics",
+        //         "Neonatal-Perinatal Medicine",
+        //         "Pediatric Cardiology",
+        //         "Pediatric Critical Care Medicine",
+        //         "Pediatric Emergency Medicine",
+        //         " Pediatric Endocrinology",
+        //         "Pediatric Gastroenterology",
+        //         "Pediatric Hematology-Oncology",
+        //         "Pediatric Infectious Diseases",
+        //         "Pediatric Nephrology",
+        //         "Pediatric Pulmonology",
+        //         "Pediatric Rheumatology",
+        //         "Pediatric Sports Medicine",
+        //         "Pediatric Transplant Hepatology",
+        //         "Neuromuscular Medicine",
+        //         "Pain Medicine",
+        //         "Spinal Cord Injury Medicine",
+        //         "Sports Medicine",
+        //         "Craniofacial Surgery",
+        //         "Hand Surgery",
+        //         "Medical Toxicology",
+        //         "Addiction Psychiatry",
+        //         "Child & Adolescent Psychiatry",
+        //         "Forensic Psychiatry",
+        //         "Geriatric Psychiatry",
+        //         "Radiation Oncology",
+        //         "Abdominal Radiology",
+        //         "Cardiothoracic Radiology",
+        //         "Endovascular Surgical Neuroradiology",
+        //         "Muscoskeletal Radiology",
+        //         "Neuroradiology",
+        //         "Nuclear Radiology",
+        //         "Pediatric Radiology",
+        //         "Vascular & Interventional Radiology",
+        //         "Sleep Medicine",
+        //         "Pediatric Surgery",
+        //         "Surgical Critical Care",
+        //         "Vascular Surgery",
+        //         "Congenital Cardiac Surgery",
+        //         "Thoracic Surgery-Integrated",
+        //         "Pediatric Urology"
+
+        //     ];
+        //     $("#docspeciality").autocomplete({
+        //         source: availableTags,
+        //         messages: {
+        //             noResults: '',
+        //             results: function () { }
+        //         }
+        //     });
+        // });
+
+    </script>
+    <!-- <script>
+        $("#docqualification").val();
+        $("#docqualification").tagsinput('items');
+    </script> -->
+    <!-- <script type="text/javascript">
+        $(document).ready(function() {
+            $('#docqualification').multiSelect();
+        });
+    </script> -->
+    <script>
+        $(function () {
+            $('#docqualification').multiselect({
+
+                includeSelectAllOption: false,
+                enableFiltering: true,
+                numberDisplayed: 2,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for Qualification'
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href=#>HMS LAMJINGBA</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item admin-name" data-toggle="tooltip" data-placement="right">
+
+                    <span class="nav-link-text"><b style="font-size:16px">Admin</b></span>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/admindashboard/'>
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        <span class="nav-link-text">Dashboard</span></a>
+                </li>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" style="background-color:#64c1b1;" href='/physician_list/'>
+                        <i class="fa fa-user-md" aria-hidden="true"></i>
+                        <span class="nav-link-text">Doctor</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/nurses_list/'>
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        <span class="nav-link-text">Nurse</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/pharmacist_list/'>
+                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                        <span class="nav-link-text">Pharmacist</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/laboratorist_list/'>
+                        <i class="fa fa-flask" aria-hidden="true"></i>
+                        <span class="nav-link-text">Lab Technician</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/receptionist_list/'>
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                        <span class="nav-link-text">Receptionist</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/Hms/inventory/dashboard'>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="nav-link-text">Inventory</span></a>
+            </li>
+            </ul>
+
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+                <li><a onclick="window.location.pathname='/logout/' " data-toggle="modal" data-target="#exampleModal"
+                        style="color:white; font-size: 16px;">
+                        Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="content-details">
+                    <h3>Doctor</h3>
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div style="margin-top: 10px;" class="add-btn right">
+                                <i class="fa fa-plus fa-lg adding doctor-adduser" aria-hidden="true"
+                                    title="Create New Doctor"></i>
+                            </div>
+                            <div class="Search">
+                                <input id="myInput" type="search" class="docinput form-control" data-table="order-table"
+                                    placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--create doctor-->
+                    {% csrf_token %}
+                    <div class="manage-table">
+                        <div id="doctor-form" title="Doctor Profile">
+                            <form autocomplete="off">
+                                <fieldset>
+                                    <div class="fields">
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2 required">
+                                                    <label for="fname" class="field">First Name</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text"
+                                                        title="Please enter your first name. Special charecter and numeric values are not allowed "
+                                                        onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="fname"
+                                                        id="docfname" value="" class="form-control" />
+
+
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <label for="mname" style="font-size:13px">Middle Name</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="mname" id="docmname" value=""
+                                                        class="form-control"
+                                                        title="Please enter your middle name. Special charecter and numeric values are not allowed "
+                                                        onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
+                                                </div>
+                                                <div class="col-md-2 required">
+                                                    <label for="lname" class="field"> Last Name</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text"
+                                                        title="Please enter your last name. Special charecter and numeric values are not allowed "
+                                                        onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="lname"
+                                                        id="doclname" value="" class="form-control" minlength="1"
+                                                        maxlength="35" />
+
+                                                </div>
+                                                <div class="col-md-2 required">
+                                                    <label for="contact" class="field">Contact No</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group-prepend ">
+                                                        <select name="countryCode" title="Select country code"
+                                                            style="width:72px !important; height:40px !important; "
+                                                            class="form-control " id="docCountryCode">
+                                                            <option data-countryCode="IN" value="+91" Selected>+91 India
+                                                            </option>
+                                                            <!-- <option data-countryCode="GB" value="+44">+44 UK</option>
+                                                            <option data-countryCode="US" value="+1">+1 &nbsp; USA
+                                                            </option>
+                                                            <option data-countryCode="MY" value="+60">+60 Malaysia
+                                                            </option>
+                                                            <optgroup label="Other countries">
+                                                                <option data-countryCode="DZ" value="+213">+213 Algeria
+                                                                </option>
+                                                                <option data-countryCode="AD" value="+376">+376 Andorra
+                                                                </option>
+                                                                <option data-countryCode="AO" value="+244">+244 Angola
+                                                                </option>
+                                                                <option data-countryCode="AI" value="+1264">+1264
+                                                                    Anguilla</option>
+                                                                <option data-countryCode="AG" value="+1268">+1268
+                                                                    Antigua &amp; Barbuda </option>
+                                                                <option data-countryCode="AR" value="+54">+54 Argentina
+                                                                </option>
+                                                                <option data-countryCode="AM" value="+374"> +374
+                                                                    Armenia </option>
+                                                                <option data-countryCode="AW" value="+297">+297 Aruba
+                                                                </option>
+                                                                <option data-countryCode="AU" value="+61">+61 Australia
+                                                                </option>
+                                                                <option data-countryCode="AT" value="+43">+43 Austria
+                                                                </option>
+                                                                <option data-countryCode="AZ" value="+994">+994
+                                                                    Azerbaijan </option>
+                                                                <option data-countryCode="BS" value="+1242">+1242
+                                                                    Bahamas </option>
+                                                                <option data-countryCode="BH" value="+973">+973 Bahrain
+                                                                </option>
+                                                                <option data-countryCode="BD" value="+880">+880
+                                                                    Bangladesh </option>
+                                                                <option data-countryCode="BB" value="+1246">+1246
+                                                                    Barbados </option>
+                                                                <option data-countryCode="BY" value="+375">+375 Belarus
+                                                                </option>
+                                                                <option data-countryCode="BE" value="+32"> +32 Belgium
+                                                                </option>
+                                                                <option data-countryCode="BZ" value="+501">+501 Belize
+                                                                </option>
+                                                                <option data-countryCode="BJ" value="+229">+229 Benin
+                                                                </option>
+                                                                <option data-countryCode="BM" value="+1441">+1441
+                                                                    Bermuda </option>
+                                                                <option data-countryCode="BT" value="+975">+975 Bhutan
+                                                                </option>
+                                                                <option data-countryCode="BO" value="+591">+591 Bolivia
+                                                                </option>
+                                                                <option data-countryCode="BA" value="+387">+387 Bosnia
+                                                                    Herzegovina </option>
+                                                                <option data-countryCode="BW" value="+267">+267
+                                                                    Botswana </option>
+                                                                <option data-countryCode="BR" value="+55">+55 Brazil
+                                                                </option>
+                                                                <option data-countryCode="BN" value="+673">+673 Brunei
+                                                                </option>
+                                                                <option data-countryCode="BG" value="+359">+359
+                                                                    Bulgaria </option>
+                                                                <option data-countryCode="BF" value="+226">+226 Burkina
+                                                                    Faso </option>
+                                                                <option data-countryCode="BI" value="+257">+257 Burundi
+                                                                </option>
+                                                                <option data-countryCode="KH" value="+855">+855
+                                                                    Cambodia </option>
+                                                                <option data-countryCode="CM" value="+237">+237
+                                                                    Cameroon </option>
+                                                                <option data-countryCode="CA" value="+1">+1 Canada
+                                                                </option>
+                                                                <option data-countryCode="CV" value="+238">+238 Cape
+                                                                    Verde Islands </option>
+                                                                <option data-countryCode="KY" value="+1345">+1345
+                                                                    Cayman Islands </option>
+                                                                <option data-countryCode="CF" value="+236">+236 Central
+                                                                    African Republic </option>
+                                                                <option data-countryCode="CL" value="+56">+56 Chile
+                                                                </option>
+                                                                <option data-countryCode="CN" value="+86">+86 China
+                                                                </option>
+                                                                <option data-countryCode="CO" value="+57">+57 Colombia
+                                                                </option>
+                                                                <option data-countryCode="KM" value="+269">+269 Comoros
+                                                                </option>
+                                                                <option data-countryCode="CG" value="+242">+242 Congo
+                                                                </option>
+                                                                <option data-countryCode="CK" value="+682">+682 Cook
+                                                                    Islands </option>
+                                                                <option data-countryCode="CR" value="+506">+506 Costa
+                                                                    Rica </option>
+                                                                <option data-countryCode="HR" value="+385">+385 Croatia
+                                                                </option>
+                                                                <option data-countryCode="CU" value="+53">+53 Cuba
+                                                                </option>
+                                                                <option data-countryCode="CY" value="+90392">+90392
+                                                                    Cyprus North </option>
+                                                                <option data-countryCode="CY" value="+357">+357 Cyprus
+                                                                    South </option>
+                                                                <option data-countryCode="CZ" value="+42">+42 Czech
+                                                                    Republic </option>
+                                                                <option data-countryCode="DK" value="+45">+45 Denmark
+                                                                </option>
+                                                                <option data-countryCode="DJ" value="+253">+253
+                                                                    Djibouti </option>
+                                                                <option data-countryCode="DM" value="+1809">+1809
+                                                                    Dominica </option>
+                                                                <option data-countryCode="DO" value="+1809">+1809
+                                                                    Dominican Republic </option>
+                                                                <option data-countryCode="EC" value="+593">+593 Ecuador
+                                                                </option>
+                                                                <option data-countryCode="EG" value="+20">+20 Egypt
+                                                                </option>
+                                                                <option data-countryCode="SV" value="+503">+503 El
+                                                                    Salvador </option>
+                                                                <option data-countryCode="GQ" value="+240">+240
+                                                                    Equatorial Guinea </option>
+                                                                <option data-countryCode="ER" value="+291">+291 Eritrea
+                                                                </option>
+                                                                <option data-countryCode="EE" value="+372">+372 Estonia
+                                                                </option>
+                                                                <option data-countryCode="ET" value="+251">+251
+                                                                    Ethiopia </option>
+                                                                <option data-countryCode="FK" value="+500">+500
+                                                                    Falkland Islands </option>
+                                                                <option data-countryCode="FO" value="+298">+298 Faroe
+                                                                    Islands </option>
+                                                                <option data-countryCode="FJ" value="+679">+679 Fiji
+                                                                </option>
+                                                                <option data-countryCode="FI" value="+358">+358 Finland
+                                                                </option>
+                                                                <option data-countryCode="FR" value="+33">+33 France
+                                                                </option>
+                                                                <option data-countryCode="GF" value="+594">+594 French
+                                                                    Guiana </option>
+                                                                <option data-countryCode="PF" value="+689">+689 French
+                                                                    Polynesia </option>
+                                                                <option data-countryCode="GA" value="+241">+241 Gabon
+                                                                </option>
+                                                                <option data-countryCode="GM" value="+220">+220 Gambia
+                                                                </option>
+                                                                <option data-countryCode="GE" value="+7880">+7880
+                                                                    Georgia </option>
+                                                                <option data-countryCode="DE" value="+49">+49 Germany
+                                                                </option>
+                                                                <option data-countryCode="GH" value="+233">+233 Ghana
+                                                                </option>
+                                                                <option data-countryCode="GI" value="+350">+350
+                                                                    Gibraltar </option>
+                                                                <option data-countryCode="GR" value="+30">+30 Greece
+                                                                </option>
+                                                                <option data-countryCode="GL" value="+299">+299
+                                                                    Greenland </option>
+                                                                <option data-countryCode="GD" value="+1473">+1473
+                                                                    Grenada </option>
+                                                                <option data-countryCode="GP" value="+590">+590
+                                                                    Guadeloupe</option>
+                                                                <option data-countryCode="GU" value="+671">+671 Guam
+                                                                </option>
+                                                                <option data-countryCode="GT" value="+502">+502
+                                                                    Guatemala </option>
+                                                                <option data-countryCode="GN" value="+224">+224 Guinea
+                                                                </option>
+                                                                <option data-countryCode="GW" value="+245">+245 Guinea
+                                                                    - Bissau </option>
+                                                                <option data-countryCode="GY" value="+592">+592 Guyana
+                                                                </option>
+                                                                <option data-countryCode="HT" value="+509">+509 Haiti
+                                                                </option>
+                                                                <option data-countryCode="HN" value="+504">+504
+                                                                    Honduras </option>
+                                                                <option data-countryCode="HK" value="+852">+852 Hong
+                                                                    Kong </option>
+                                                                <option data-countryCode="HU" value="+36">+36 Hungary
+                                                                </option>
+                                                                <option data-countryCode="IS" value="+354">+354 Iceland
+                                                                </option>
+                                                                <option data-countryCode="ID" value="+62">+62 Indonesia
+                                                                </option>
+                                                                <option data-countryCode="IR" value="+98">+98 Iran
+                                                                </option>
+                                                                <option data-countryCode="IQ" value="+964">+964 Iraq
+                                                                </option>
+                                                                <option data-countryCode="IE" value="+353">+353 Ireland
+                                                                </option>
+                                                                <option data-countryCode="IL" value="+972">+972 Israel
+                                                                </option>
+                                                                <option data-countryCode="IT" value="+39">+39 Italy
+                                                                </option>
+                                                                <option data-countryCode="JM" value="+1876">+1876
+                                                                    Jamaica </option>
+                                                                <option data-countryCode="JP" value="+81">+81 Japan
+                                                                </option>
+                                                                <option data-countryCode="JO" value="+962">+962 Jordan
+                                                                </option>
+                                                                <option data-countryCode="KZ" value="+7">+7 Kazakhstan
+                                                                </option>
+                                                                <option data-countryCode="KE" value="+254">(+254) Kenya
+                                                                </option>
+                                                                <option data-countryCode="KI" value="+686">+686
+                                                                    Kiribati </option>
+                                                                <option data-countryCode="KP" value="+850">+850 Korea
+                                                                    North </option>
+                                                                <option data-countryCode="KR" value="+82">+82 Korea
+                                                                    South </option>
+                                                                <option data-countryCode="KW" value="+965">+965 Kuwait
+                                                                </option>
+                                                                <option data-countryCode="KG" value="+996">+996
+                                                                    Kyrgyzstan </option>
+                                                                <option data-countryCode="LA" value="+856">+856 Laos
+                                                                </option>
+                                                                <option data-countryCode="LV" value="+371">+371 Latvia
+                                                                </option>
+                                                                <option data-countryCode="LB" value="+961">+961 Lebanon
+                                                                </option>
+                                                                <option data-countryCode="LS" value="+266">+266 Lesotho
+                                                                </option>
+                                                                <option data-countryCode="LR" value="+231">+231 Liberia
+                                                                </option>
+                                                                <option data-countryCode="LY" value="+218">+218 Libya
+                                                                </option>
+                                                                <option data-countryCode="LI" value="+417">+417
+                                                                    Liechtenstein </option>
+                                                                <option data-countryCode="LT" value="+370">+370
+                                                                    Lithuania </option>
+                                                                <option data-countryCode="LU" value="+352">+352
+                                                                    Luxembourg </option>
+                                                                <option data-countryCode="MO" value="+853">+853 Macao
+                                                                </option>
+                                                                <option data-countryCode="MK" value="+389">+389
+                                                                    Macedonia </option>
+                                                                <option data-countryCode="MG" value="+261">+261
+                                                                    Madagascar </option>
+                                                                <option data-countryCode="MW" value="+265">+265 Malawi
+                                                                </option> 
+                                                                <option data-countryCode="MV" value="+960">+960
+                                                                    Maldives </option>
+                                                                <option data-countryCode="ML" value="+223">+223 Mali
+                                                                </option>
+                                                                <option data-countryCode="MT" value="+356">+356 Malta
+                                                                </option>
+                                                                <option data-countryCode="MH" value="+692">+692
+                                                                    Marshall Islands </option>
+                                                                <option data-countryCode="MQ" value="+596">+596
+                                                                    Martinique </option>
+                                                                <option data-countryCode="MR" value="+222">+222
+                                                                    Mauritania </option>
+                                                                <option data-countryCode="YT" value="+269">+269 Mayotte
+                                                                </option>
+                                                                <option data-countryCode="MX" value="+52">+52 Mexico
+                                                                </option>
+                                                                <option data-countryCode="FM" value="+691">+691
+                                                                    Micronesia </option>
+                                                                <option data-countryCode="MD" value="+373">+373 Moldova
+                                                                </option>
+                                                                <option data-countryCode="MC" value="+377">+377 Monaco
+                                                                </option>
+                                                                <option data-countryCode="MN" value="+976">+976
+                                                                    Mongolia </option>
+                                                                <option data-countryCode="MS" value="+1664">+1664
+                                                                    Montserrat </option>
+                                                                <option data-countryCode="MA" value="+212">+212 Morocco
+                                                                </option>
+                                                                <option data-countryCode="MZ" value="+258">+258
+                                                                    Mozambique</option>
+                                                                <option data-countryCode="MN" value="+95">+95 Myanmar
+                                                                </option>
+                                                                <option data-countryCode="NA" value="+264">+264 Namibia
+                                                                </option>
+                                                                <option data-countryCode="NR" value="+674">+674 Nauru
+                                                                </option>
+                                                                <option data-countryCode="NP" value="+977">+977 Nepal
+                                                                </option>
+                                                                <option data-countryCode="NL" value="+31">+31
+                                                                    Netherlands </option>
+                                                                <option data-countryCode="NC" value="+687">+687 New
+                                                                    Caledonia </option>
+                                                                <option data-countryCode="NZ" value="+64">+64 New
+                                                                    Zealand </option>
+                                                                <option data-countryCode="NI" value="+505">+505
+                                                                    Nicaragua </option>
+                                                                <option data-countryCode="NE" value="+227">+227 Niger
+                                                                </option>
+                                                                <option data-countryCode="NG" value="+234">+234 Nigeria
+                                                                </option>
+                                                                <option data-countryCode="NU" value="+683">+683 Niue
+                                                                </option>
+                                                                <option data-countryCode="NF" value="+672">+672 Norfolk
+                                                                    Islands </option>
+                                                                <option data-countryCode="NP" value="+670">+670
+                                                                    Northern Marianas </option>
+                                                                <option data-countryCode="NO" value="+47">+47 Norway
+                                                                </option>
+                                                                <option data-countryCode="OM" value="+968">+968 Oman
+                                                                </option>
+                                                                <option data-countryCode="PW" value="+680">+680 Palau
+                                                                </option>
+                                                                <option data-countryCode="PA" value="+507">+507 Panama
+                                                                </option>
+                                                                <option data-countryCode="PG" value="+675">+675 Papua
+                                                                    New Guinea </option>
+                                                                <option data-countryCode="PY" value="+595">+595
+                                                                    Paraguay </option>
+                                                                <option data-countryCode="PE" value="+51">+51 Peru
+                                                                </option>
+                                                                <option data-countryCode="PH" value="+63">+63
+                                                                    Philippines </option>
+                                                                <option data-countryCode="PL" value="+48">+48 Poland
+                                                                </option>
+                                                                <option data-countryCode="PT" value="+351">+351
+                                                                    Portugal </option>
+                                                                <option data-countryCode="PR" value="+1787">+1787
+                                                                    Puerto Rico </option>
+                                                                <option data-countryCode="QA" value="+974">+974 Qatar
+                                                                </option>
+                                                                <option data-countryCode="RE" value="+262">+262 Reunion
+                                                                </option>
+                                                                <option data-countryCode="RO" value="+40">+40 Romania
+                                                                </option>
+                                                                <option data-countryCode="RU" value="+7">+7 Russia
+                                                                </option>
+                                                                <option data-countryCode="RW" value="+250">+250 Rwanda
+                                                                </option>
+                                                                <option data-countryCode="SM" value="+378">+378 San
+                                                                    Marino </option>
+                                                                <option data-countryCode="ST" value="+239">+239 Sao
+                                                                    Tome &amp; Principe </option>
+                                                                <option data-countryCode="SA" value="+966">+966 Saudi
+                                                                    Arabia </option>
+                                                                <option data-countryCode="SN" value="+221">+221 Senegal
+                                                                </option>
+                                                                <option data-countryCode="CS" value="+381">+381 Serbia
+                                                                </option>
+                                                                <option data-countryCode="SC" value="+248">+248
+                                                                    Seychelles </option>
+                                                                <option data-countryCode="SL" value="+232">+232 Sierra
+                                                                    Leone </option>
+                                                                <option data-countryCode="SG" value="+65">+65 Singapore
+                                                                </option>
+                                                                <option data-countryCode="SK" value="+421">+421 Slovak
+                                                                    Republic </option>
+                                                                <option data-countryCode="SI" value="+386">+386
+                                                                    Slovenia </option>
+                                                                <option data-countryCode="SB" value="+677">+677 Solomon
+                                                                    Islands </option>
+                                                                <option data-countryCode="SO" value="+252">+252 Somalia
+                                                                </option>
+                                                                <option data-countryCode="ZA" value="+27">+27 South
+                                                                    Africa </option>
+                                                                <option data-countryCode="ES" value="+34">+34 Spain
+                                                                </option>
+                                                                <option data-countryCode="LK" value="+94">+94 Sri Lanka
+                                                                </option>
+                                                                <option data-countryCode="SH" value="+290">+290 St.
+                                                                    Helena </option>
+                                                                <option data-countryCode="KN" value="+1869">+1869 St.
+                                                                    Kitts </option>
+                                                                <option data-countryCode="SC" value="+1758">+1758 St.
+                                                                    Lucia </option>
+                                                                <option data-countryCode="SD" value="+249">+249 Sudan
+                                                                </option>
+                                                                <option data-countryCode="SR" value="+597">+597
+                                                                    Suriname </option>
+                                                                <option data-countryCode="SZ" value="+268">+268
+                                                                    Swaziland </option>
+                                                                <option data-countryCode="SE" value="+46">+46 Sweden
+                                                                </option>
+                                                                <option data-countryCode="CH" value="+41">+41
+                                                                    Switzerland </option>
+                                                                <option data-countryCode="SI" value="+963">+963 Syria
+                                                                </option>
+                                                                <option data-countryCode="TW" value="+886">+886 Taiwan
+                                                                </option>
+                                                                <option data-countryCode="TJ" value="+992">+992
+                                                                    Tajikstan
+                                                                </option>
+                                                                <option data-countryCode="TH" value="+66">+66 Thailand
+                                                                </option>
+                                                                <option data-countryCode="TG" value="+228">+228 Togo
+                                                                </option>
+                                                                <option data-countryCode="TO" value="+676">+676 Tonga
+                                                                </option>
+                                                                <option data-countryCode="TT" value="+1868">+1868
+                                                                    Trinidad &amp; Tobago </option>
+                                                                <option data-countryCode="TN" value="+216">+216 Tunisia
+                                                                </option>
+                                                                <option data-countryCode="TR" value="+90">+90 Turkey
+                                                                </option>
+                                                                <option data-countryCode="TM" value="+993">+993
+                                                                    Turkmenistan </option>
+                                                                <option data-countryCode="TC" value="+1649">+1649 Turks
+                                                                    &amp; Caicos Islands </option>
+                                                                <option data-countryCode="TV" value="+688">+688 Tuvalu
+                                                                </option>
+                                                                <option data-countryCode="UG" value="+256">+256 Uganda
+                                                                </option>
+                                                                <option data-countryCode="UA" value="+380">+380 Ukraine
+                                                                </option>
+                                                                <option data-countryCode="AE" value="+971">+971 United
+                                                                    Arab Emirates </option>
+                                                                <option data-countryCode="UY" value="+598">+598 Uruguay
+                                                                </option>
+                                                                <option data-countryCode="UZ" value="+998">+998
+                                                                    Uzbekistan
+                                                                </option>
+                                                                <option data-countryCode="VU" value="+678">+678 Vanuatu
+                                                                </option>
+                                                                <option data-countryCode="VA" value="+379">+379 Vatican
+                                                                    City </option>
+                                                                <option data-countryCode="VE" value="+58">+58 Venezuela
+                                                                </option>
+                                                                <option data-countryCode="VN" value="+84">+84 Vietnam
+                                                                </option>
+                                                                <option data-countryCode="VG" value="+84">+1284 Virgin
+                                                                    Islands - British </option>
+                                                                <option data-countryCode="VI" value="+84">+1340 Virgin
+                                                                    Islands - US </option>
+                                                                <option data-countryCode="WF" value="+681">+681 Wallis
+                                                                    &amp; Futuna </option>
+                                                                <option data-countryCode="YE" value="+969">+969 Yemen
+                                                                    (North)</option>
+                                                                <option data-countryCode="YE" value="+967">+967Yemen
+                                                                    (South)</option>
+                                                                <option data-countryCode="ZM" value="+260">+260 Zambia
+                                                                </option>
+                                                                <option data-countryCode="ZW" value="+263">+263
+                                                                    Zimbabwe </option> 
+                                                            </optgroup>-->
+                                                        </select>
+
+                                                        <input style=" height:40px !important;" name="contact"
+                                                            id="doccontact" class="form-control "
+                                                            title="Contact number must be 10 digits"
+                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.key === "Backspace"'
+                                                            type="number" maxlength="10" />
+
+
+                                                    </div>
+
+                                                    <!-- <div class="col-md-2">
+
+                                                </div> -->
+                                                </div>
+                                                <div class="col-md-2" id="docgendername">
+                                                    <label for="Gender" class="field">Gender</label></div>
+                                                <div class="col-md-4" id="docgendername">
+                                                    <select style=" height:40px !important;" id="docgender"
+                                                        title="Select gender" class="form-control">
+                                                        <option value="" disabled selected>Select
+                                                        </option>
+                                                        <option value="Male">Male
+                                                        </option>
+                                                        <option value="Female">Female
+                                                        </option>
+                                                        <option value="Other">Other
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-2 required">
+                                                    <label for="email" class="field"> Email</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" autocomplete="off"
+                                                        title="Enter a valid email address" name="email" id="docemail"
+                                                        value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                        class="form-control" />
+
+                                                </div>
+                                                <div class="col-md-2 required" id="docusernamename">
+                                                    <label for="email" class="field" title="Enter user name ">
+                                                        Username</label></div>
+                                                <div class="col-md-4" id="docusernamename">
+                                                    <input type="text" name="docusername" id="docusername" value=""
+                                                        class="form-control" autocomplete="off" />
+
+                                                </div>
+                                                <!--                                            <div class="col-md-2" id="docpasswordname">-->
+                                                <!--                                                <label for="Password" class="field">Password</label></div>-->
+                                                <!--                                            <div class="col-md-4">-->
+                                                <!--                                                <input type="text" name="Password" id="docPassword" value=""-->
+
+                                                <!--                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"-->
+                                                <!--                                                       class="form-control" required/>-->
+                                                <!--                                            </div>-->
+                                                <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                                <div class="col-md-2 required" id="docspecialityname">
+                                                    <label for="Speciality" class="field"> Speciality</label></div>
+                                                <div class="col-md-4">
+                                                    <!-- <input type="text" name="Speciality" id="docspeciality" value=""
+                                                       class="form-control" required/> -->
+                                                    <!-- <select onfocus='this.size=10;' onblur='this.size=1;'
+                                                    onchange='this.size=1; this.blur();' name="Speciality" id="docspeciality" value=""
+                                                        class="form-control" required>
+                                                        <option value="" disabled selected>Select Specialty</option>
+                                                        <option value="Abdominal Radiology">Abdominal
+                                                            Radiology
+                                                        </option>
+                                                        <option value="Abdominal Surgery">Abdominal Surgery
+                                                        </option>
+                                                        <option value="Addiction medicine">Addiction medicine
+                                                        </option>
+                                                        <option value="Addiction Psychiatr">Addiction
+                                                            Psychiatry
+                                                        </option>
+                                                        <option value="Adolescent Medicine (Internal Medicine)">
+                                                            Adolescent Medicine (Internal Medicine)
+                                                        </option>
+                                                        <option value="Adolescent Medicine (Pediatrics)">
+                                                            Adolescent Medicine (Pediatrics)
+                                                        </option>
+                                                        <option value="Adult Reconstructive Orthopedics">Adult
+                                                            Reconstructive Orthopedics
+                                                        </option>
+                                                        <option value="Aerospace Medicine">Aerospace Medicine
+                                                        </option>
+                                                        <option value="Allergy">Allergy</option>
+                                                        <option value="Allergy & Immunology">Allergy &
+                                                            Immunology
+                                                        </option>
+                                                        <option value="Anatomic Pathology">Anatomic Pathology
+                                                        </option>
+                                                        <option value="Anatomic/Clinical Pathology">
+                                                            Anatomic/Clinical Pathology
+                                                        </option>
+                                                        <option value="Anesthesiology">Anesthesiology</option>
+                                                        <option value="Blood Banking/Transfusion Medicine">Blood
+                                                            Banking/Transfusion Medicine
+                                                        </option>
+                                                        <option value="Cardiothoracic Surgery">Cardiothoracic
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Cardiovascular Disease">Cardiovascular
+                                                            Disease
+                                                        </option>
+                                                        <option value="Chemical Pathology">Chemical Pathology
+                                                        </option>
+                                                        <option value="Child and Adolescent Psychiatry">Child
+                                                            and Adolescent Psychiatry
+                                                        </option>
+                                                        <option value="Child Neurology">Child Neurology</option>
+                                                        <option
+                                                            value="Clinical and Laboratory Dermatological Immunology">
+                                                            Clinical and Laboratory Dermatological Immunology
+                                                        </option>
+                                                        <option
+                                                            value="Clinical and Laboratory Immunology (Internal Medicine)">
+                                                            Clinical and Laboratory Immunology (Internal
+                                                            Medicine)
+                                                        </option>
+                                                        <option value="Clinical and Laboratory Immunology (Pediatrics)">
+                                                            Clinical and Laboratory Immunology (Pediatrics)
+                                                        </option>
+                                                        <option value="Clinical Biochemical Genetics">Clinical
+                                                            Biochemical Genetics
+                                                        </option>
+                                                        <option value="Clinical Cardiac Electrophysiology">
+                                                            Clinical Cardiac Electrophysiology
+                                                        </option>
+                                                        <option value="Clinical Cytogenetics">Clinical
+                                                            Cytogenetics
+                                                        </option>
+                                                        <option value="Clinical Genetics">Clinical Genetics
+                                                        </option>
+                                                        <option
+                                                            value="Clinical Laboratory Immunology(Allergy & Immunology)">
+                                                            Clinical Laboratory Immunology(Allergy & Immunology)
+                                                        </option>
+                                                        <option value="Clinical Molecular Genetics">Clinical
+                                                            Molecular Genetics
+                                                        </option>
+                                                        <option value="Clinical Neurophysiology">Clinical
+                                                            Neurophysiology
+                                                        </option>
+                                                        <option value="Clinical Pathology">Clinical Pathology
+                                                        </option>
+                                                        <option value="Clinical Pharmacology">Clinical
+                                                            Pharmacology
+                                                        </option>
+                                                        <option value="Colon & Rectal Surgery">Colon & Rectal
+                                                            Surgery
+                                                        </option>
+                                                        <option value=">Craniofacial Surgery">Craniofacial
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Critical Care Medicine (Anesthesiology)">
+                                                            Critical Care Medicine (Anesthesiology)
+                                                        </option>
+                                                        <option value="Critical Care Medicine (Internal Medicine)">
+                                                            Critical Care Medicine (Internal Medicine)
+                                                        </option>
+                                                        <option
+                                                            value="Critical Care Medicine(Obstetrics and Gynecology)">
+                                                            Critical Care Medicine(Obstetrics and Gynecology)
+                                                        </option>
+                                                        <option value="Cytopathology">Cytopathology</option>
+                                                        <option value="Dermatologic Surgery">Dermatologic
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Dermatology">Dermatology</option>
+                                                        <option value="Dermatopathology">Dermatopathology
+                                                        </option>
+                                                        <option value="Developmental-Behavioral Pediatrics">
+                                                            Developmental-Behavioral Pediatrics
+                                                        </option>
+                                                        <option value="Diabetes">Diabetes</option>
+                                                        <option value="Diagnostic Radiology">Diagnostic
+                                                            Radiology
+                                                        </option>
+                                                        <option value="Emergency Medicine">Emergency Medicine
+                                                        </option>
+                                                        <option value="Endocrinology, Diabetes and Metabolism">
+                                                            Endocrinology, Diabetes and Metabolism
+                                                        </option>
+                                                        <option value="Epidemiology">Epidemiology</option>
+                                                        <option value="Facial Plastic Surgery">Facial Plastic
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Family Physician">Family Physician
+                                                        </option>
+                                                        <option value="Family Practice">Family Practice</option>
+                                                        <option value="Forensic Pathology">Forensic Pathology
+                                                        </option>
+                                                        <option value="Forensic Psychiatry">Forensic
+                                                            Psychiatry
+                                                        </option>
+                                                        <option value="Gastroenterology">Gastroenterology
+                                                        </option>
+                                                        <option value="General Practice">General Practice
+                                                        </option>
+                                                        <option value="General Preventive Medicine">General
+                                                            Preventive Medicine
+                                                        </option>
+                                                        <option value="General Surgery">General Surgery</option>
+                                                        <option value="Geriatric Medicine (Family Practice)">
+                                                            Geriatric Medicine (Family Practice)
+                                                        </option>
+                                                        <option value="Geriatric Medicine (Internal Medicine)">
+                                                            Geriatric Medicine (Internal Medicine)
+                                                        </option>
+                                                        <option value="Geriatric Psychiatry">Geriatric
+                                                            Psychiatry
+                                                        </option>
+                                                        <option value="Gynecological Oncology">Gynecological
+                                                            Oncology
+                                                        </option>
+                                                        <option value="Gynecology">Gynecology</option>
+                                                        <option value="Hand Surgery">Hand Surgery</option>
+                                                        <option value="Head & Neck Surgery">Head & Neck
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Hematology (Internal Medicine)">
+                                                            Hematology (Internal Medicine)
+                                                        </option>
+                                                        <option value="Hematology (Pathology)">Hematology
+                                                            (Pathology)
+                                                        </option>
+                                                        <option value="Hematology/Oncology">
+                                                            Hematology/Oncology
+                                                        </option>
+                                                        <option value="Hepatology">Hepatology</option>
+                                                        <option value="Hospitalist">Hospitalist</option>
+                                                        <option value="Immunology">Immunology</option>
+                                                        <option value="Infectious Disease">Infectious Disease
+                                                        </option>
+                                                        <option value="Internal Medicine">Internal Medicine
+                                                        </option>
+                                                        <option value="Internal Medicine/Pediatrics">Internal
+                                                            Medicine/Pediatrics
+                                                        </option>
+                                                        <option value="Interventional Cardiology">Interventional
+                                                            Cardiology
+                                                        </option>
+                                                        <option value="Legal Medicine">Legal Medicine</option>
+                                                        <option value="Maternal & Fetal Medicine">Maternal &
+                                                            Fetal Medicine
+                                                        </option>
+                                                        <option value="Medical Genetics">Medical Genetics
+                                                        </option>
+                                                        <option value="Medical Management">Medical Management
+                                                        </option>
+                                                        <option value="Medical Microbiology">Medical
+                                                            Microbiology
+                                                        </option>
+                                                        <option value="Medical Oncology">Medical Oncology
+                                                        </option>
+                                                        <option value="Medical Toxicology (Emergency Medicine)">
+                                                            Medical Toxicology (Emergency Medicine)
+                                                        </option>
+                                                        <option value="Medical Toxicology (Pediatrics)">Medical
+                                                            Toxicology (Pediatrics)
+                                                        </option>
+                                                        <option value="Medical Toxicology (Preventive Medicine)">
+                                                            Medical Toxicology (Preventive Medicine)
+                                                        </option>
+                                                        <option value="Molecular Genetic Pathology (Medical Genetics)">
+                                                            Molecular Genetic Pathology (Medical Genetics)
+                                                        </option>
+                                                        <option value="Molecular Genetic Pathology">Molecular
+                                                            Genetic Pathology (Pathology)
+                                                        </option>
+                                                        <option value="Musculoskeletal Oncology">Musculoskeletal
+                                                            Oncology
+                                                        </option>
+                                                        <option value="Musculoskeletal Radiology">
+                                                            Musculoskeletal Radiology
+                                                        </option>
+                                                        <option value="Neonatal-Perinatal Medicine">
+                                                            Neonatal-Perinatal Medicine
+                                                        </option>
+                                                        <option value="Nephrology">Nephrology</option>
+                                                        <option value="Neurodevelopmental Disabilities (Psychiatry
+                                                                    & Neurology)">Neurodevelopmental Disabilities
+                                                            (Psychiatry
+                                                            &amp; Neurology)
+                                                        </option>
+                                                        <option value="Neurological Surgery">Neurological
+                                                            Surgery
+                                                        </option>
+                                                        <option value="Neurology">Neurology</option>
+                                                        <option value="Neurology/Diagnostic Radiology/Neuroradiology">
+                                                            Neurology/Diagnostic Radiology/Neuroradiology
+                                                        </option>
+                                                        <option value="Neuropathology">Neuropathology</option>
+                                                        <option value="Neuroradiology">Neuroradiology</option>
+                                                        <option value="Nuclear Medicine">Nuclear Medicine
+                                                        </option>
+                                                        <option value="Nuclear Radiology">Nuclear Radiology
+                                                        </option>
+                                                        <option value="Nutrition">Nutrition</option>
+                                                        <option value="Obstetrics">Obstetrics</option>
+                                                        <option value="Obstetrics &amp; Gynecology">Obstetrics
+                                                            &amp; Gynecology
+                                                        </option>
+                                                        <option value="Occupational Medicine">Occupational
+                                                            Medicine
+                                                        </option>
+                                                        <option value="Ophthalmology">Ophthalmology</option>
+                                                        <option value="Oral &amp; Maxillofacial Surgery">Oral
+                                                            &amp; Maxillofacial Surgery
+                                                        </option>
+                                                        <option value="Orthopedic Surgery">Orthopedic Surgery
+                                                        </option>
+                                                        <option value="Orthopedic Surgery of the Spine">
+                                                            Orthopedic Surgery of the Spine
+                                                        </option>
+                                                        <option value="Orthopedic Trauma">Orthopedic Trauma
+                                                        </option>
+                                                        <option value="Orthopedics, Foot and Ankle">Orthopedics,
+                                                            Foot and Ankle
+                                                        </option>
+                                                        <option value="Osteopathic Manipulative Medicine">
+                                                            Osteopathic Manipulative Medicine
+                                                        </option>
+
+                                                        <option value="Otolaryngology">Otolaryngology</option>
+                                                        <option value="Otology/Neurotology">
+                                                            Otology/Neurotology
+                                                        </option>
+                                                        <option value="Other">Other</option>
+                                                    </select> -->
+                                                    <div class="specialityContent">
+                                                        <!-- <input id="docspeciality" class="form-control"> -->
+                                                        <select style=" height:40px !important;" id="docspeciality"
+                                                            class="form-control">
+                                                            <option value="" disabled selected>Select speciality
+                                                            </option>
+                                                            <option value="Allergy & Immunology">Allergy & Immunology
+                                                            </option>
+                                                            <option value="Anesthesiology">Anesthesiology</option>
+                                                            <option value="Colon & Rectal Surgery">Colon & Rectal
+                                                                Surgery</option>
+                                                            <option value="Dermatology">Dermatology</option>
+                                                            <option value="Emergency Medicine">Emergency Medicine
+                                                            </option>
+                                                            <option value="Family Medicine">Family Medicine</option>
+                                                            <option value="Family Practice">Family Practice</option>
+                                                            <option value="Internal Medicine">Internal Medicine</option>
+                                                            <option value="Internal Medicine-Pediatrics">Internal
+                                                                Medicine-Pediatrics</option>
+                                                            <option value="Medical Genetics">Medical Genetics</option>
+                                                            <option value="Neurological Surgery">Neurological Surgery
+                                                            </option>
+                                                            <option value="Neurology">Neurology</option>
+                                                            <option value="Nuclear Medicine">Nuclear Medicine</option>
+                                                            <option value="Obstetrics & Gynecology">Obstetrics &
+                                                                Gynecology</option>
+                                                            <option value="Ophthalmology">Ophthalmology</option>
+                                                            <option value="Orthopaedic Surgery">Orthopaedic Surgery
+                                                            </option>
+                                                            <option value="Otolaryngology">Otolaryngology</option>
+                                                            <option value="Pathology-Anatomic & Clinical">
+                                                                Pathology-Anatomic & Clinical</option>
+                                                            <option value="Physical Medicine & Rehabilitation">Physical
+                                                                Medicine & Rehabilitation</option>
+                                                            <option value="Plastic Surgery">Plastic Surgery</option>
+                                                            <option value="Preventive Medicine">Preventive Medicine
+                                                            </option>
+                                                            <option value="Psychiatry">Psychiatry</option>
+                                                            <option value="Radiology-Diagnostic">Radiology-Diagnostic
+                                                            </option>
+                                                            <option value="Surgery-General">Surgery-General</option>
+                                                            <option value="Thoracic Surgery">Thoracic Surgery</option>
+                                                            <option value="Urology">Urology</option>
+                                                            <option value="Advanced Heart Failure">Advanced Heart
+                                                                Failure</option>
+                                                            <option value="Heart Transplant Cardiology">Heart Transplant
+                                                                Cardiology</option>
+                                                            <option value="Cardiovascular Disease">Cardiovascular
+                                                                Disease</option>
+                                                            <option value="Clinical Cardiac Electrophysiology">Clinical
+                                                                Cardiac Electrophysiology</option>
+                                                            <option value="Critical Care Medicine">Critical Care
+                                                                Medicine</option>
+                                                            <option value="Endocrinology">Endocrinology</option>
+                                                            <option value="Diabetes ">Diabetes </option>
+                                                            <option value="Metabolism">Metabolism</option>
+                                                            <option value="Gastroenterology">Gastroenterology</option>
+                                                            <option value="Geriatric Medicine">Geriatric Medicine
+                                                            </option>
+                                                            <option value="Hematology">Hematology</option>
+                                                            <option value="Oncology">Oncology</option>
+                                                            <option value="Infectious Disease">Infectious Disease
+                                                            </option>
+                                                            <option value="Interventional Cardiology">Interventional
+                                                                Cardiology</option>
+                                                            <option value="Nephrology">Nephrology</option>
+                                                            <option value="Oncology">Oncology</option>
+                                                            <option value="Pulmonary Disease">Pulmonary Disease</option>
+                                                            <option value="Critical Care Medicine">Critical Care
+                                                                Medicine</option>
+                                                            <option value="Rheumatology">Rheumatology</option>
+                                                            <option value="Sports Medicine">Sports Medicine</option>
+                                                            <option value="Transplant Hepatology">Transplant Hepatology
+                                                            </option>
+                                                            <option value="Biochemical Genetics">Biochemical Genetics
+                                                            </option>
+                                                            <option value=" Molecular Genetic Pathology">Molecular
+                                                                Genetic Pathology</option>
+                                                            <option value="Endovascular Surgical Neuroradiology">
+                                                                Endovascular Surgical Neuroradiology</option>
+                                                            <option value="Child Neurology">Child Neurology</option>
+                                                            <option value="Clinical Neurophysiology">Clinical
+                                                                Neurophysiology</option>
+                                                            <option value="Endovascular Surgical Neuroradiology">
+                                                                Endovascular Surgical Neuroradiology</option>
+                                                            <option value="Neuromuscular Medicine">Neuromuscular
+                                                                Medicine</option>
+                                                            <option value="Pain Medicine">Pain Medicine</option>
+                                                            <option
+                                                                value="Female Pelvic Medicine & Reconstructive Surgery">
+                                                                Female Pelvic Medicine & Reconstructive Surgery</option>
+                                                            <option value="Ophthalmic Plastic & Reconstructive Surgery">
+                                                                Ophthalmic Plastic & Reconstructive Surgery</option>
+                                                            <option value="Adult Reconstructive Orthopaedics">Adult
+                                                                Reconstructive Orthopaedics</option>
+                                                            <option value="Foot Ankle Orthopaedics">Foot Ankle
+                                                                Orthopaedics</option>
+                                                            <option value="Ankle Orthopaedics">Ankle Orthopaedics
+                                                            </option>
+                                                            <option value="Hand Surgery">Hand Surgery</option>
+                                                            <option value="Musculoskeletal Oncology">Musculoskeletal
+                                                                Oncology</option>
+                                                            <option value="Orthopaedic Sports Medicine">Orthopaedic
+                                                                Sports Medicine</option>
+                                                            <option value="Foot & Ankle Orthopaedics">Foot & Ankle
+                                                                Orthopaedics</option>
+                                                            <option value="Orthopaedic Surgery of the Spine">Orthopaedic
+                                                                Surgery of the Spine</option>
+                                                            <option value="Orthopaedic Trauma">Orthopaedic Trauma
+                                                            </option>
+                                                            <option value=" Pediatric Orthopaedics">Pediatric
+                                                                Orthopaedics</option>
+                                                            <option value="Otology - Neurotology">Otology - Neurotology
+                                                            </option>
+                                                            <option value="Pediatric Otolaryngology">Pediatric
+                                                                Otolaryngology</option>
+                                                            <option value="Blood Banking - Transfusion Medicine">Blood
+                                                                Banking - Transfusion Medicine</option>
+                                                            <option value="Chemical Pathology">Chemical Pathology
+                                                            </option>
+                                                            <option value="Cytopathology">Cytopathology</option>
+                                                            <option value="Forensic Pathology">Forensic Pathology
+                                                            </option>
+                                                            <option value="Hematology">Hematology</option>
+                                                            <option value="Medical Microbiology">Medical Microbiology
+                                                            </option>
+                                                            <option value="Neuropathology">Neuropathology</option>
+                                                            <option value="Pediatric Pathology">Pediatric Pathology
+                                                            </option>
+                                                            <option value="Adolescent Medicine">Adolescent Medicine
+                                                            </option>
+                                                            <option value="Child Abuse Pediatrics">Child Abuse
+                                                                Pediatrics</option>
+                                                            <option value="Developmental-Behavioral Pediatrics">
+                                                                Developmental-Behavioral Pediatrics</option>
+                                                            <option value="Neonatal-Perinatal Medicine">
+                                                                Neonatal-Perinatal Medicine</option>
+                                                            <option value="Pediatric Cardiology">Pediatric Cardiology
+                                                            </option>
+                                                            <option value="Pediatric Critical Care Medicine">Pediatric
+                                                                Critical Care Medicine</option>
+                                                            <option value="Pediatric Emergency Medicine">Pediatric
+                                                                Emergency Medicine</option>
+                                                            <option value=" Pediatric Endocrinology">Pediatric
+                                                                Endocrinology</option>
+                                                            <option value="Pediatric Gastroenterology">Pediatric
+                                                                Gastroenterology</option>
+                                                            <option value="Pediatric Hematology-Oncology">Pediatric
+                                                                Hematology-Oncology</option>
+                                                            <option value="Pediatric Infectious Diseases">Pediatric
+                                                                Infectious Diseases</option>
+                                                            <option value="Pediatric Nephrology">Pediatric Nephrology
+                                                            </option>
+                                                            <option value="Pediatric Pulmonology">Pediatric Pulmonology
+                                                            </option>
+                                                            <option value="Pediatric Rheumatology">Pediatric
+                                                                Rheumatology</option>
+                                                            <option value="Pediatric Sports Medicine">Pediatric Sports
+                                                                Medicine</option>
+                                                            <option value="Pediatric Transplant Hepatology">Pediatric
+                                                                Transplant Hepatology</option>
+                                                            <option value="Neuromuscular Medicine">Neuromuscular
+                                                                Medicine</option>
+                                                            <option value="Pain Medicine">Pain Medicine</option>
+                                                            <option value="Spinal Cord Injury Medicine">Spinal Cord
+                                                                Injury Medicine</option>
+                                                            <option value="Sports Medicine">Sports Medicine</option>
+                                                            <option value="Craniofacial Surgery">Craniofacial Surgery
+                                                            </option>
+                                                            <option value="Hand Surgery">Hand Surgery</option>
+                                                            <option value="Medical Toxicology">Medical Toxicology
+                                                            </option>
+                                                            <option value="Addiction Psychiatry">Addiction Psychiatry
+                                                            </option>
+                                                            <option value="Child & Adolescent Psychiatry">Child &
+                                                                Adolescent Psychiatry</option>
+                                                            <option value="Forensic Psychiatry">Forensic Psychiatry
+                                                            </option>
+                                                            <option value="Geriatric Psychiatry">Geriatric Psychiatry
+                                                            </option>
+                                                            <option value="Radiation Oncology">Radiation Oncology
+                                                            </option>
+                                                            <option value="Abdominal Radiology">Abdominal Radiology
+                                                            </option>
+                                                            <option value="Cardiothoracic Radiology">Cardiothoracic
+                                                                Radiology</option>
+                                                            <option value="Endovascular Surgical Neuroradiology">
+                                                                Endovascular Surgical Neuroradiology</option>
+                                                            <option value="Muscoskeletal Radiology">Muscoskeletal
+                                                                Radiology</option>
+                                                            <option value="Neuroradiology">Neuroradiology</option>
+                                                            <option value="Nuclear Radiology">Nuclear Radiology</option>
+                                                            <option value="Pediatric Radiology">Pediatric Radiology
+                                                            </option>
+                                                            <option value="Vascular & Interventional Radiology">Vascular
+                                                                & Interventional Radiology</option>
+                                                            <option value="Sleep Medicine">Sleep Medicine</option>
+                                                            <option value="Pediatric Surgery">Pediatric Surgery</option>
+                                                            <option value="Surgical Critical Care">Surgical Critical
+                                                                Care</option>
+                                                            <option value="Vascular Surgery">Vascular Surgery</option>
+                                                            <option value="Congenital Cardiac Surgery">Congenital
+                                                                Cardiac Surgery</option>
+                                                            <option value="Thoracic Surgery-Integrated">Thoracic
+                                                                Surgery-Integrated</option>
+                                                            <option value="Pediatric Urology">Pediatric Urology</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 required" id="doclicensename">
+                                                    <label for="License">License Number</label></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="License" id="doclicense" value=""
+                                                        class="form-control" maxlength="25" />
+
+                                                </div>
+
+
+
+
+                                                <!-- <div class="col-md-2 required" id='docexperiencename'>
+                                                <label for="Experience" class="field" style="margin-top:22px"> Experience</label></div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="Experience" id="docexperience" value=""
+                                                       class="form-control" />
+                                                <select class="1-100" style="width:20px ! important; height: 40px !important "></select>
+                                            </div> -->
+
+
+                                                <div class="col-md-2 required" id="docqualificationname">
+                                                    <label for="Qualification" class="field">Qualification</label></div>
+
+                                                <div class="col-md-4" id="docqualificationnamen">
+                                                    <select style=" height:40px !important;" id="docqualification"
+                                                        multiple="multiple" class="form-control">
+                                                        <!-- <option value="BAMS">BAMS</option>
+                                                        <option value="MBBS"> MBBS</option>
+                                                        <option value="BMBS">BMBS</option>
+                                                        <option value="MBChB">MBChB</option>
+                                                        <option value="MBBCh">MBBCh</option>
+                                                        <option value="MD">MD</option>
+                                                        <option value="Dr.MuD">Dr.MuD</option>
+                                                        <option value="Dr.Med">Dr.Med</option>
+                                                        <option value="DO">DO</option>
+                                                        <option value="MD(Res)">MD(Res)</option>
+                                                        <option value="DM">DM</option>
+                                                        <option value="PhD">PhD</option>
+                                                        <option value="DPhil">DPhil</option>
+                                                        <option value="MCM">MCM</option>
+                                                        <option value="MMSc">MMSc</option>
+                                                        <option value="MMedSc">MMedSc</option>
+                                                        <option value="MM">MM</option>
+                                                        <option value="MMed">MMed</option>
+                                                        <option value="MPhil">MPhil</option>
+                                                        <option value="MS">MS</option>
+                                                        <option value="MSurg"> MSurg</option>
+                                                        <option value="MChir">MChir</option>
+                                                        <option value="MCh">MCh</option>
+                                                        <option value="ChM">ChM</option>
+                                                        <option value="CM">CM</option>
+                                                        <option value="MSc">MSc</option>
+                                                        <option value="DCM">DCM</option>
+                                                        <option value="DClinSurg">DClinSurg</option>
+                                                        <option value="DMSc">DMSc</option>
+                                                        <option value="DMedSc">DMedSc</option>
+                                                        <option value="DS">DS</option>
+                                                        <option value="DSurg">DSurg</option> -->
+                                                        <option value="BDS">BDS </option>
+                                                        <option value="BAMS">BAMS</option>
+                                                        <option value="BUMS">BUMS</option>
+                                                        <option value="BHMS"> BHMS</option>
+                                                        <option value="DNB"> DNB</option>
+                                                        <option value="DM">DM</option>
+                                                        <option value="DO"> DO</option>
+                                                        <option value="MCh">MCh</option>
+                                                        <option value="MBBS">MBBS</option>
+                                                        <option value="MD"> MD</option>
+                                                        <option value="MS">MS</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-md-2 required" id='docexperiencename'>
+                                                    <label for="Experience" class="field" > Experience</label></div>
+                                                <div class="col-md-4" id='docexperiencenamen'>
+                                                    <div class="input-group-prepend">
+							<div >
+                                                            <span class="row" style="margin-left:2px;"><span><select
+                                                                    style="width:60px; height:40px !important;padding-left:10px;font-size:13px;border: 1px solid #ced4da;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-radius: .25rem;"
+                                                                    id='selectYear'>
+                                                                </select></span><span style="font-size:14px;margin-top:8px">Years</span></span>
+
+                                                        </div>
+                                                        <div>
+                                                            <span class="row"><span>&emsp;&emsp;<select
+                                                                    style="width:60px; height:40px !important;padding-left:10px;font-size:13px;border: 1px solid #ced4da;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;border-radius: .25rem;"
+                                                                    id='docexperience'>
+                                                                </select></span><span style="font-size:14px;margin-top:8px">Months</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="status" id="dialogboxDoctor1" style="display: none;">
+                                                    <span id="errorMsgFirstName" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor9" style="display: none;">
+                                                    <span id="errorMsgLastName" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor8" style="display: none;">
+                                                    <span id="errorMsgemail" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor3" style="display: none;">
+                                                    <span id="errorMsgUsername" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxUsername" style="display: none;">
+                                                    <span id="errorMsgUserName1" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor5" style="display: none;">
+                                                    <span id="errorMsgSpeciality" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor7" style="display: none;">
+                                                    <span id="errorMsgLicenceNumber" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor2" style="display: none;">
+                                                    <span id="errorMsgContact" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor6" style="display: none;">
+                                                    <span id="errorMsgExperience" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+                                                <div class="status" id="dialogboxDoctor4" style="display: none;">
+                                                    <span id="errorMsgQualification" style="font-size:12px; color:red"
+                                                        class="alert " role="alert">
+                                                    </span></div>
+
+
+
+                                                <!--                                            <div class="col-md-2">-->
+                                                <!--                                            </div>-->
+                                                <!--                                            <div class="col-md-4"><input type="text" name="Doctortype" id="Doctortype" value="4"-->
+                                                <!--                                                       class="form-control" hidden/>-->
+                                                <!--                                            </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                        <div class="manage-table">
+                            <table class="table table-bordered table-striped order-table table"
+                                style="    font-size: 13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Speciality</th>
+                                        <th>Qualification</th>
+                                        <th>Experience</th>
+                                        <th>License</th>
+                    <th>Profile</th>
+                    <!--<th>Availability</th>-->
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                        
+                                        <!--<th style="width: 382px !important;">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    <tr id="selectdoctor">
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <!--create user-->
+                    {% csrf_token %}
+                    
+                                    </div>
+                                </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="footer">-->
+  <!--<p>Address: Level 1, MB tower,am@10 Road Number 10, Avenue 4, Banjara Hills, Hyderabad, Telangana 500034</p>-->
+<!--</div>-->
+
+
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+    <script>
+        window.drf = {
+            csrfHeaderName: "X-CSRFTOKEN",
+            csrfCookieName: "csrftoken"
+        };
+
+
+    </script>
+    <script>
+        (function (document) {
+            'use strict';
+
+            var LightTableFilter = (function (Arr) {
+
+                var _input;
+
+                function _onInputEvent(e) {
+                    _input = e.target;
+                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                    Arr.forEach.call(tables, function (table) {
+                        Arr.forEach.call(table.tBodies, function (tbody) {
+                            Arr.forEach.call(tbody.rows, _filter);
+                        });
+                    });
+                }
+
+                function _filter(row) {
+                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                }
+
+                return {
+                    init: function () {
+                        var inputs = document.getElementsByClassName('docinput');
+                        Arr.forEach.call(inputs, function (input) {
+                            input.oninput = _onInputEvent;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function () {
+                if (document.readyState === 'complete') {
+                    LightTableFilter.init();
+                }
+            });
+
+        })(document);
+    </script>
+    <script>
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+
+
+    </script>
+
+    <script>
+        var month = '';
+        for (i = 0; i <= 12; i++) {
+
+            month += '<option val=' + i + '>' + i + '</option>';
+        }
+
+        $('#docexperience').html(month);
+        var year = '';
+        for (i = 0; i <= 70; i++) {
+            year += '<option val=' + i + '>' + i + '</option>';
+        }
+        $('#selectYear').html(year);
+
+
+    </script>
+    <script src="{% static 'js/sb-admin.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/adminscript.js' %}"></script>
+    <script src="{% static 'js/adminajax.js' %}"></script>
+
+</body>
+
+</html>

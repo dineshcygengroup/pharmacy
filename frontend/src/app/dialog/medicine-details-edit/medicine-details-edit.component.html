@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<hr />
+<mat-dialog-content>
+    <div class="container">
+        <form [formGroup]="addMedicineForm">
+            <div class="form-container">
+                <div class="form-column">
+                    <mat-form-field class="input-field">
+                        <input type="text" placeholder="Name" aria-label="Medicine name" matInput formControlName="name" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <input matInput placeholder="Generic Name" required formControlName="genericName">
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <input type="number" matInput placeholder="Quantity" formControlName="quantity" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category" required>
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let category of categoryList" [value]="category.medicineType">
+                                {{category.medicineType}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <textarea matInput placeholder="Medicine Details" cdkTextareaAutosize cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5" formControlName="medicineDetails"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-column">
+                    <mat-form-field class="input-field">
+                        <input type="text" placeholder="Supplier Name" aria-label="Supplier name" matInput
+                            formControlName="supplier" [matAutocomplete]="supplierNameAutocomplete" required>
+                        <mat-autocomplete autoActiveFirstOption #supplierNameAutocomplete="matAutocomplete">
+                            <mat-option *ngFor="let supplier of filteredSuppliers | async" [value]="supplier.name">
+                                {{supplier.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <input type="text" matInput placeholder="Batch number" formControlName="batchNumber" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="small-input-field">
+                        <input matInput [matDatepicker]="picker" formControlName="expiryDate" [min]="todayDate" required
+                            placeholder="Expiry Date" [attr.disabled]="true" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker [attr.disabled]="false"></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field class="small-input-field">
+                        <input type="number" matInput placeholder="Price" required formControlName="price">
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <input type="text" placeholder="Medicine Location" aria-label="Medicine Location" matInput
+                            formControlName="location" [matAutocomplete]="location">
+                        <mat-autocomplete autoActiveFirstOption #location="matAutocomplete">
+                            <mat-option *ngFor="let location of filteredLocations | async"
+                                [value]="location.storeLocation">
+                                {{location.storeLocation}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-field">
+                        <input type="text" matInput placeholder="Reference link" formControlName="referenceLink">
+                    </mat-form-field>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="update()">Update</button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

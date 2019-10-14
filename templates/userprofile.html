@@ -1,0 +1,801 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js" type="text/javascript"></script>
+    <link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script type=text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!--<link href="css/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <link href="{% static 'css2/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css2/ehrpatient.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+
+    <style>
+     tr td {
+  display: block;
+  border:none;
+}
+.createbutton{
+border: none !important;
+    color: white !important;
+    font-size: 14px !important;
+    padding: 7px !important;
+    border-radius: 4px !important;
+    background: #017b8b !important;
+    margin: 2px !important;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: none !important;
+    background: #017b8b !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+.ui-button-text{
+color:#017b8b !important;
+background: white !important;
+}
+
+    </style>
+</head>
+
+<body>
+<div id="content">
+
+             <div class="navbar1">
+
+  <div class="dropdown1">
+    <button class="dropbtn1"><img src="{% static 'img/user.png'%}">
+    </button>
+    <div class="dropdown-content1">
+      <a href="#">My Account</a>
+      <a href="#">Sign out</a>
+
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-12 container">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="admin">
+                    <div class="row">
+                        <!--userprofile-->
+                        <!--<div class="col-md-6">-->
+                            <!--<div class="user-profile">-->
+                                <!--<div class="upload-fileupload">-->
+                                    <!--<form id="form1">-->
+                                        <!--<div class="upload-btn-wrapper" style="padding:20px">-->
+                                            <!--<button class="btn">Upload Image</button>-->
+                                            <!--<input type='file' id="uploadimgInp"/><br></div>-->
+                                        <!--<img id="uploadblah" src="#" alt="your image" style="width: 200px;-->
+                                               <!--height: 200px;-->
+                                               <!--display: block;-->
+                                               <!--overflow: hidden;-->
+                                               <!--margin: 0 auto;"/>-->
+                                        <!--<br/>-->
+                                        <!--<button type='button' id='uploadremove' value='' class='hide' style="display: block;-->
+                                               <!--margin: 0 auto;">-->
+                                            <!--<i class="fa fa-trash-o"></i></button>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--information-->
+                        <div class="col-md-6">
+                            <div class="user-profile">
+                                <div id="dialog-form" title="Create new user">
+                                    <form>
+                                        <fieldset>
+                                            <div class="fields">
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="fname">First Name</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="fname" id="fname" value=""
+                                                                   class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="lname"> Last Name</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="lname" id="lname" value=""
+                                                                   class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="hospitalname"> Hospital Name</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="hospitalname" id="hospitalname"
+                                                                   value="" class="form-control"/>
+                                                        </div>
+
+                                                        <div class="col-md-2">
+                                                            <label for="contact">contact</label></div>
+                                                        <div class="col-md-4">
+                                                            <input type="number" name="contact" id="contact"
+                                                                   value="" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <div id="users-contain" class="ui-widget">
+                                    <div class="info-name">Information</div>
+                                    <div class="but-add">
+                                    <table id="users" class="ui-widget ui-widget-content">
+                                        <tbody>
+                                        <tr>
+                                             <td>
+                                                 <button class="createbutton" id="create-user" style="float:right;">
+                                          +
+                                        </button>
+                                             </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--personal-->
+                        <div class="col-md-6">
+                            <div class="user-profile">
+                                <div id="dialog-form1" title="Create new user">
+                                    <form>
+                                        <fieldset>
+                                            <div class="fields">
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="usergender">Gender</label></div>
+                                                        <div class="col-md-8">
+                                                            <select name="Gender" id="usergender"
+                                                                    class="form-control">
+                                                                <option selected="selected" value=""> -Select-</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                                <option value="Others">Others</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="usereducation">Education</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="City" id="usereducation"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userlicence">License No</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="" id="userlicence"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                                <div id="users-contain" class="ui-widget">
+                                    <div class="info-name">Personal</div>
+                                    <div class="create-btn">
+
+                                    </div>
+                                    <table id="users1" class="ui-widget ui-widget-content">
+
+                                        <tbody>
+                                        <tr>
+
+                                                 <td>
+                                                 <button class="createbutton" id="create-user1"  style="float:right;">
+                                           +
+                                        </button>
+                                             </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!--contact-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="user-profile">
+                                <div id="dialog-form2" title="Create new user">
+                                    <form>
+                                        <fieldset>
+                                            <div class="fields">
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userAddress">Address</label></div>
+                                                        <div class="col-md-8">
+                                                                <textarea name="Address" id="userAddress"
+                                                                          class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userCity">City</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="City" id="userCity"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userState"> State</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="State" id="userState"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userCountry"> Country</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="Country" id="userCountry"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userPostal"> Postal Code</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" name="Postal" id="userPostal"
+                                                                   class="form-control" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userPhone1"> Phone1</label></div>
+                                                        <div class="col-md-8">
+                                                            <input type="number" name="Phone1" id="userPhone1"
+                                                                   class="form-control" value=""></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                                <div id="users-contain" class="ui-widget">
+                                    <div class="info-name">Contact</div>
+                                    <table id="users2" class="ui-widget ui-widget-content">
+
+                                        <tbody>
+                                        <tr>
+                                             <td>
+                                                 <button class="createbutton" id="create-user2" style="float:right;">
+                                          +
+                                        </button>
+                                             </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!--alternateinfo-->
+
+                        <div class="col-md-6">
+                            <div class="user-profile">
+                                <div id="dialog-form3" title="Alternate contact">
+                                    <form>
+                                        <fieldset>
+                                            <div class="fields">
+                                                <div class="user-info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="userspeciality">Specialty</label></div>
+                                                        <div class="col-md-8">
+                                                            <select id="userspeciality" class="form-control"
+                                                                    style="width: 100%;">
+                                                                <option value="">--Select Specialty--</option>
+                                                                <option value="Abdominal Radiology">Abdominal
+                                                                    Radiology
+                                                                </option>
+                                                                <option value="Abdominal Surgery">Abdominal Surgery
+                                                                </option>
+                                                                <option value="Addiction medicine">Addiction medicine
+                                                                </option>
+                                                                <option value="Addiction Psychiatr">Addiction
+                                                                    Psychiatry
+                                                                </option>
+                                                                <option value="Adolescent Medicine (Internal Medicine)">
+                                                                    Adolescent Medicine (Internal Medicine)
+                                                                </option>
+                                                                <option value="Adolescent Medicine (Pediatrics)">
+                                                                    Adolescent Medicine (Pediatrics)
+                                                                </option>
+                                                                <option value="Adult Reconstructive Orthopedics">Adult
+                                                                    Reconstructive Orthopedics
+                                                                </option>
+                                                                <option value="Aerospace Medicine">Aerospace Medicine
+                                                                </option>
+                                                                <option value="Allergy">Allergy</option>
+                                                                <option value="Allergy & Immunology">Allergy &
+                                                                    Immunology
+                                                                </option>
+                                                                <option value="Anatomic Pathology">Anatomic Pathology
+                                                                </option>
+                                                                <option value="Anatomic/Clinical Pathology">
+                                                                    Anatomic/Clinical Pathology
+                                                                </option>
+                                                                <option value="Anesthesiology">Anesthesiology</option>
+                                                                <option value="Blood Banking/Transfusion Medicine">Blood
+                                                                    Banking/Transfusion Medicine
+                                                                </option>
+                                                                <option value="Cardiothoracic Surgery">Cardiothoracic
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Cardiovascular Disease">Cardiovascular
+                                                                    Disease
+                                                                </option>
+                                                                <option value="Chemical Pathology">Chemical Pathology
+                                                                </option>
+                                                                <option value="Child and Adolescent Psychiatry">Child
+                                                                    and Adolescent Psychiatry
+                                                                </option>
+                                                                <option value="Child Neurology">Child Neurology</option>
+                                                                <option value="Clinical and Laboratory Dermatological Immunology">
+                                                                    Clinical and Laboratory Dermatological Immunology
+                                                                </option>
+                                                                <option value="Clinical and Laboratory Immunology (Internal Medicine)">
+                                                                    Clinical and Laboratory Immunology (Internal
+                                                                    Medicine)
+                                                                </option>
+                                                                <option value="Clinical and Laboratory Immunology (Pediatrics)">
+                                                                    Clinical and Laboratory Immunology (Pediatrics)
+                                                                </option>
+                                                                <option value="Clinical Biochemical Genetics">Clinical
+                                                                    Biochemical Genetics
+                                                                </option>
+                                                                <option value="Clinical Cardiac Electrophysiology">
+                                                                    Clinical Cardiac Electrophysiology
+                                                                </option>
+                                                                <option value="Clinical Cytogenetics">Clinical
+                                                                    Cytogenetics
+                                                                </option>
+                                                                <option value="Clinical Genetics">Clinical Genetics
+                                                                </option>
+                                                                <option value="Clinical Laboratory Immunology(Allergy & Immunology)">
+                                                                    Clinical Laboratory Immunology(Allergy & Immunology)
+                                                                </option>
+                                                                <option value="Clinical Molecular Genetics">Clinical
+                                                                    Molecular Genetics
+                                                                </option>
+                                                                <option value="Clinical Neurophysiology">Clinical
+                                                                    Neurophysiology
+                                                                </option>
+                                                                <option value="Clinical Pathology">Clinical Pathology
+                                                                </option>
+                                                                <option value="Clinical Pharmacology">Clinical
+                                                                    Pharmacology
+                                                                </option>
+                                                                <option value="Colon & Rectal Surgery">Colon & Rectal
+                                                                    Surgery
+                                                                </option>
+                                                                <option value=">Craniofacial Surgery">Craniofacial
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Critical Care Medicine (Anesthesiology)">
+                                                                    Critical Care Medicine (Anesthesiology)
+                                                                </option>
+                                                                <option value="Critical Care Medicine (Internal Medicine)">
+                                                                    Critical Care Medicine (Internal Medicine)
+                                                                </option>
+                                                                <option value="Critical Care Medicine(Obstetrics and Gynecology)">
+                                                                    Critical Care Medicine(Obstetrics and Gynecology)
+                                                                </option>
+                                                                <option value="Cytopathology">Cytopathology</option>
+                                                                <option value="Dermatologic Surgery">Dermatologic
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Dermatology">Dermatology</option>
+                                                                <option value="Dermatopathology">Dermatopathology
+                                                                </option>
+                                                                <option value="Developmental-Behavioral Pediatrics">
+                                                                    Developmental-Behavioral Pediatrics
+                                                                </option>
+                                                                <option value="Diabetes">Diabetes</option>
+                                                                <option value="Diagnostic Radiology">Diagnostic
+                                                                    Radiology
+                                                                </option>
+                                                                <option value="Emergency Medicine">Emergency Medicine
+                                                                </option>
+                                                                <option value="Endocrinology, Diabetes and Metabolism">
+                                                                    Endocrinology, Diabetes and Metabolism
+                                                                </option>
+                                                                <option value="Epidemiology">Epidemiology</option>
+                                                                <option value="Facial Plastic Surgery">Facial Plastic
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Family Physician">Family Physician
+                                                                </option>
+                                                                <option value="Family Practice">Family Practice</option>
+                                                                <option value="Forensic Pathology">Forensic Pathology
+                                                                </option>
+                                                                <option value="Forensic Psychiatry">Forensic
+                                                                    Psychiatry
+                                                                </option>
+                                                                <option value="Gastroenterology">Gastroenterology
+                                                                </option>
+                                                                <option value="General Practice">General Practice
+                                                                </option>
+                                                                <option value="General Preventive Medicine">General
+                                                                    Preventive Medicine
+                                                                </option>
+                                                                <option value="General Surgery">General Surgery</option>
+                                                                <option value="Geriatric Medicine (Family Practice)">
+                                                                    Geriatric Medicine (Family Practice)
+                                                                </option>
+                                                                <option value="Geriatric Medicine (Internal Medicine)">
+                                                                    Geriatric Medicine (Internal Medicine)
+                                                                </option>
+                                                                <option value="Geriatric Psychiatry">Geriatric
+                                                                    Psychiatry
+                                                                </option>
+                                                                <option value="Gynecological Oncology">Gynecological
+                                                                    Oncology
+                                                                </option>
+                                                                <option value="Gynecology">Gynecology</option>
+                                                                <option value="Hand Surgery">Hand Surgery</option>
+                                                                <option value="Head & Neck Surgery">Head & Neck
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Hematology (Internal Medicine)">
+                                                                    Hematology (Internal Medicine)
+                                                                </option>
+                                                                <option value="Hematology (Pathology)">Hematology
+                                                                    (Pathology)
+                                                                </option>
+                                                                <option value="Hematology/Oncology">
+                                                                    Hematology/Oncology
+                                                                </option>
+                                                                <option value="Hepatology">Hepatology</option>
+                                                                <option value="Hospitalist">Hospitalist</option>
+                                                                <option value="Immunology">Immunology</option>
+                                                                <option value="Infectious Disease">Infectious Disease
+                                                                </option>
+                                                                <option value="Internal Medicine">Internal Medicine
+                                                                </option>
+                                                                <option value="Internal Medicine/Pediatrics">Internal
+                                                                    Medicine/Pediatrics
+                                                                </option>
+                                                                <option value="Interventional Cardiology">Interventional
+                                                                    Cardiology
+                                                                </option>
+                                                                <option value="Legal Medicine">Legal Medicine</option>
+                                                                <option value="Maternal & Fetal Medicine">Maternal &
+                                                                    Fetal Medicine
+                                                                </option>
+                                                                <option value="Medical Genetics">Medical Genetics
+                                                                </option>
+                                                                <option value="Medical Management">Medical Management
+                                                                </option>
+                                                                <option value="Medical Microbiology">Medical
+                                                                    Microbiology
+                                                                </option>
+                                                                <option value="Medical Oncology">Medical Oncology
+                                                                </option>
+                                                                <option value="Medical Toxicology (Emergency Medicine)">
+                                                                    Medical Toxicology (Emergency Medicine)
+                                                                </option>
+                                                                <option value="Medical Toxicology (Pediatrics)">Medical
+                                                                    Toxicology (Pediatrics)
+                                                                </option>
+                                                                <option value="Medical Toxicology (Preventive Medicine)">
+                                                                    Medical Toxicology (Preventive Medicine)
+                                                                </option>
+                                                                <option value="Molecular Genetic Pathology (Medical Genetics)">
+                                                                    Molecular Genetic Pathology (Medical Genetics)
+                                                                </option>
+                                                                <option value="Molecular Genetic Pathology">Molecular
+                                                                    Genetic Pathology (Pathology)
+                                                                </option>
+                                                                <option value="Musculoskeletal Oncology">Musculoskeletal
+                                                                    Oncology
+                                                                </option>
+                                                                <option value="Musculoskeletal Radiology">
+                                                                    Musculoskeletal Radiology
+                                                                </option>
+                                                                <option value="Neonatal-Perinatal Medicine">
+                                                                    Neonatal-Perinatal Medicine
+                                                                </option>
+                                                                <option value="Nephrology">Nephrology</option>
+                                                                <option value="Neurodevelopmental Disabilities (Psychiatry
+                                                        & Neurology)">Neurodevelopmental Disabilities (Psychiatry
+                                                                    &amp; Neurology)
+                                                                </option>
+                                                                <option value="Neurological Surgery">Neurological
+                                                                    Surgery
+                                                                </option>
+                                                                <option value="Neurology">Neurology</option>
+                                                                <option value="Neurology/Diagnostic Radiology/Neuroradiology">
+                                                                    Neurology/Diagnostic Radiology/Neuroradiology
+                                                                </option>
+                                                                <option value="Neuropathology">Neuropathology</option>
+                                                                <option value="Neuroradiology">Neuroradiology</option>
+                                                                <option value="Nuclear Medicine">Nuclear Medicine
+                                                                </option>
+                                                                <option value="Nuclear Radiology">Nuclear Radiology
+                                                                </option>
+                                                                <option value="Nutrition">Nutrition</option>
+                                                                <option value="Obstetrics">Obstetrics</option>
+                                                                <option value="Obstetrics &amp; Gynecology">Obstetrics
+                                                                    &amp; Gynecology
+                                                                </option>
+                                                                <option value="Occupational Medicine">Occupational
+                                                                    Medicine
+                                                                </option>
+                                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                                <option value="Oral &amp; Maxillofacial Surgery">Oral
+                                                                    &amp; Maxillofacial Surgery
+                                                                </option>
+                                                                <option value="Orthopedic Surgery">Orthopedic Surgery
+                                                                </option>
+                                                                <option value="Orthopedic Surgery of the Spine">
+                                                                    Orthopedic Surgery of the Spine
+                                                                </option>
+                                                                <option value="Orthopedic Trauma">Orthopedic Trauma
+                                                                </option>
+                                                                <option value="Orthopedics, Foot and Ankle">Orthopedics,
+                                                                    Foot and Ankle
+                                                                </option>
+                                                                <option value="Osteopathic Manipulative Medicine">
+                                                                    Osteopathic Manipulative Medicine
+                                                                </option>
+                                                                <option value="Other">Other</option>
+                                                                <option value="Otolaryngology">Otolaryngology</option>
+                                                                <option value="Otology/Neurotology">
+                                                                    Otology/Neurotology
+                                                                </option>
+                                                                <option value="Pain Management">Pain Management</option>
+                                                                <option value="Pain Medicine">Pain Medicine</option>
+                                                                <option value="Palliative Medicine">Palliative
+                                                                    Medicine
+                                                                </option>
+                                                                <option value="Pediatric Allergy">Pediatric Allergy
+                                                                </option>
+                                                                <option value="Pediatric Anesthesiology (Pediatrics)">
+                                                                    Pediatric Anesthesiology (Pediatrics)
+                                                                </option>
+                                                                <option value="Pediatric Cardiology">Pediatric
+                                                                    Cardiology
+                                                                </option>
+                                                                <option value="Pediatric Cardiothoric Surgery">Pediatric
+                                                                    Cardiothoric Surgery
+                                                                </option>
+                                                                <option value="Pediatric Critical Care Medicine">
+                                                                    Pediatric Critical Care Medicine
+                                                                </option>
+                                                                <option value="Pediatric Emergency Medicine (EmergencyMedicine)">
+                                                                    Pediatric Emergency Medicine (EmergencyMedicine)
+                                                                </option>
+                                                                <option value="Pediatric Emergency Medicine (Pediatrics)">
+                                                                    Pediatric Emergency Medicine (Pediatrics)
+                                                                </option>
+                                                                <option value="Pediatric Endocrinology">Pediatric
+                                                                    Endocrinology
+                                                                </option>
+                                                                <option value="Pediatric Gastroenterology">Pediatric
+                                                                    Gastroenterology
+                                                                </option>
+                                                                <option value="Pediatric Hematology/Oncology">Pediatric
+                                                                    Hematology/Oncology
+                                                                </option>
+                                                                <option value="Pediatric Infectious Disease">Pediatric
+                                                                    Infectious Disease
+                                                                </option>
+                                                                <option value="Pediatric Nephrology">Pediatric
+                                                                    Nephrology
+                                                                </option>
+                                                                <option value="Pediatric Ophthalmology">Pediatric
+                                                                    Ophthalmology
+                                                                </option>
+                                                                <option value="Pediatric Orthopedics">Pediatric
+                                                                    Orthopedics
+                                                                </option>
+                                                                <option value="Pediatric Otolaryngology">Pediatric
+                                                                    Otolaryngology
+                                                                </option>
+                                                                <option value="Pediatric Pathology">Pediatric
+                                                                    Pathology
+                                                                </option>
+                                                                <option value="Pediatric Pulmonology">Pediatric
+                                                                    Pulmonology
+                                                                </option>
+                                                                <option value="Pediatric Radiology">Pediatric
+                                                                    Radiology
+                                                                </option>
+                                                                <option value="Pediatric Rehabilitation Medicine">
+                                                                    Pediatric Rehabilitation Medicine
+                                                                </option>
+                                                                <option value="Pediatric Rheumatology">Pediatric
+                                                                    Rheumatology
+                                                                </option>
+                                                                <option value="Pediatric Surgery (Neurology)">Pediatric
+                                                                    Surgery (Neurology)
+                                                                </option>
+                                                                <option value="Pediatric Surgery (Surgery)">Pediatric
+                                                                    Surgery (Surgery)
+                                                                </option>
+                                                                <option value="Pediatric Urology">Pediatric Urology
+                                                                </option>
+                                                                <option value="Pediatrics">Pediatrics</option>
+                                                                <option value="Pharmaceutical Medicine">Pharmaceutical
+                                                                    Medicine
+                                                                </option>
+                                                                <option value="Phlebology">Phlebology</option>
+                                                                <option value="Physical Medicine &amp; Rehabilitation">
+                                                                    Physical Medicine &amp; Rehabilitation
+                                                                </option>
+                                                                <option value="Plastic Surgery">Plastic Surgery</option>
+                                                                <option value="Plastic Surgery within the Head &amp; Neck">
+                                                                    Plastic Surgery within the Head &amp; Neck
+                                                                </option>
+                                                                <option value="Podiatrist">Podiatrist</option>
+                                                                <option value="Prosthodontist">Prosthodontist</option>
+                                                                <option value="Psychiatry">Psychiatry</option>
+                                                                <option value="Psychoanalysis">Psychoanalysis</option>
+                                                                <option value="Public Health and General Preventive Medicine">
+                                                                    Public Health and General Preventive Medicine
+                                                                </option>
+                                                                <option value="Pulmonary Critical Care Medicine">
+                                                                    Pulmonary Critical Care Medicine
+                                                                </option>
+                                                                <option value="Pulmonary Disease">Pulmonary Disease
+                                                                </option>
+                                                                <option value="Radiation Oncology">Radiation Oncology
+                                                                </option>
+                                                                <option value="Radiological Physics">Radiological
+                                                                    Physics
+                                                                </option>
+                                                                <option value="Radiology">Radiology</option>
+                                                                <option value="Reproductive Endocrinology &amp; Infertility">
+                                                                    Reproductive Endocrinology &amp; Infertility
+                                                                </option>
+                                                                <option value="Rheumatology">Rheumatology</option>
+                                                                <option value="Selective Pathology">Selective
+                                                                    Pathology
+                                                                </option>
+                                                                <option value="Sleep Medicine">Sleep Medicine</option>
+                                                                <option value="Spinal Cord Injury Medicine">Spinal Cord
+                                                                    Injury Medicine
+                                                                </option>
+                                                                <option value="Sports Medicine (Emergency Medicine)">
+                                                                    Sports Medicine (Emergency Medicine)
+                                                                </option>
+                                                                <option value="Sports Medicine (Family Practice)">Sports
+                                                                    Medicine (Family Practice)
+                                                                </option>
+                                                                <option value="Sports Medicine (Internal Medicine)">
+                                                                    Sports Medicine (Internal Medicine)
+                                                                </option>
+                                                                <option value="Sports Medicine (Orthopedic Surgery)">
+                                                                    Sports Medicine (Orthopedic Surgery)
+                                                                </option>
+                                                                <option value="Sports Medicine (Pediatrics)">Sports
+                                                                    Medicine (Pediatrics)
+                                                                </option>
+                                                                <option value="Sports Medicine (Physical Medicine &amp;Rehabilitation)">
+                                                                    Sports Medicine (Physical Medicine &amp;
+                                                                    Rehabilitation)
+                                                                </option>
+                                                                <option value="Surgical Critical Care (Surgery)">
+                                                                    Surgical Critical Care (Surgery)
+                                                                </option>
+                                                                <option value="Surgical Oncology">Surgical Oncology
+                                                                </option>
+                                                                <option value="Thoracic Surgery<">Thoracic Surgery
+                                                                </option>
+                                                                <option value="Transplant Surgery">Transplant Surgery
+                                                                </option>
+                                                                <option value="Trauma Surgery">Trauma Surgery</option>
+                                                                <option value="Undersea &amp; Hyperbaric Medicine (EmergencyMedicine)">
+                                                                    Undersea &amp; Hyperbaric Medicine (Emergency
+                                                                    Medicine)
+                                                                </option>
+                                                                <option value="Undersea &amp; Hyperbaric Medicine (PreventiveMedicine)">
+                                                                    Undersea &amp; Hyperbaric Medicine (Preventive
+                                                                    Medicine)
+                                                                </option>
+                                                                <option value="Urology">Urology</option>
+                                                                <option value="Vascular and Interventional Radiology">
+                                                                    Vascular and Interventional Radiology
+                                                                </option>
+                                                                <option value="Vascular Medicine">Vascular Medicine
+                                                                </option>
+                                                                <option value="Vascular Surgery">Vascular Surgery
+                                                                </option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                                <div id="users-contain1" style="padding:10px;" class="ui-widget">
+                                    <div class="info-name" style="float:left;">Speciality</div>
+                                    <div class="create-btn">
+                                        <button class="createbutton" id="create-user3" style="float:right;">
+                                            +
+                                        </button>
+                                    </div>
+                                    <table id="users3" class="ui-widget ui-widget-content">
+                                        <tbody>
+                                        <tr>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    var patient_id='{{patient_id}}';
+    var user_id='{{user_id}}';
+    var orgnastion_id='{{request.user.orgnastion_id}}';
+</script>
+<script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+      </script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js2/userprofile.js' %}"></script>
+<script src="{% static 'js2/services.js' %}"></script>
+
+
+</body>
+</html>

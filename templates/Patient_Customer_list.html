@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ehr.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+            .required label {
+font-weight: bold;
+}
+.required label:after {
+color: #e32;
+content: ' *';
+display:inline;
+}
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href=#>HMS LAMJINGBA</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item admin-name" data-toggle="tooltip" data-placement="right" title="Admin Name">
+
+                <img src="" alt="" class="img-ic">
+                <span class="nav-link-text"><b style="font-size:16px">Receptionist</b></span>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href='/receptionistdashboard/'>
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    <span class="nav-link-text">Dashboard</span></a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pharmacist">
+                <a class="nav-link" href='/Patient_list/'>
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span class="nav-link-text">Patients</span></a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href='/Physician_list_view/'>
+                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                    <span class="nav-link-text">Doctors</span></a>
+            </li>
+
+
+
+        </ul>
+
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li><a onclick="window.location.pathname='/logout/'" data-toggle="modal" data-target="#exampleModal" style="color:white;">
+                Logout</a>
+
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="content-details">
+                <h3>Patients</h3>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="btn add-btn right"><i  class="fa fa-plus fa-lg adding patient-adduser" aria-hidden="true"
+                                                              ></i>
+                        </div>
+                        <div class="Search">
+                            <input  id="myInput"  type="search" class="patientinput form-control" data-table="order-table" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <!--create patient-->
+                {% csrf_token %}
+                <div class="manage-table">
+                    <div id="patient-form" title="patient Profile">
+                        <form>
+                            <fieldset>
+                                <div class="fields">
+                                    <div class="user-info">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="fname" class="field">First Name</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="fname" id="patientfname" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="lname" class="field"> Last Name</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="lname" id="patientlname" value=""
+                                                       class="form-control" required/>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label for="contact" class="field">Contact No</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="contact" id="patientcontact" value=""
+                                                       pattern="[0-9]{1}[0-9]{9}"
+                                                       title="Phone number with 7-9 and remaing 9 digit with 0-9"
+                                                       minlength="10" maxlength="10"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="Gender" class="field">Gender</label></div>
+                                            <div class="col-md-3">
+                                                <select id="patientgender" class="form-control" required>
+                                                    <option value="" disabled selected>Select
+                                                    </option>
+                                                    <option value="Male">Male
+                                                    </option>
+                                                    <option value="Female">Female
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3" id="patientemailname">
+                                                <label for="email" class="field"> Email</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="email" id="patientemail" value=""
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" id="patientusernamename">
+                                                <label for="username" class="field" > Username</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="patientusername" id="patientusername" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" id="patientpasswordname">
+                                                <label for="Password" class="field">Password</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="Password" id="patientPassword" value=""
+
+                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                            <div class="col-md-3">
+                                                <label for="email" class="field"> Occupation</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="email" id="patientoccupation" value=""
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label for="username" class="field" >Blood group</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="patientusername" id="patientbloodgroup" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <label for="Password"  class="field">Maritial status</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="Password" id="patientmaritialstatus" value=""
+
+                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                            <div class="col-md-3" >
+                                                <label for="email" class="field"> Ethnicity</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="email" id="patientethnicity" value=""
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <label for="username" class="field" > age</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="patientusername" id="patientage" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <label for="Password" class="field">Address</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="Password" id="patientaddress" value=""
+
+                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="email" class="field"> city</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="email" id="patientcity" value=""
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <label for="username" class="field" > state</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="patientusername" id="patientstate" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <label for="Password" class="field">country</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="Password" id="patientcountry" value=""
+
+                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                            <div class="col-md-3" >
+                                                <label for="email" class="field"> Zipcode</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="email" id="patientzipcode" value=""
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-1" >
+                                                <label for="username" class="field" > Notes</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="patientusername" id="patientnotes" value=""
+                                                       class="form-control" required/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="guardian" class="field">guardian</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" name="guardian" id="patientguardian" value=""
+
+                                                       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                       class="form-control" required/>
+                                            </div>
+                                            <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="manage-table">
+                        <table class="table table-bordered table-striped order-table table" style="    font-size: 13px;">
+                            <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>gender</th>
+                                <th>Email</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>Profile</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="patienttable">
+                                <tr id="selectdoctor">
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+
+
+</script>
+<script>
+   (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('patientinput');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+<script>
+  $('#toggleNavPosition').click(function() {
+    $('body').toggleClass('fixed-nav');
+    $('nav').toggleClass('fixed-top static-top');
+  });
+
+  </script>
+
+<script src="{% static 'js/sb-admin.js' %}"></script>
+<script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/adminscript.js' %}"></script>
+<script src="{% static 'js/adminajax.js' %}"></script>
+
+</body>
+</html>

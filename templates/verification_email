@@ -1,0 +1,17 @@
+
+{% block plain %}
+
+Dear {{user}},
+
+Thank you for registering with LAMJINGBA HMS
+Your Username is {{username}}. This Username can not be changed and hence we recommend that you save this Username for your future reference.
+Your login password for LAMJINGBA HMS is {{userpassword}} (password change is mandatory upon first login).
+Thank you for registering with Hospital Management System.
+Please Login Here https://hms.cygen.in/
+
+Thank you
+With regards,
+LAMJINGBA Hospital.
+
+{% endblock %}
+

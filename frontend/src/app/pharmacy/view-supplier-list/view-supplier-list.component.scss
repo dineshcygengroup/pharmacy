@@ -1,0 +1,47 @@
+.container {
+  padding: 1%;
+  height: 85vh;
+  .table-container {
+    overflow: auto;
+    height: 67vh;
+  }
+  table {
+    width: 100%;
+    th.mat-sort-header-sorted {
+      color: black;
+    }
+    .mat-column-address {
+      word-wrap: break-word !important;
+      white-space: unset !important;
+      flex: 0 0 28% !important;
+      width: 28% !important;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+
+.watermark
+        {
+        padding-right: 29px;
+        position: fixed;
+        bottom:10px;
+        right:5px;
+        opacity:0.4;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }

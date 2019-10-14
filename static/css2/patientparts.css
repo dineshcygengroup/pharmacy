@@ -1,0 +1,391 @@
+.setting-box{
+    margin-top: 70px;
+    padding: 10px 30px;
+}
+.setting-subbox{
+    overflow: hidden;
+    box-shadow: 0px 0px 6px 0px #454545;
+}
+.settings-content,.settings-button{
+    padding: 5px;
+    font-size: 15px;
+}
+.settings-head{
+    width: fit-content;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    border: none;
+    background: rgba(17, 45, 65, 0.6);
+}
+.ppedit,.ppdelete,.pcedit,.paedit,.padelete,.piedit,.pidelete{
+       border: 1px solid;
+    border-radius: 10px;
+    color: #017b8b ! important;
+    float: left;
+    padding: 5px;
+    font-weight: bold;
+}
+
+}
+.Allergydelete,.diagnosticdelete,.notedelete,.familydelete,.socialhistorydelete,.vitalsdelete,.problemdelete,.visitreasondelete,.medicationdelete,.vaccinedelete,.statusdelete,.amendmentsdelete,.proceduredelete,.allertdelete,.ADdelete,.goaldelete,.symptomdelete,.inpatientdelete,.doctordelete,.filedelete,.ADdelete{
+    border: none;
+    color:#017b8b ! important ;
+      float: left;
+    padding-right: 5px;
+    font-weight:bold;
+
+
+}
+
+buttons{
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 4px;
+    background: #017b8b;
+}
+.settings-button{
+    float: right;
+}
+.admin {
+
+    border: 2px solid #efefef;
+    margin-top: 70px;
+    position:relative;
+}
+.upload-profile{
+    height: 217.5px;
+    padding: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 217.5px;
+}
+.profile-img{
+width:200px;
+}
+.center {
+    width: 70%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    float:right;
+}
+
+.hideform {
+    display: none;
+}
+.profile {
+    z-index: 1;
+    padding: 2px 20px;
+    float: left;
+    border-collapse: inherit !important;
+}
+.edit-profile{
+    z-index: 2;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .upload {
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+.profile-info {
+    overflow: hidden;
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+
+.close{
+    border: none;
+    color: #777676;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.profile-content{
+    padding: 5px;
+    color: #777676;
+}
+.edit-info{
+    padding: 5px;
+}
+.edit-name{
+    padding: 5px;
+    color: #017b8b;
+    font-weight: bold;
+}
+.edit-content{
+    padding:10px;
+}
+
+.profile-name{
+    font-size: 15px;
+    font-weight: bold;
+    color: #017b8b;
+    padding: 10px 25px;
+}
+.form-name{
+    color: #777676;
+    padding: 5px 10px;
+    font-size: 15px;
+    /* font-weight: bold; */
+}
+.form-input{
+
+    padding: 5px 10px;
+}
+
+ tr td {
+  display: block;
+  border:none;
+  font-size:13px !important;
+  padding:5px 0px 0px 20px !important;
+  word-break: break-all;
+
+}
+input.text {
+    margin-bottom: 10px;
+    width: 95%;
+   padding: .4em;
+ }
+ fieldset {
+    padding: 0;
+   border: 0;
+   margin-top: 15px;
+  }
+ h1 {
+    font-size: 1.2em;
+    margin: .6em 0;
+ }
+
+ .ui-dialog .ui-state-error {
+     padding: .3em;
+  }
+ .validateTips {
+    border: 1px solid transparent;
+   padding: 0.3em;
+  }
+ #dialog-form-allergy{
+    display: none;
+ }
+
+
+.ui-dialog {
+   position: absolute;
+    height: auto;
+    width: 500px !important;
+    top: 154px;
+        left: 496.5px;
+        display: block;
+}
+.ui-dialog-content {
+    display: block;
+    width: auto;
+    min-height: 0px;
+    max-height: none;
+     height:  100% !important;
+}
+.sign{
+    border: 0px !important;
+    background: none !important;
+    color: white;
+    font-size: 15px;
+    font-weight: 700%;
+
+}
+.ui-dialog .ui-dialog-titlebar-close {
+
+    border: none;
+    background: white;
+}
+.ui-dialog .ui-dialog-titlebar-close :before,.ui-dialog .ui-dialog-titlebar-close :after{
+    content: '✖';
+    border: none !important;
+
+
+}
+label{
+    font-size: 13px;
+}
+.user-info{
+    padding: 5px;
+}
+.user-profile{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.info-name{
+
+    padding: 5px;
+    font-size: 15px;
+}
+.create-btn{
+    text-align: center;
+}
+
+
+  .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+    border: none !important;
+    font-weight:0 !important;
+     background:none !important;
+}
+.ui-button-text-only .ui-button-text {
+    padding:0px !important;
+}
+
+.row.content {
+height: auto;
+background-color:white;
+}
+.row-equal-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.content-box {
+	background-color: #ffffff;
+/* 	box-shadow: 0 1px 2px rgba(0,0,0,.15); #e5e5e5 1px 1px 2px 1px; */
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius:  4px; /*0.25rem;*/
+}
+
+.max-hgt {
+	height:100%;
+	min-height:100%;
+}
+
+.white-box {
+	background-color: white;
+/* 	box-shadow: 0 1px 2px rgba(0,0,0,.15); #e5e5e5 1px 1px 2px 1px; */
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius:  4px; /*0.25rem;*/
+}
+
+.white-box-shadow {
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0,0,0,.25); /*rgba(0, 0, 0, 0.2) 1px 3px 8px 0px;*/
+	border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.25);
+}
+
+.imodule-head {
+	padding-top: 5px;
+/* 	padding-right: 0px; */
+	padding-bottom: 0px;
+/* 	border-bottom: 1px #ddd solid; */
+/* 	background-color: #cfeaea; */
+/* 	background-color: #cfeaea; */
+	margin-bottom: 4px;
+}
+
+
+.kpull-left {
+	float: left !important;
+	max-width: 100%;
+	padding-right: 1em;
+}
+.kpull-left:empty {
+	display: none !important;
+}
+
+.kpull-right {
+	float: right !important;
+	max-width: 100%;
+	padding-left: 1em;
+}
+
+.kpull-right:empty {
+	display: none !important;
+}
+
+.icon-md {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
+}
+
+.icon-color  {
+
+	color: #00b3ac;
+}
+
+html {
+    font-size: 10px !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#dialog-form-allergy{
+font-weight:1% !important;
+font-size:10px !important;
+}
+
+.ui-widget-header {
+    border: none !important/*{borderColorHeader}*/;
+    background: #ffffff !important;
+    color: #017b8b !important/*{fcHeader}*/;
+    font-weight: bold !important;
+    Font-size : 15px !important ;
+}
+
+label{
+font-weight:100% !important;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: Verdana,Arial,sans-serif/*{ffDefault}*/;
+    font-size: 15px !important ;
+}
+.ui-widget .ui-widget-content {
+    font-size: 12px !important;
+    border-left:12px !important;
+}
+
+.td{
+font-size: 12px !important;
+ border-left:12px !important;
+ padding:10px !important;
+}
+
+#AllergyType,#socialhistoryType,#alertvisibility,#relationType,#statusselect,#distype,#amendementssource,#amendementsstatus,#directive,#proceduredestatus,#filetype,#bloodgroup,#maritialstatus,#ethnicity{
+height:30px;
+}
+.fa {
+	font-size: 16px;
+	cursor: pointer;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+
+    background: #017b8b !important;
+    font-weight: 700% !important;
+    color: #ffffff !important;
+    padding:5px;
+    border:1px solid !important;
+}
+.ui-button-text-only .ui-button-text {
+    padding: 0px !important;
+    background:none !important;
+    color: #017b8b ! important;
+    font-weight:Bold ! important;
+    }
+ .ui-widget .ui-widget {
+     font-size: 1.5em !important;
+     background:none !important;
+     font-color:#017b8b !important;
+}
+.form-popup{
+display:none;
+}
+
+element.style {
+    width: 200px;
+    height: 200px;
+    display: block;
+    overflow: hidden;
+    margin: 0px auto;
+    border-radius: 100px ! important;
+}
+
